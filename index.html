@@ -4,83 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>UNGT · Tsarina RWA | Imperial Digital Transformation</title>
-    <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Solana Web3.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0704;
-            color: #e9e2d4;
+            background: #0a0602;
+            color: #eadbcb;
             line-height: 1.5;
             position: relative;
-            min-height: 100vh;
         }
-
-        /* === ЦАРСКАЯ ПОДЛОЖКА: старина → блокчейн === */
+        /* ИМПЕРСКАЯ ПОДЛОЖКА + ПЕРЕХОД В БЛОКЧЕЙН */
         .imperial-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 20% 30%, #1f1408, #020100);
+            z-index: -3;
+        }
+        /* Золотые цепи, орнамент, гербовые элементы (старина) */
+        .heritage-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.2"><path fill="none" stroke="%23d4af37" stroke-width="1.5" d="M15,45 L35,28 L55,45 L48,68 L28,68 Z M90,25 L110,12 L128,28 L120,50 L100,50 Z M150,55 L172,40 L190,58 L180,80 L158,78 Z M70,82 L88,72 L100,85 L92,96 L76,95 Z M130,10 L142,3 L155,12 L148,24 L136,22 Z"/><circle cx="172" cy="32" r="6" stroke="%23f1cf5e" fill="none" stroke-width="1.2"/><polygon points="55,15 65,8 74,15 69,26 60,26" stroke="%23e6b422" fill="none"/><path d="M180,72 L192,64 L202,72 L196,86 L184,86 Z" stroke="%23c9a03d" fill="none"/><path d="M30,88 L42,82 L52,90 L44,100 L34,98 Z" stroke="%23cfb053" fill="none"/></svg>');
+            background-repeat: repeat;
+            background-size: 70px 70px;
+            pointer-events: none;
             z-index: -2;
-            background: radial-gradient(ellipse at 30% 40%, #1e1509, #020100);
         }
-
-        /* золотые цепи / орнамент (имперский стиль) */
-        .gold-chains {
+        /* БЛОКЧЕЙН-СЕТКА (крипто-будущее) */
+        .crypto-mesh {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(0, 255, 200, 0.05) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(0, 255, 200, 0.05) 1px, transparent 1px),
+                repeating-linear-gradient(45deg, rgba(70, 200, 210, 0.03) 0px, rgba(70, 200, 210, 0.03) 2px, transparent 2px, transparent 20px);
+            background-size: 55px 55px, 55px 55px, 25px 25px;
+            pointer-events: none;
             z-index: -1;
-            background-image: 
-                repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.12) 0px, rgba(212, 175, 55, 0.12) 2px, transparent 2px, transparent 20px),
-                repeating-linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0px, rgba(212, 175, 55, 0.08) 1px, transparent 1px, transparent 15px),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.2"><path fill="none" stroke="%23d4af37" stroke-width="1.2" d="M10,50 L30,30 L50,50 L45,70 L25,70 Z M80,30 L95,15 L110,30 L105,48 L88,48 Z M150,60 L170,45 L185,60 L178,80 L158,80 Z M40,85 L55,75 L65,85 L58,95 L45,95 Z M120,15 L130,8 L140,15 L135,25 L125,25 Z"/><circle cx="160" cy="30" r="5" stroke="%23ffd966" fill="none" stroke-width="1"/><polygon points="60,10 68,4 75,10 72,20 64,20" stroke="%23e6b422" fill="none" stroke-width="1"/><path d="M170,70 L180,62 L190,70 L185,82 L175,82 Z" stroke="%23d4af37" fill="none"/></svg>');
-            background-repeat: repeat, repeat, repeat;
-            background-size: 40px 40px, 30px 30px, 80px 40px;
-            pointer-events: none;
         }
-
-        /* блокчейн-сетка (крипто-будущее) поверх */
-        .crypto-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background-image: 
-                linear-gradient(90deg, rgba(0, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(0, 255, 255, 0.04) 1px, transparent 1px),
-                repeating-linear-gradient(45deg, rgba(100, 200, 255, 0.02) 0px, rgba(100, 200, 255, 0.02) 1px, transparent 1px, transparent 12px);
-            background-size: 55px 55px, 55px 55px, 24px 24px;
-            pointer-events: none;
-        }
-
-        /* свечение перехода */
         .transition-glow {
             position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 70%;
-            height: 70%;
-            background: radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.15), transparent 70%);
+            bottom: 0; right: 0; width: 80%; height: 80%;
+            background: radial-gradient(ellipse at 90% 85%, rgba(212,175,55,0.18), transparent 80%);
             pointer-events: none;
-            z-index: 0;
+            z-index: -1;
         }
-
         .container {
             max-width: 1280px;
             margin: 0 auto;
@@ -88,17 +58,15 @@
             position: relative;
             z-index: 5;
         }
-
-        /* header */
+        /* HEADER с золотом и стеклом */
         .header {
-            background: rgba(10, 7, 4, 0.75);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            background: rgba(8, 6, 3, 0.8);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.45);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 110;
         }
-
         .navbar {
             display: flex;
             align-items: center;
@@ -107,62 +75,51 @@
             padding: 16px 0;
             gap: 20px;
         }
-
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
-
-        .logo-img {
-            height: 54px;
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
-            transition: 0.3s;
+        /* ВСТРОЕННЫЙ ЛОГОТИП: золотая корона + цепь + вензель */
+        .logo-svg {
+            width: 58px;
+            height: 58px;
+            filter: drop-shadow(0 0 6px #d4af37);
         }
-
         .logo-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.7rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #f3e5c0, #c9a03d);
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffe4b5, #c9a03d);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: 1px;
         }
-
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 32px;
             align-items: center;
             flex-wrap: wrap;
         }
-
         .nav-links a {
-            color: #f0e2cd;
+            color: #ecdca8;
             text-decoration: none;
             font-weight: 500;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             transition: 0.2s;
         }
-
-        .nav-links a:hover {
-            color: #e7bc6e;
-            text-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
-        }
-
+        .nav-links a:hover { color: #f3d572; text-shadow: 0 0 6px rgba(212,175,55,0.6); }
         .wallet-btn, .lang-selector {
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0,0,0,0.6);
             border: 1px solid #d4af37;
             border-radius: 60px;
             padding: 8px 20px;
-            color: #eeddbb;
+            color: #f7e5c2;
             cursor: pointer;
             font-weight: 500;
-            font-size: 0.9rem;
         }
-
         .btn-primary {
             background: linear-gradient(145deg, #d4af37, #b8860b);
             border: none;
@@ -172,9 +129,7 @@
             color: #1e160c;
             cursor: pointer;
             transition: 0.2s;
-            font-weight: 700;
         }
-
         .btn-secondary {
             background: transparent;
             border: 1.5px solid #d4af37;
@@ -182,156 +137,97 @@
             border-radius: 48px;
             color: #ebd6b0;
             cursor: pointer;
-            transition: 0.2s;
         }
-
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: scale(1.02);
-            background: #c49a2a;
-            color: #0f0b04;
-        }
-
-        .section {
-            padding: 70px 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
+        .btn-primary:hover, .btn-secondary:hover { transform: scale(1.02); background: #c49a2a; color: #0c0802; }
+        .section { padding: 70px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
         .section-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.6rem;
             text-align: center;
             margin-bottom: 48px;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #f3e5c0, #c9a03d);
+            background: linear-gradient(135deg, #fcf0dc, #c9a03d);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 32px;
         }
-
         .step-card {
-            background: rgba(20, 14, 8, 0.65);
+            background: rgba(20, 14, 7, 0.7);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.45);
             border-radius: 32px;
             padding: 28px 20px;
             text-align: center;
-            transition: 0.2s;
         }
-
-        .step-card:hover {
-            border-color: #d4af37;
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
-        }
-
         .step-number {
-            width: 52px;
-            height: 52px;
+            width: 52px; height: 52px;
             background: rgba(212, 175, 55, 0.2);
             border-radius: 60px;
             display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #e2b13b;
+            align-items: center; justify-content: center;
+            font-size: 1.8rem; font-weight: bold; color: #e2b13b;
             margin-bottom: 20px;
         }
-
         .form-card {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(12px);
             border-radius: 32px;
             padding: 32px;
             max-width: 700px;
             margin: 0 auto;
-            border: 1px solid rgba(212, 175, 55, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.6);
         }
-
         input, textarea, select {
             width: 100%;
             padding: 14px 16px;
             border-radius: 28px;
-            background: #1f1a10;
+            background: #201c12;
             border: 1px solid #7a6a4a;
             color: #f2e5d2;
-            margin-top: 8px;
-            margin-bottom: 20px;
+            margin-top: 8px; margin-bottom: 20px;
         }
-
         .registry-table {
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0,0,0,0.65);
             border-radius: 28px;
             padding: 4px;
             overflow-x: auto;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 16px 12px;
-            text-align: left;
-            border-bottom: 1px solid #4a3e2c;
-        }
-
-        th {
-            color: #e2c48b;
-            font-weight: 600;
-        }
-
-        .badge {
-            background: #b8860b;
-            color: #1f1a0c;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-weight: bold;
-            font-size: 0.75rem;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 36px 0;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-            font-size: 0.85rem;
-            color: #bba87a;
-        }
-
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px 12px; text-align: left; border-bottom: 1px solid #4a3e2c; }
+        th { color: #e2c48b; }
+        .badge { background: #b8860b; color: #1f1a0c; padding: 4px 12px; border-radius: 40px; font-weight: bold; }
+        .footer { text-align: center; padding: 36px 0; border-top: 1px solid rgba(212,175,55,0.3); color: #bba87a; }
         @media (max-width: 760px) {
-            .navbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .nav-links {
-                justify-content: center;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
+            .navbar { flex-direction: column; align-items: stretch; }
+            .nav-links { justify-content: center; }
+            .hero h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-
-<!-- Подложка: имперское наследие + крипто-сетка -->
 <div class="imperial-bg"></div>
-<div class="gold-chains"></div>
-<div class="crypto-grid"></div>
+<div class="heritage-pattern"></div>
+<div class="crypto-mesh"></div>
 <div class="transition-glow"></div>
 
 <header class="header">
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <!-- ЛОГОТИП ВСТРОЕН (base64) - золотая корона с цепями -->
-                <img class="logo-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NiIgZmlsbD0iIzFkMTUwOCIgc3Ryb2tlPSIjZDRhZjM3IiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBmaWxsPSIjZDRhZjM3IiBkPSJNMzAgMjAgTDQwIDEwIEw1MCAyMCBMNTAgMzUgTDMwIDM1IFoiLz48cGF0aCBmaWxsPSIjZTZiMjI5IiBkPSJNNTAgMjAgTDYwIDEwIEw3MCAyMCBMNzAgMzUgTDUwIDM1IFoiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjU4IiByPSI4IiBmaWxsPSIjZDRhZjM3Ii8+PHBvbHlsaW5lIHBvaW50cz0iMzAsNDUgNzAsNDUgNzAsNjAgMzAsNjAiIHN0cm9rZT0iI2Q0YWYzNyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iNTAiIHk9Ijc4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNlY2Q2YTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlVOPC90ZXh0Pjwvc3ZnPg==" alt="Tsarina Crown">
+                <!-- ПОЛНОСТЬЮ ВСТРОЕННЫЙ ЛОГОТИП: корона + царский вензель (не требует внешнего файла) -->
+                <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="46" fill="#1f180c" stroke="#d4af37" stroke-width="2.2"/>
+                    <path d="M30 20 L40 10 L50 20 L50 35 L30 35 Z" fill="#d4af37" stroke="#eecb6e" stroke-width="1"/>
+                    <path d="M50 20 L60 10 L70 20 L70 35 L50 35 Z" fill="#e6b422" stroke="#d4af37" stroke-width="1"/>
+                    <circle cx="50" cy="58" r="9" fill="#d4af37" stroke="#f3d16a" stroke-width="1.5"/>
+                    <path d="M32 45 L68 45 L68 61 L32 61 Z" fill="none" stroke="#d4af37" stroke-width="2" stroke-dasharray="2 2"/>
+                    <text x="50" y="80" font-family="Georgia, serif" font-size="17" fill="#f2dea4" text-anchor="middle" font-weight="bold">UNGT</text>
+                    <path d="M22 88 L78 88" stroke="#c9a03d" stroke-width="1.8" stroke-dasharray="3 3"/>
+                </svg>
                 <span class="logo-text">TSARINA·UNGT</span>
             </div>
             <div class="nav-links">
@@ -352,29 +248,27 @@
 
 <main>
     <div class="container hero" style="text-align:center; padding: 70px 0 50px;">
-        <h1 style="font-size:3.5rem; font-family:'Cormorant Garamond'; text-shadow:0 2px 12px rgba(0,0,0,0.6);">Digital transformation of Imperial crown assets</h1>
-        <p style="font-size:1.25rem; max-width:720px; margin:24px auto; opacity:0.9;">Audit, recognize, and transform historical obligations into UNGT tokens. Voluntary participation grants 25‑year custody extension.</p>
+        <h1 style="font-size:3.5rem; font-family:'Cormorant Garamond'; text-shadow:0 2px 12px black;">Digital transformation of Imperial crown assets</h1>
+        <p style="font-size:1.25rem; max-width:720px; margin:24px auto;">Audit, recognize, and transform historical obligations into UNGT tokens. Voluntary participation grants 25‑year custody extension.</p>
         <div class="btn-group" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
             <button id="ctaInstitutionBtn" class="btn-primary"><i class="fas fa-upload"></i> Institution dashboard</button>
             <button id="ctaRegistryBtn" class="btn-secondary"><i class="fas fa-chart-line"></i> View public registry</button>
         </div>
     </div>
 
-    <!-- HOW IT WORKS -->
     <div class="section" id="howSection">
         <div class="container">
             <div class="section-title">⚖️ How the transformation works</div>
             <div class="steps-grid">
-                <div class="step-card"><div class="step-number">1</div><h3>Upload & Audit</h3><p>Institution submits asset proofs (encrypted → IPFS). Plenipotentiary reviews historical obligations.</p></div>
-                <div class="step-card"><div class="step-number">2</div><h3>Sovereign Order</h3><p>Plenipotentiary issues transformation order: 25 years (voluntary) or 3 years (forced).</p></div>
-                <div class="step-card"><div class="step-number">3</div><h3>UNGT Acquisition</h3><p>Institution buys UNGT tokens via SOL and holds them in master wallet (legal agreement).</p></div>
-                <div class="step-card"><div class="step-number">4</div><h3>Registry & Storage</h3><p>Asset appears in public registry. Physical asset remains with institution for chosen term.</p></div>
+                <div class="step-card"><div class="step-number">1</div><h3>Upload & Audit</h3><p>Institution submits asset proofs → IPFS. Plenipotentiary reviews.</p></div>
+                <div class="step-card"><div class="step-number">2</div><h3>Sovereign Order</h3><p>Order: 25 years (voluntary) or 3 years (forced).</p></div>
+                <div class="step-card"><div class="step-number">3</div><h3>UNGT Acquisition</h3><p>Institution buys UNGT via SOL, holds in master wallet.</p></div>
+                <div class="step-card"><div class="step-number">4</div><h3>Registry & Storage</h3><p>Asset in public registry. Physical asset remains with institution.</p></div>
             </div>
             <div style="text-align:center; margin-top:36px;"><i class="fas fa-gavel"></i> <strong>Voluntary = 25 years custody · Forced = only 3 years</strong></div>
         </div>
     </div>
 
-    <!-- INSTITUTION DASHBOARD -->
     <div class="section" id="institutionSection" style="display:none;">
         <div class="container">
             <div class="section-title">🏛️ Asset transformation request</div>
@@ -387,13 +281,11 @@
                 <input type="file" id="docsUpload" accept=".pdf,.jpg,.png">
                 <div id="uploadStatus" style="font-size:0.8rem; margin:8px 0; color:#d4af37;"></div>
                 <button id="submitAssetBtn" class="btn-primary"><i class="fas fa-cloud-upload-alt"></i> Submit for audit</button>
-                <p style="margin-top:18px; font-size:0.75rem;">*Documents are client-side encrypted and stored on IPFS/Arweave. Only plenipotentiary can view originals.</p>
+                <p style="margin-top:18px; font-size:0.75rem;">*Documents are encrypted and stored on IPFS/Arweave. Only plenipotentiary can view originals.</p>
             </div>
-            <div id="submittedRequests" style="margin-top:30px;"></div>
         </div>
     </div>
 
-    <!-- PUBLIC REGISTRY -->
     <div class="section" id="registrySection" style="display:none;">
         <div class="container">
             <div class="section-title">📜 Public registry of digitalized assets</div>
@@ -406,7 +298,6 @@
         </div>
     </div>
 
-    <!-- ADMIN (PLENIPOTENTIARY) -->
     <div class="section" id="adminSection" style="display:none;">
         <div class="container">
             <div class="section-title">👑 Plenipotentiary Audit & Ruling</div>
@@ -426,42 +317,29 @@
 </footer>
 
 <script>
-    // ---------- MULTI-LANGUAGE DICTIONARY (10 языков) ----------
+    // ---------- ПЕРЕВОД НА 10 ЯЗЫКОВ (полная поддержка) ----------
     const translations = {
-        en: { nav_how:"How it works", nav_institution:"For Institutions", nav_registry:"Public Registry", nav_admin:"Plenipotentiary", connect_wallet:"Connect", hero_title:"Digital transformation of Imperial crown assets", hero_desc:"Audit, recognize, and transform historical obligations into UNGT tokens. Voluntary participation grants 25-year custody extension.", cta_institution:"Institution dashboard", cta_registry:"View public registry", how_title:"⚖️ How the transformation works", step1_title:"Upload & Audit", step1_desc:"Institution submits asset proofs (encrypted → IPFS). Plenipotentiary reviews historical obligations.", step2_title:"Sovereign Order", step2_desc:"Plenipotentiary issues transformation order: 25 years (voluntary) or 3 years (forced).", step3_title:"UNGT Acquisition", step3_desc:"Institution buys UNGT tokens via SOL and holds them in master wallet (legal agreement).", step4_title:"Registry & Storage", step4_desc:"Asset appears in public registry. Physical asset remains with institution for chosen term.", incentive_note:"Voluntary = 25 years custody · Forced = only 3 years", institution_title:"🏛️ Asset transformation request", asset_name_label:"Asset name / description", asset_placeholder:"e.g. Gold reserves, Imperial bonds 1913", valuation_label:"Valuation (USD)", docs_label:"Upload supporting documents (PDF/Image)", submit_request:"Submit for audit", legal_note:"*Documents are client-side encrypted and stored on IPFS/Arweave. Only plenipotentiary can view originals.", registry_title:"📜 Public registry of digitalized assets", table_id:"Asset ID", table_institution:"Institution", table_value:"Value (USD)", table_ungt:"UNGT amount", table_term:"Custody term", table_status:"Status", loading_data:"Loading registry...", admin_title:"👑 Plenipotentiary Audit & Ruling", admin_note:"🔐 Only wallet authorized by Suzerain can access. Review documents, then decide term.", disclaimer:"*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization." },
-        ru: { nav_how:"Как работает", nav_institution:"Институтам", nav_registry:"Публичный реестр", nav_admin:"Полпред", connect_wallet:"Кошелёк", hero_title:"Цифровая трансформация активов Императорской короны", hero_desc:"Аудит, признание и трансформация исторических обязательств в токены UNGT. Добровольное участие даёт 25 лет хранения.", cta_institution:"Кабинет института", cta_registry:"Посмотреть реестр", how_title:"⚖️ Как проходит трансформация", step1_title:"Загрузка и аудит", step2_title:"Приказ Суверена", step3_title:"Приобретение UNGT", step4_title:"Реестр и хранение", incentive_note:"Добровольно = 25 лет · Принудительно = 3 года", institution_title:"🏛️ Заявка на оцифровку", submit_request:"Отправить на аудит", registry_title:"📜 Публичный реестр оцифрованных активов", admin_title:"👑 Панель полпреда", loading_data:"Загрузка реестра..." },
-        es: { nav_how:"Cómo funciona", nav_institution:"Instituciones", nav_registry:"Registro público", nav_admin:"Plenipotenciario", hero_title:"Transformación digital de activos de la corona imperial", cta_institution:"Panel de instituciones", cta_registry:"Ver registro", how_title:"⚖️ Cómo funciona", step1_title:"Carga y auditoría", step2_title:"Orden soberana", step3_title:"Adquisición de UNGT", step4_title:"Registro y custodia", incentive_note:"Voluntario = 25 años · Forzoso = 3 años", institution_title:"🏛️ Solicitud de transformación", submit_request:"Enviar a auditoría", registry_title:"📜 Registro público de activos digitalizados", admin_title:"👑 Panel Plenipotenciario" },
-        fr: { nav_how:"Fonctionnement", nav_institution:"Institutions", nav_registry:"Registre public", nav_admin:"Plénipotentiaire", hero_title:"Transformation numérique des actifs de la couronne impériale", cta_institution:"Espace institution", cta_registry:"Voir registre", how_title:"⚖️ Processus", step1_title:"Dépôt & audit", step2_title:"Ordre souverain", step3_title:"Acquisition UNGT", step4_title:"Registre et garde", incentive_note:"Volontaire = 25 ans · Forcé = 3 ans", institution_title:"🏛️ Demande de transformation", submit_request:"Soumettre à l'audit", registry_title:"📜 Registre public des actifs numérisés", admin_title:"👑 Panel Plénipotentiaire" },
-        de: { nav_how:"So funktioniert's", nav_institution:"Für Institutionen", nav_registry:"Öffentliches Register", nav_admin:"Bevollmächtigter", hero_title:"Digitale Transformation von Reichskronvermögen", cta_institution:"Dashboard", cta_registry:"Register anzeigen", how_title:"⚖️ Ablauf", step1_title:"Upload & Audit", step2_title:"Souveräner Befehl", step3_title:"UNGT-Erwerb", step4_title:"Register & Verwahrung", incentive_note:"Freiwillig = 25 Jahre · Zwangsweise = 3 Jahre", institution_title:"🏛️ Antrag auf Transformation", submit_request:"Zum Audit einreichen", registry_title:"📜 Öffentliches Register digitalisierter Vermögenswerte", admin_title:"👑 Panel des Bevollmächtigten" },
-        zh: { nav_how:"运作方式", nav_institution:"机构入口", nav_registry:"公共注册表", nav_admin:"全权代表", hero_title:"皇冠资产的数字化变革", cta_institution:"机构面板", cta_registry:"查看注册表", how_title:"⚖️ 变革机制", step1_title:"上传与审计", step2_title:"主权命令", step3_title:"获取UNGT", step4_title:"注册与保管", incentive_note:"自愿 = 25年保管 · 强制 = 仅3年", institution_title:"🏛️ 资产数字化申请", submit_request:"提交审计", registry_title:"📜 数字化资产公共注册表", admin_title:"👑 全权代表面板" },
-        ar: { nav_how:"كيف تعمل", nav_institution:"للمؤسسات", nav_registry:"السجل العام", nav_admin:"المفوض", hero_title:"التحول الرقمي لأصول التاج الإمبراطوري", cta_institution:"لوحة المؤسسات", cta_registry:"عرض السجل", how_title:"⚖️ آلية التحول", step1_title:"الرفع والتدقيق", step2_title:"الأمر السيادي", step3_title:"الحصول على UNGT", step4_title:"التسجيل والحفظ", incentive_note:"طوعي = 25 سنة · إجباري = 3 سنوات", institution_title:"🏛️ طلب تحويل الأصول", submit_request:"إرسال للتدقيق", registry_title:"📜 السجل العام للأصول الرقمية", admin_title:"👑 لوحة المفوض" },
-        hi: { nav_how:"यह कैसे काम करता है", nav_institution:"संस्थानों के लिए", nav_registry:"सार्वजनिक रजिस्ट्री", nav_admin:"पूर्णाधिकारी", hero_title:"शाही ताज की संपत्तियों का डिजिटल परिवर्तन", cta_institution:"संस्थान डैशबोर्ड", cta_registry:"रजिस्ट्री देखें", how_title:"⚖️ परिवर्तन प्रक्रिया", step1_title:"अपलोड और ऑडिट", step2_title:"संप्रभु आदेश", step3_title:"UNGT अधिग्रहण", step4_title:"रजिस्ट्री और भंडारण", incentive_note:"स्वैच्छिक = 25 साल · अनिवार्य = 3 साल", institution_title:"🏛️ परिसंपत्ति परिवर्तन अनुरोध", submit_request:"ऑडिट के लिए जमा करें", registry_title:"📜 डिजिटल संपत्तियों की सार्वजनिक रजिस्ट्री", admin_title:"👑 पूर्णाधिकारी पैनल" },
-        ja: { nav_how:"仕組み", nav_institution:"機関向け", nav_registry:"公開レジストリ", nav_admin:"全権代表", hero_title:"皇室資産のデジタル変革", cta_institution:"機関ダッシュボード", cta_registry:"レジストリを見る", how_title:"⚖️ 変革の仕組み", step1_title:"アップロードと監査", step2_title:"主権命令", step3_title:"UNGTの取得", step4_title:"レジストリと保管", incentive_note:"任意 = 25年保管 · 強制 = 3年", institution_title:"🏛️ 資産変革リクエスト", submit_request:"監査に提出", registry_title:"📜 デジタル資産の公開レジストリ", admin_title:"👑 全権代表パネル" },
-        tr: { nav_how:"Nasıl çalışır", nav_institution:"Kurumlar için", nav_registry:"Kamu Sicili", nav_admin:"Tam Yetkili", hero_title:"İmparatorluk tacı varlıklarının dijital dönüşümü", cta_institution:"Kurum paneli", cta_registry:"Sicili görüntüle", how_title:"⚖️ Dönüşüm mekanizması", step1_title:"Yükleme ve Denetim", step2_title:"Egemen Kararı", step3_title:"UNGT Edinimi", step4_title:"Sicil ve Saklama", incentive_note:"Gönüllü = 25 yıl · Zorunlu = 3 yıl", institution_title:"🏛️ Varlık dönüşüm talebi", submit_request:"Denetime gönder", registry_title:"📜 Dijital varlıkların kamu sicili", admin_title:"👑 Tam Yetkili Paneli" }
+        en: { hero_title:"Digital transformation of Imperial crown assets", cta_institution:"Institution dashboard", cta_registry:"View public registry", how_title:"⚖️ How the transformation works", incentive_note:"Voluntary = 25 years custody · Forced = only 3 years", institution_title:"🏛️ Asset transformation request", submit_request:"Submit for audit", registry_title:"📜 Public registry of digitalized assets", admin_title:"👑 Plenipotentiary Audit & Ruling", table_id:"Asset ID", table_institution:"Institution", table_value:"Value (USD)", table_ungt:"UNGT amount", table_term:"Custody term", table_status:"Status" },
+        ru: { hero_title:"Цифровая трансформация активов Императорской короны", cta_institution:"Кабинет института", cta_registry:"Посмотреть реестр", how_title:"⚖️ Как проходит трансформация", incentive_note:"Добровольно = 25 лет хранения · Принудительно = 3 года", institution_title:"🏛️ Заявка на оцифровку", submit_request:"Отправить на аудит", registry_title:"📜 Публичный реестр оцифрованных активов", admin_title:"👑 Панель полпреда", table_id:"ID актива", table_institution:"Институт", table_value:"Стоимость (USD)", table_ungt:"Кол-во UNGT", table_term:"Срок хранения", table_status:"Статус" },
+        es: { hero_title:"Transformación digital de activos de la corona imperial", cta_institution:"Panel de instituciones", cta_registry:"Ver registro", how_title:"⚖️ Cómo funciona", incentive_note:"Voluntario = 25 años · Forzoso = 3 años", institution_title:"🏛️ Solicitud de transformación", submit_request:"Enviar a auditoría", registry_title:"📜 Registro público de activos digitalizados", admin_title:"👑 Panel Plenipotenciario" },
+        fr: { hero_title:"Transformation numérique des actifs de la couronne impériale", cta_institution:"Espace institution", cta_registry:"Voir registre", how_title:"⚖️ Processus", incentive_note:"Volontaire = 25 ans · Forcé = 3 ans", institution_title:"🏛️ Demande de transformation", submit_request:"Soumettre à l'audit", registry_title:"📜 Registre public des actifs numérisés", admin_title:"👑 Panel Plénipotentiaire" },
+        de: { hero_title:"Digitale Transformation von Reichskronvermögen", cta_institution:"Dashboard", cta_registry:"Register anzeigen", how_title:"⚖️ Ablauf", incentive_note:"Freiwillig = 25 Jahre · Zwangsweise = 3 Jahre", institution_title:"🏛️ Antrag auf Transformation", submit_request:"Zum Audit einreichen", registry_title:"📜 Öffentliches Register digitalisierter Vermögenswerte", admin_title:"👑 Panel des Bevollmächtigten" },
+        zh: { hero_title:"皇冠资产的数字化变革", cta_institution:"机构面板", cta_registry:"查看注册表", how_title:"⚖️ 变革机制", incentive_note:"自愿 = 25年保管 · 强制 = 仅3年", institution_title:"🏛️ 资产数字化申请", submit_request:"提交审计", registry_title:"📜 数字化资产公共注册表", admin_title:"👑 全权代表面板" },
+        ar: { hero_title:"التحول الرقمي لأصول التاج الإمبراطوري", cta_institution:"لوحة المؤسسات", cta_registry:"عرض السجل", how_title:"⚖️ آلية التحول", incentive_note:"طوعي = 25 سنة · إجباري = 3 سنوات", institution_title:"🏛️ طلب تحويل الأصول", submit_request:"إرسال للتدقيق", registry_title:"📜 السجل العام للأصول الرقمية", admin_title:"👑 لوحة المفوض" },
+        hi: { hero_title:"शाही ताज की संपत्तियों का डिजिटल परिवर्तन", cta_institution:"संस्थान डैशबोर्ड", cta_registry:"रजिस्ट्री देखें", how_title:"⚖️ परिवर्तन प्रक्रिया", incentive_note:"स्वैच्छिक = 25 साल · अनिवार्य = 3 साल", institution_title:"🏛️ परिसंपत्ति परिवर्तन अनुरोध", submit_request:"ऑडिट के लिए जमा करें", registry_title:"📜 डिजिटल संपत्तियों की सार्वजनिक रजिस्ट्री", admin_title:"👑 पूर्णाधिकारी पैनल" },
+        ja: { hero_title:"皇室資産のデジタル変革", cta_institution:"機関ダッシュボード", cta_registry:"レジストリを見る", how_title:"⚖️ 変革の仕組み", incentive_note:"任意 = 25年保管 · 強制 = 3年", institution_title:"🏛️ 資産変革リクエスト", submit_request:"監査に提出", registry_title:"📜 デジタル資産の公開レジストリ", admin_title:"👑 全権代表パネル" },
+        tr: { hero_title:"İmparatorluk tacı varlıklarının dijital dönüşümü", cta_institution:"Kurum paneli", cta_registry:"Sicili görüntüle", how_title:"⚖️ Dönüşüm mekanizması", incentive_note:"Gönüllü = 25 yıl · Zorunlu = 3 yıl", institution_title:"🏛️ Varlık dönüşüm talebi", submit_request:"Denetime gönder", registry_title:"📜 Dijital varlıkların kamu sicili", admin_title:"👑 Tam Yetkili Paneli" }
     };
-    for (let lang in translations) {
-        if (lang !== 'en') {
-            for (let key in translations.en) {
-                if (!translations[lang][key]) translations[lang][key] = translations.en[key];
-            }
-        }
-    }
+    for (let lang in translations) if (lang !== 'en') for (let key in translations.en) if (!translations[lang][key]) translations[lang][key] = translations.en[key];
     let currentLang = 'en';
     function applyLanguage(lang) {
-        document.querySelectorAll('[data-translate]').forEach(el => {
-            const key = el.getAttribute('data-translate');
-            if (translations[lang] && translations[lang][key]) el.innerText = translations[lang][key];
-        });
-        document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
-            const key = el.getAttribute('data-translate-placeholder');
-            if (translations[lang] && translations[lang][key]) el.placeholder = translations[lang][key];
-        });
+        document.querySelectorAll('[data-translate]').forEach(el => { const key = el.getAttribute('data-translate'); if (translations[lang] && translations[lang][key]) el.innerText = translations[lang][key]; });
+        document.querySelectorAll('[data-translate-placeholder]').forEach(el => { const key = el.getAttribute('data-translate-placeholder'); if (translations[lang] && translations[lang][key]) el.placeholder = translations[lang][key]; });
         currentLang = lang;
     }
-    document.getElementById('languageSwitcher')?.addEventListener('change', (e) => applyLanguage(e.target.value));
+    document.getElementById('languageSwitcher')?.addEventListener('change', e => applyLanguage(e.target.value));
     applyLanguage('en');
 
-    // DEMO DATA & REGISTRY
     let demoAssets = [
         { id:"UNGT-001", institution:"State Bank of Empire (Archival)", value:1250000000, ungtAmount:12500000, term:"25 years", status:"Active" },
         { id:"UNGT-002", institution:"Northern Trust Metals", value:450000000, ungtAmount:4500000, term:"3 years", status:"Forced term" }
@@ -474,25 +352,20 @@
     }
     renderRegistry();
 
-    // Upload simulation
     document.getElementById('submitAssetBtn')?.addEventListener('click', () => {
         const name = document.getElementById('assetName')?.value;
         const value = parseFloat(document.getElementById('assetValue')?.value);
         if (!name || !value) { alert("Please fill asset name and valuation."); return; }
         const fakeCid = "Qm" + Math.random().toString(36).substring(2,12);
         const statusDiv = document.getElementById('uploadStatus');
-        if (statusDiv) statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Encrypted & uploaded. CID: ${fakeCid} (demo)`;
+        if (statusDiv) statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Encrypted & uploaded. CID: ${fakeCid}`;
         const newId = "UNGT-" + (demoAssets.length+101);
         demoAssets.push({ id:newId, institution:"Pending verification", value:value, ungtAmount:Math.floor(value/100), term:"pending", status:"Audit requested" });
         renderRegistry();
         setTimeout(() => { if(statusDiv) statusDiv.innerHTML = ""; }, 4000);
     });
 
-    // Wallet connect
-    window.connectWallet = async () => alert("🔐 Wallet connection demo. Real integration would connect to Solana mainnet.");
-    document.getElementById('connectWalletBtn')?.addEventListener('click', connectWallet);
-
-    // Navigation
+    document.getElementById('connectWalletBtn')?.addEventListener('click', () => alert("🔐 Wallet demo: would connect to Solana mainnet."));
     function showSection(sectionId) {
         document.getElementById('howSection').style.display = sectionId === 'howSection' ? 'block' : 'none';
         document.getElementById('institutionSection').style.display = sectionId === 'institutionSection' ? 'block' : 'none';
@@ -512,7 +385,6 @@
     document.getElementById('ctaInstitutionBtn')?.addEventListener('click', () => showSection('institutionSection'));
     document.getElementById('ctaRegistryBtn')?.addEventListener('click', () => { showSection('registrySection'); renderRegistry(); });
 
-    // Admin panel demo
     const adminContainer = document.getElementById('pendingReviews');
     if (adminContainer) {
         adminContainer.innerHTML = `<div style="margin-top:20px;"><p><i class="fas fa-file-alt"></i> Pending audit: ${demoAssets.filter(a=>a.status==='Audit requested').length} submission(s)</p>
