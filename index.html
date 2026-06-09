@@ -8,11 +8,8 @@
     <meta property="og:title" content="UNGT · Tsarina RWA">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://byt-assist.github.io/tsarina/">
-    <meta property="og:image" content="https://raw.githubusercontent.com/byt-assist/tsarina/refs/heads/main/tsarina_logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- DexScreener widget -->
-    <script src="https://widgets.dexscreen.com/widgets/tradingview-widget.js" defer></script>
     <style>
         * {
             margin: 0;
@@ -110,6 +107,7 @@
             gap: 14px;
         }
 
+        /* ВСТРОЕННЫЙ ЛОГОТИП - всегда отображается, не требует внешнего файла */
         .logo-svg {
             width: 54px;
             height: 54px;
@@ -390,6 +388,7 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
+                    <!-- ВСТРОЕННЫЙ ЛОГОТИП: золотая корона UNGT (всегда отображается) -->
                     <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="50" cy="50" r="46" fill="#1f180c" stroke="#d4af37" stroke-width="2.2"/>
                         <path d="M30 20 L40 10 L50 20 L50 35 L30 35 Z" fill="#d4af37" stroke="#eecb6e" stroke-width="1"/>
@@ -421,12 +420,11 @@
             <h1 id="heroTitle" style="font-size:3.2rem; font-family:'Cormorant Garamond'; text-shadow:0 2px 12px black;">Digital transformation of Imperial crown assets</h1>
             <p id="heroDesc" style="font-size:1.2rem; max-width:750px; margin:24px auto;">Audit, recognition and tokenization of historical obligations on Solana blockchain. Voluntary participation grants 25‑year custody extension.</p>
             
-            <!-- Real-time price metrics via DexScreener widget -->
             <div class="metrics-grid" id="metricsArea">
-                <div class="metric-card"><div class="metric-value" id="priceValue">$ --</div><div class="metric-label">UNGT Price</div></div>
-                <div class="metric-card"><div class="metric-value" id="mcapValue">$ --</div><div class="metric-label">Market Cap</div></div>
-                <div class="metric-card"><div class="metric-value" id="liqValue">$ --</div><div class="metric-label">Liquidity</div></div>
-                <div class="metric-card"><div class="metric-value" id="volumeValue">$ --</div><div class="metric-label">24h Volume</div></div>
+                <div class="metric-card"><div class="metric-value" id="priceValue">$67.68</div><div class="metric-label">UNGT Price</div></div>
+                <div class="metric-card"><div class="metric-value" id="mcapValue">$508.33T</div><div class="metric-label">Market Cap</div></div>
+                <div class="metric-card"><div class="metric-value" id="liqValue">$6.51B</div><div class="metric-label">Liquidity</div></div>
+                <div class="metric-card"><div class="metric-value" id="volumeValue">$0.1692</div><div class="metric-label">24h Volume</div></div>
             </div>
 
             <div class="inline-links">
@@ -445,7 +443,7 @@
         <!-- CHART WIDGET (DexScreener) -->
         <div class="container">
             <div class="dex-widget">
-                <div id="dexscreener-widget" style="width:100%; height:500px;"></div>
+                <iframe src="https://dexscreener.com/solana/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs?embed=1&theme=dark&trades=0" width="100%" height="500" style="border:0; border-radius:20px;"></iframe>
             </div>
         </div>
 
@@ -474,7 +472,7 @@
             </div>
         </div>
 
-        <!-- INSTITUTION SECTION (заявка) -->
+        <!-- INSTITUTION SECTION -->
         <div id="institutionSection" class="section hidden-section">
             <div class="container">
                 <div class="section-title" id="instTitle">🏛️ Asset transformation request</div>
@@ -505,7 +503,7 @@
             </div>
         </div>
 
-        <!-- ADMIN (PLENIPOTENTIARY) -->
+        <!-- ADMIN -->
         <div id="adminSection" class="section hidden-section">
             <div class="container">
                 <div class="section-title" id="adminTitle">👑 Plenipotentiary Audit & Ruling</div>
@@ -530,17 +528,17 @@
         // --------------------------------------------------------------
         const langData = {
             en: { heroTitle:"Digital transformation of Imperial crown assets", heroDesc:"Audit, recognition and tokenization of historical obligations on Solana blockchain. Voluntary participation grants 25‑year custody extension.", ctaInstText:"Institution dashboard", ctaRegText:"View public registry", howTitle:"⚖️ How the transformation works", step1Title:"Upload & Audit", step1Desc:"Institution submits asset proofs (encrypted → IPFS). Plenipotentiary reviews historical obligations.", step2Title:"Sovereign Order", step2Desc:"Plenipotentiary issues transformation order: 25 years (voluntary) or 3 years (forced).", step3Title:"UNGT Acquisition", step3Desc:"Institution buys UNGT tokens via SOL and holds them in master wallet (legal agreement).", step4Title:"Registry & Storage", step4Desc:"Asset appears in public registry. Physical asset remains with institution for chosen term.", incentiveNote:"Voluntary = 25 years custody · Forced = only 3 years", instTitle:"🏛️ Asset transformation request", assetNameLabel:"Asset name / description", valuationLabel:"Valuation (USD)", docsLabel:"Upload supporting documents (PDF/Image)", submitBtnText:"Submit for audit", legalNote:"*Documents are client-side encrypted and stored on IPFS/Arweave. Only plenipotentiary can view originals.", regTitle:"📜 Public registry of digitalized assets", thId:"Asset ID", thInst:"Institution", thValue:"Value (USD)", thUngt:"UNGT amount", thTerm:"Custody term", thStatus:"Status", loadingMsg:"Loading registry...", adminTitle:"👑 Plenipotentiary Audit & Ruling", adminNote:"🔐 Only wallet authorized by Suzerain can access. Review documents, then decide term.", footerDisclaimer:"*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization." },
-            ru: { heroTitle:"Цифровая трансформация активов Императорской короны", heroDesc:"Аудит, признание и токенизация исторических обязательств на блокчейне Solana. Добровольное участие даёт 25 лет хранения.", ctaInstText:"Кабинет института", ctaRegText:"Посмотреть реестр", howTitle:"⚖️ Как проходит трансформация", step1Title:"Загрузка и аудит", step1Desc:"Институт загружает документы (шифрование → IPFS). Полпред проверяет.", step2Title:"Приказ Суверена", step2Desc:"Полпред выдаёт предписание: 25 лет (добровольно) или 3 года (принудительно).", step3Title:"Приобретение UNGT", step3Desc:"Институт покупает UNGT через SOL и хранит на мастер-кошельке.", step4Title:"Реестр и хранение", step4Desc:"Актив в реестре. Физически остаётся у института на указанный срок.", incentiveNote:"Добровольно = 25 лет хранения · Принудительно = 3 года", instTitle:"🏛️ Заявка на оцифровку", assetNameLabel:"Название актива", valuationLabel:"Оценка (USD)", docsLabel:"Загрузить документы (PDF/изображения)", submitBtnText:"Отправить на аудит", legalNote:"*Документы шифруются и хранятся в IPFS. Только полпред может просматривать оригиналы.", regTitle:"📜 Публичный реестр оцифрованных активов", thId:"ID актива", thInst:"Институт", thValue:"Стоимость (USD)", thUngt:"Кол-во UNGT", thTerm:"Срок хранения", thStatus:"Статус", loadingMsg:"Загрузка реестра...", adminTitle:"👑 Панель полпреда", adminNote:"🔐 Только кошелёк, авторизованный Сувереном. Примите решение: 25 лет или 3 года.", footerDisclaimer:"*Юридическая ответственность лежит на Суверене и Полпреде. Технический интерфейс для прозрачности." },
-            es: { heroTitle:"Transformación digital de activos de la corona imperial", ctaInstText:"Panel de instituciones", ctaRegText:"Ver registro", howTitle:"⚖️ Cómo funciona", step1Title:"Carga y auditoría", step2Title:"Orden soberana", step3Title:"Adquisición de UNGT", step4Title:"Registro y custodia", incentiveNote:"Voluntario = 25 años · Forzoso = 3 años", instTitle:"🏛️ Solicitud de transformación", submitBtnText:"Enviar a auditoría", regTitle:"📜 Registro público de activos digitalizados", adminTitle:"👑 Panel Plenipotenciario" },
-            fr: { heroTitle:"Transformation numérique des actifs de la couronne impériale", ctaInstText:"Espace institution", ctaRegText:"Voir registre", howTitle:"⚖️ Processus", step1Title:"Dépôt & audit", step2Title:"Ordre souverain", step3Title:"Acquisition UNGT", step4Title:"Registre et garde", incentiveNote:"Volontaire = 25 ans · Forcé = 3 ans", instTitle:"🏛️ Demande de transformation", submitBtnText:"Soumettre à l'audit", regTitle:"📜 Registre public des actifs numérisés", adminTitle:"👑 Panel Plénipotentiaire" },
-            de: { heroTitle:"Digitale Transformation von Reichskronvermögen", ctaInstText:"Dashboard", ctaRegText:"Register anzeigen", howTitle:"⚖️ Ablauf", step1Title:"Upload & Audit", step2Title:"Souveräner Befehl", step3Title:"UNGT-Erwerb", step4Title:"Register & Verwahrung", incentiveNote:"Freiwillig = 25 Jahre · Zwangsweise = 3 Jahre", instTitle:"🏛️ Antrag auf Transformation", submitBtnText:"Zum Audit einreichen", regTitle:"📜 Öffentliches Register digitalisierter Vermögenswerte", adminTitle:"👑 Panel des Bevollmächtigten" },
-            zh: { heroTitle:"皇冠资产的数字化变革", ctaInstText:"机构面板", ctaRegText:"查看注册表", howTitle:"⚖️ 变革机制", step1Title:"上传与审计", step2Title:"主权命令", step3Title:"获取UNGT", step4Title:"注册与保管", incentiveNote:"自愿 = 25年保管 · 强制 = 仅3年", instTitle:"🏛️ 资产数字化申请", submitBtnText:"提交审计", regTitle:"📜 数字化资产公共注册表", adminTitle:"👑 全权代表面板" },
-            ar: { heroTitle:"التحول الرقمي لأصول التاج الإمبراطوري", ctaInstText:"لوحة المؤسسات", ctaRegText:"عرض السجل", howTitle:"⚖️ آلية التحول", step1Title:"الرفع والتدقيق", step2Title:"الأمر السيادي", step3Title:"الحصول على UNGT", step4Title:"التسجيل والحفظ", incentiveNote:"طوعي = 25 سنة · إجباري = 3 سنوات", instTitle:"🏛️ طلب تحويل الأصول", submitBtnText:"إرسال للتدقيق", regTitle:"📜 السجل العام للأصول الرقمية", adminTitle:"👑 لوحة المفوض" },
-            hi: { heroTitle:"शाही ताज की संपत्तियों का डिजिटल परिवर्तन", ctaInstText:"संस्थान डैशबोर्ड", ctaRegText:"रजिस्ट्री देखें", howTitle:"⚖️ परिवर्तन प्रक्रिया", step1Title:"अपलोड और ऑडिट", step2Title:"संप्रभु आदेश", step3Title:"UNGT अधिग्रहण", step4Title:"रजिस्ट्री और भंडारण", incentiveNote:"स्वैच्छिक = 25 साल · अनिवार्य = 3 साल", instTitle:"🏛️ परिसंपत्ति परिवर्तन अनुरोध", submitBtnText:"ऑडिट के लिए जमा करें", regTitle:"📜 डिजिटल संपत्तियों की सार्वजनिक रजिस्ट्री", adminTitle:"👑 पूर्णाधिकारी पैनल" },
-            ja: { heroTitle:"皇室資産のデジタル変革", ctaInstText:"機関ダッシュボード", ctaRegText:"レジストリを見る", howTitle:"⚖️ 変革の仕組み", step1Title:"アップロードと監査", step2Title:"主権命令", step3Title:"UNGTの取得", step4Title:"レジストリと保管", incentiveNote:"任意 = 25年保管 · 強制 = 3年", instTitle:"🏛️ 資産変革リクエスト", submitBtnText:"監査に提出", regTitle:"📜 デジタル資産の公開レジストリ", adminTitle:"👑 全権代表パネル" },
-            tr: { heroTitle:"İmparatorluk tacı varlıklarının dijital dönüşümü", ctaInstText:"Kurum paneli", ctaRegText:"Sicili görüntüle", howTitle:"⚖️ Dönüşüm mekanizması", step1Title:"Yükleme ve Denetim", step2Title:"Egemen Kararı", step3Title:"UNGT Edinimi", step4Title:"Sicil ve Saklama", incentiveNote:"Gönüllü = 25 yıl · Zorunlu = 3 yıl", instTitle:"🏛️ Varlık dönüşüm talebi", submitBtnText:"Denetime gönder", regTitle:"📜 Dijital varlıkların kamu sicili", adminTitle:"👑 Tam Yetkili Paneli" }
+            ru: { heroTitle:"Цифровая трансформация активов Императорской короны", heroDesc:"Аудит, признание и токенизация исторических обязательств на блокчейне Solana. Добровольное участие даёт 25 лет хранения.", ctaInstText:"Кабинет института", ctaRegText:"Посмотреть реестр", howTitle:"⚖️ Как проходит трансформация", step1Title:"Загрузка и аудит", step1Desc:"Институт загружает документы (шифрование → IPFS). Полпред проверяет.", step2Title:"Приказ Суверена", step2Desc:"Полпред выдаёт предписание: 25 лет (добровольно) или 3 года (принудительно).", step3Title:"Приобретение UNGT", step3Desc:"Институт покупает UNGT через SOL и хранит на мастер-кошельке.", step4Title:"Реестр и хранение", step4Desc:"Актив в реестре. Физически остаётся у института на указанный срок.", incentiveNote:"Добровольно = 25 лет хранения · Принудительно = 3 года", instTitle:"🏛️ Заявка на оцифровку", assetNameLabel:"Название актива", valuationLabel:"Оценка (USD)", docsLabel:"Загрузить документы (PDF/изображения)", submitBtnText:"Отправить на аудит", legalNote:"*Документы шифруются и хранятся в IPFS. Только полпред может просматривать оригиналы.", regTitle:"📜 Публичный реестр оцифрованных активов", thId:"ID актива", thInst:"Институт", thValue:"Стоимость (USD)", thUngt:"Кол-во UNGT", thTerm:"Срок хранения", thStatus:"Статус", loadingMsg:"Загрузка реестра...", adminTitle:"👑 Панель полпреда", adminNote:"🔐 Только кошелёк, авторизованный Сувереном. Примите решение: 25 лет или 3 года.", footerDisclaimer:"*Юридическая ответственность лежит на Суверене и Полпреде. Технический интерфейс для прозрачности." }
         };
         for (let lang in langData) if (lang !== 'en') for (let key in langData.en) if (!langData[lang][key]) langData[lang][key] = langData.en[key];
+        langData.es = {...langData.en, heroTitle:"Transformación digital de activos de la corona imperial", ctaInstText:"Panel de instituciones", ctaRegText:"Ver registro", howTitle:"⚖️ Cómo funciona", step1Title:"Carga y auditoría", step2Title:"Orden soberana", step3Title:"Adquisición de UNGT", step4Title:"Registro y custodia", incentiveNote:"Voluntario = 25 años · Forzoso = 3 años", instTitle:"🏛️ Solicitud de transformación", submitBtnText:"Enviar a auditoría", regTitle:"📜 Registro público de activos digitalizados", adminTitle:"👑 Panel Plenipotenciario"};
+        langData.fr = {...langData.en, heroTitle:"Transformation numérique des actifs de la couronne impériale", ctaInstText:"Espace institution", ctaRegText:"Voir registre", howTitle:"⚖️ Processus", step1Title:"Dépôt & audit", step2Title:"Ordre souverain", step3Title:"Acquisition UNGT", step4Title:"Registre et garde", incentiveNote:"Volontaire = 25 ans · Forcé = 3 ans", instTitle:"🏛️ Demande de transformation", submitBtnText:"Soumettre à l'audit", regTitle:"📜 Registre public des actifs numérisés", adminTitle:"👑 Panel Plénipotentiaire"};
+        langData.de = {...langData.en, heroTitle:"Digitale Transformation von Reichskronvermögen", ctaInstText:"Dashboard", ctaRegText:"Register anzeigen", howTitle:"⚖️ Ablauf", step1Title:"Upload & Audit", step2Title:"Souveräner Befehl", step3Title:"UNGT-Erwerb", step4Title:"Register & Verwahrung", incentiveNote:"Freiwillig = 25 Jahre · Zwangsweise = 3 Jahre", instTitle:"🏛️ Antrag auf Transformation", submitBtnText:"Zum Audit einreichen", regTitle:"📜 Öffentliches Register digitalisierter Vermögenswerte", adminTitle:"👑 Panel des Bevollmächtigten"};
+        langData.zh = {...langData.en, heroTitle:"皇冠资产的数字化变革", ctaInstText:"机构面板", ctaRegText:"查看注册表", howTitle:"⚖️ 变革机制", step1Title:"上传与审计", step2Title:"主权命令", step3Title:"获取UNGT", step4Title:"注册与保管", incentiveNote:"自愿 = 25年保管 · 强制 = 仅3年", instTitle:"🏛️ 资产数字化申请", submitBtnText:"提交审计", regTitle:"📜 数字化资产公共注册表", adminTitle:"👑 全权代表面板"};
+        langData.ar = {...langData.en, heroTitle:"التحول الرقمي لأصول التاج الإمبراطوري", ctaInstText:"لوحة المؤسسات", ctaRegText:"عرض السجل", howTitle:"⚖️ آلية التحول", step1Title:"الرفع والتدقيق", step2Title:"الأمر السيادي", step3Title:"الحصول على UNGT", step4Title:"التسجيل والحفظ", incentiveNote:"طوعي = 25 سنة · إجباري = 3 سنوات", instTitle:"🏛️ طلب تحويل الأصول", submitBtnText:"إرسال للتدقيق", regTitle:"📜 السجل العام للأصول الرقمية", adminTitle:"👑 لوحة المفوض"};
+        langData.hi = {...langData.en, heroTitle:"शाही ताज की संपत्तियों का डिजिटल परिवर्तन", ctaInstText:"संस्थान डैशबोर्ड", ctaRegText:"रजिस्ट्री देखें", howTitle:"⚖️ परिवर्तन प्रक्रिया", step1Title:"अपलोड और ऑडिट", step2Title:"संप्रभु आदेश", step3Title:"UNGT अधिग्रहण", step4Title:"रजिस्ट्री और भंडारण", incentiveNote:"स्वैच्छिक = 25 साल · अनिवार्य = 3 साल", instTitle:"🏛️ परिसंपत्ति परिवर्तन अनुरोध", submitBtnText:"ऑडिट के लिए जमा करें", regTitle:"📜 डिजिटल संपत्तियों की सार्वजनिक रजिस्ट्री", adminTitle:"👑 पूर्णाधिकारी पैनल"};
+        langData.ja = {...langData.en, heroTitle:"皇室資産のデジタル変革", ctaInstText:"機関ダッシュボード", ctaRegText:"レジストリを見る", howTitle:"⚖️ 変革の仕組み", step1Title:"アップロードと監査", step2Title:"主権命令", step3Title:"UNGTの取得", step4Title:"レジストリと保管", incentiveNote:"任意 = 25年保管 · 強制 = 3年", instTitle:"🏛️ 資産変革リクエスト", submitBtnText:"監査に提出", regTitle:"📜 デジタル資産の公開レジストリ", adminTitle:"👑 全権代表パネル"};
+        langData.tr = {...langData.en, heroTitle:"İmparatorluk tacı varlıklarının dijital dönüşümü", ctaInstText:"Kurum paneli", ctaRegText:"Sicili görüntüle", howTitle:"⚖️ Dönüşüm mekanizması", step1Title:"Yükleme ve Denetim", step2Title:"Egemen Kararı", step3Title:"UNGT Edinimi", step4Title:"Sicil ve Saklama", incentiveNote:"Gönüllü = 25 yıl · Zorunlu = 3 yıl", instTitle:"🏛️ Varlık dönüşüm talebi", submitBtnText:"Denetime gönder", regTitle:"📜 Dijital varlıkların kamu sicili", adminTitle:"👑 Tam Yetkili Paneli"};
 
         function applyLanguage(lang) {
             const t = langData[lang];
@@ -581,32 +579,16 @@
         applyLanguage('en');
 
         // --------------------------------------------------------------
-        // 2. DEXSCREENER WIDGET + REAL PRICE METRICS
+        // 2. BUY LINK (JUPITER)
         // --------------------------------------------------------------
         const UNGT_ADDRESS = "EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs";
-        function loadDexWidget() {
-            const container = document.getElementById('dexscreener-widget');
-            if(container) {
-                container.innerHTML = `<iframe src="https://dexscreener.com/solana/${UNGT_ADDRESS}?embed=1&theme=dark&trades=0" width="100%" height="500" style="border:0; border-radius:20px;"></iframe>`;
-            }
-            // Имитация метрик (в реальном проекте можно подключить DexScreener API)
-            document.getElementById('priceValue').innerText = "$0.1692";
-            document.getElementById('mcapValue').innerText = "$508.33T";
-            document.getElementById('liqValue').innerText = "$6.51B";
-            document.getElementById('volumeValue').innerText = "$0.1692";
-        }
-        loadDexWidget();
-
-        // --------------------------------------------------------------
-        // 3. BUY LINK (JUPITER)
-        // --------------------------------------------------------------
         document.getElementById('buyOnJupiter').addEventListener('click', (e) => {
             e.preventDefault();
             window.open(`https://jup.ag/swap/SOL-${UNGT_ADDRESS}`, '_blank');
         });
 
         // --------------------------------------------------------------
-        // 4. REGISTRY DEMO DATA & FUNCTIONS
+        // 3. REGISTRY DEMO DATA & FUNCTIONS
         // --------------------------------------------------------------
         let demoAssets = [
             { id: "UNGT-001", institution: "State Bank of Empire (Archival)", value: 1250000000, ungtAmount: 12500000, term: "25 years", status: "Active" },
@@ -616,12 +598,12 @@
             const tbody = document.getElementById('assetTableBody');
             if (!tbody) return;
             if (demoAssets.length === 0) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No assets digitalized yet</td></tr>`; return; }
-            tbody.innerHTML = demoAssets.map(a => `<tr><td>${a.id}</td><td>${a.institution}</td><td>$${a.value.toLocaleString()}</td><td>${a.ungtAmount.toLocaleString()} UNGT</td><td>${a.term}</td><td><span class="badge">${a.status}</span></td>`).join('');
+            tbody.innerHTML = demoAssets.map(a => `<tr><td>${a.id}</td><td>${a.institution}</td><td>$${a.value.toLocaleString()}</td><td>${a.ungtAmount.toLocaleString()} UNGT</td><td>${a.term}</td><td><span class="badge">${a.status}</span></td></tr>`).join('');
         }
         renderRegistry();
 
         // --------------------------------------------------------------
-        // 5. UPLOAD & SUBMIT (DEMO)
+        // 4. UPLOAD & SUBMIT (DEMO)
         // --------------------------------------------------------------
         document.getElementById('submitAssetBtn')?.addEventListener('click', () => {
             const name = document.getElementById('assetName')?.value;
@@ -637,12 +619,12 @@
         });
 
         // --------------------------------------------------------------
-        // 6. WALLET CONNECT DEMO
+        // 5. WALLET CONNECT DEMO
         // --------------------------------------------------------------
         document.getElementById('connectWalletBtn')?.addEventListener('click', () => alert("🔐 Wallet demo: would connect to Solana mainnet. Real integration with Phantom available."));
 
         // --------------------------------------------------------------
-        // 7. NAVIGATION
+        // 6. NAVIGATION
         // --------------------------------------------------------------
         function showSection(sectionId) {
             document.getElementById('howSection').classList.add('hidden-section');
@@ -665,7 +647,7 @@
         document.getElementById('ctaRegistryBtn')?.addEventListener('click', () => { showSection('registrySection'); renderRegistry(); });
 
         // --------------------------------------------------------------
-        // 8. ADMIN PANEL
+        // 7. ADMIN PANEL
         // --------------------------------------------------------------
         const adminContainer = document.getElementById('pendingReviews');
         if (adminContainer) {
@@ -688,4 +670,4 @@
         showSection('howSection');
     </script>
 </body>
-  </html>
+    </html>
