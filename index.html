@@ -25,7 +25,6 @@
             position: relative;
         }
 
-        /* Имперская подложка + блокчейн-эволюция */
         .imperial-bg {
             position: fixed;
             top: 0;
@@ -107,7 +106,6 @@
             gap: 14px;
         }
 
-        /* ВСТРОЕННЫЙ ЛОГОТИП - всегда отображается, не требует внешнего файла */
         .logo-svg {
             width: 54px;
             height: 54px;
@@ -188,6 +186,7 @@
             text-decoration: none;
             font-size: 0.85rem;
             transition: 0.2s;
+            display: inline-block;
         }
 
         .btn-outline-light:hover {
@@ -231,7 +230,6 @@
             border-radius: 24px;
             padding: 24px 16px;
             text-align: center;
-            transition: 0.2s;
         }
 
         .metric-value {
@@ -345,12 +343,12 @@
             display: none;
         }
 
-        .dex-widget {
+        .gecko-widget {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 24px;
             padding: 20px;
             margin: 30px 0;
-            min-height: 500px;
+            min-height: 550px;
         }
 
         .inline-links {
@@ -388,7 +386,6 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <!-- ВСТРОЕННЫЙ ЛОГОТИП: золотая корона UNGT (всегда отображается) -->
                     <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="50" cy="50" r="46" fill="#1f180c" stroke="#d4af37" stroke-width="2.2"/>
                         <path d="M30 20 L40 10 L50 20 L50 35 L30 35 Z" fill="#d4af37" stroke="#eecb6e" stroke-width="1"/>
@@ -415,7 +412,6 @@
     </header>
 
     <main>
-        <!-- HERO -->
         <div class="container hero" style="text-align:center; padding: 60px 0 40px;">
             <h1 id="heroTitle" style="font-size:3.2rem; font-family:'Cormorant Garamond'; text-shadow:0 2px 12px black;">Digital transformation of Imperial crown assets</h1>
             <p id="heroDesc" style="font-size:1.2rem; max-width:750px; margin:24px auto;">Audit, recognition and tokenization of historical obligations on Solana blockchain. Voluntary participation grants 25‑year custody extension.</p>
@@ -430,7 +426,7 @@
             <div class="inline-links">
                 <a href="https://solscan.io/token/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" class="btn-outline-light"><i class="fas fa-file-contract"></i> Solscan</a>
                 <a href="https://dexscreener.com/solana/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" class="btn-outline-light"><i class="fas fa-chart-line"></i> DexScreener</a>
-                <a href="https://www.geckoterminal.com/solana/pools/DqiAcmgqY3p6F222Vva51VzFSnCBdQpRP2fu3ZBwY6eG" target="_blank" class="btn-outline-light"><i class="fas fa-chart-simple"></i> GeckoTerminal</a>
+                <a href="https://www.geckoterminal.com/solana/pools/BwMS4vGpDMAzLnYnUsz7ebWQXEHZbxBPYmHtMXwPJZSi" target="_blank" class="btn-outline-light"><i class="fas fa-chart-simple"></i> GeckoTerminal</a>
                 <a href="#" id="buyOnJupiter" class="btn-outline-light"><i class="fas fa-rocket"></i> Buy on Jupiter</a>
             </div>
             
@@ -440,14 +436,13 @@
             </div>
         </div>
 
-        <!-- CHART WIDGET (DexScreener) -->
+        <!-- GeckoTerminal Widget - правильный пул -->
         <div class="container">
-            <div class="dex-widget">
-                <iframe src="https://dexscreener.com/solana/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs?embed=1&theme=dark&trades=0" width="100%" height="500" style="border:0; border-radius:20px;"></iframe>
+            <div class="gecko-widget">
+                <iframe src="https://www.geckoterminal.com/solana/pools/BwMS4vGpDMAzLnYnUsz7ebWQXEHZbxBPYmHtMXwPJZSi?embed=1&theme=dark" width="100%" height="550" style="border:0; border-radius:20px;"></iframe>
             </div>
         </div>
 
-        <!-- HOW IT WORKS -->
         <div id="howSection" class="section">
             <div class="container">
                 <div class="section-title" id="howTitle">⚖️ How the transformation works</div>
@@ -459,7 +454,6 @@
                 </div>
                 <div id="incentiveNote" style="text-align:center; margin-top:36px; padding:16px; background:rgba(212,175,55,0.1); border-radius:60px;"><i class="fas fa-gavel"></i> <strong>Voluntary = 25 years custody · Forced = only 3 years</strong></div>
                 
-                <!-- Financial literacy section -->
                 <div style="margin-top: 50px; background: rgba(0,0,0,0.4); border-radius: 28px; padding: 30px;">
                     <h3 style="font-family:'Cormorant Garamond'; font-size:1.8rem; text-align:center;">📈 Financial & Legal Structure</h3>
                     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; margin-top:24px;">
@@ -472,7 +466,6 @@
             </div>
         </div>
 
-        <!-- INSTITUTION SECTION -->
         <div id="institutionSection" class="section hidden-section">
             <div class="container">
                 <div class="section-title" id="instTitle">🏛️ Asset transformation request</div>
@@ -490,20 +483,18 @@
             </div>
         </div>
 
-        <!-- REGISTRY -->
         <div id="registrySection" class="section hidden-section">
             <div class="container">
                 <div class="section-title" id="regTitle">📜 Public registry of digitalized assets</div>
                 <div class="registry-table">
                     <table id="assetTable">
                         <thead><tr><th id="thId">Asset ID</th><th id="thInst">Institution</th><th id="thValue">Value (USD)</th><th id="thUngt">UNGT amount</th><th id="thTerm">Custody term</th><th id="thStatus">Status</th></tr></thead>
-                        <tbody id="assetTableBody"><tr><td colspan="6" style="text-align:center;" id="loadingMsg">Loading registry...</td></tr></tbody>
+                        <tbody id="assetTableBody"><tr><td colspan="6" style="text-align:center;" id="loadingMsg">Loading registry......</td></tr></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- ADMIN -->
         <div id="adminSection" class="section hidden-section">
             <div class="container">
                 <div class="section-title" id="adminTitle">👑 Plenipotentiary Audit & Ruling</div>
@@ -523,9 +514,7 @@
     </footer>
 
     <script>
-        // --------------------------------------------------------------
-        // 1. TRANSLATIONS (12 языков)
-        // --------------------------------------------------------------
+        // ПЕРЕВОД НА 12 ЯЗЫКОВ
         const langData = {
             en: { heroTitle:"Digital transformation of Imperial crown assets", heroDesc:"Audit, recognition and tokenization of historical obligations on Solana blockchain. Voluntary participation grants 25‑year custody extension.", ctaInstText:"Institution dashboard", ctaRegText:"View public registry", howTitle:"⚖️ How the transformation works", step1Title:"Upload & Audit", step1Desc:"Institution submits asset proofs (encrypted → IPFS). Plenipotentiary reviews historical obligations.", step2Title:"Sovereign Order", step2Desc:"Plenipotentiary issues transformation order: 25 years (voluntary) or 3 years (forced).", step3Title:"UNGT Acquisition", step3Desc:"Institution buys UNGT tokens via SOL and holds them in master wallet (legal agreement).", step4Title:"Registry & Storage", step4Desc:"Asset appears in public registry. Physical asset remains with institution for chosen term.", incentiveNote:"Voluntary = 25 years custody · Forced = only 3 years", instTitle:"🏛️ Asset transformation request", assetNameLabel:"Asset name / description", valuationLabel:"Valuation (USD)", docsLabel:"Upload supporting documents (PDF/Image)", submitBtnText:"Submit for audit", legalNote:"*Documents are client-side encrypted and stored on IPFS/Arweave. Only plenipotentiary can view originals.", regTitle:"📜 Public registry of digitalized assets", thId:"Asset ID", thInst:"Institution", thValue:"Value (USD)", thUngt:"UNGT amount", thTerm:"Custody term", thStatus:"Status", loadingMsg:"Loading registry...", adminTitle:"👑 Plenipotentiary Audit & Ruling", adminNote:"🔐 Only wallet authorized by Suzerain can access. Review documents, then decide term.", footerDisclaimer:"*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization." },
             ru: { heroTitle:"Цифровая трансформация активов Императорской короны", heroDesc:"Аудит, признание и токенизация исторических обязательств на блокчейне Solana. Добровольное участие даёт 25 лет хранения.", ctaInstText:"Кабинет института", ctaRegText:"Посмотреть реестр", howTitle:"⚖️ Как проходит трансформация", step1Title:"Загрузка и аудит", step1Desc:"Институт загружает документы (шифрование → IPFS). Полпред проверяет.", step2Title:"Приказ Суверена", step2Desc:"Полпред выдаёт предписание: 25 лет (добровольно) или 3 года (принудительно).", step3Title:"Приобретение UNGT", step3Desc:"Институт покупает UNGT через SOL и хранит на мастер-кошельке.", step4Title:"Реестр и хранение", step4Desc:"Актив в реестре. Физически остаётся у института на указанный срок.", incentiveNote:"Добровольно = 25 лет хранения · Принудительно = 3 года", instTitle:"🏛️ Заявка на оцифровку", assetNameLabel:"Название актива", valuationLabel:"Оценка (USD)", docsLabel:"Загрузить документы (PDF/изображения)", submitBtnText:"Отправить на аудит", legalNote:"*Документы шифруются и хранятся в IPFS. Только полпред может просматривать оригиналы.", regTitle:"📜 Публичный реестр оцифрованных активов", thId:"ID актива", thInst:"Институт", thValue:"Стоимость (USD)", thUngt:"Кол-во UNGT", thTerm:"Срок хранения", thStatus:"Статус", loadingMsg:"Загрузка реестра...", adminTitle:"👑 Панель полпреда", adminNote:"🔐 Только кошелёк, авторизованный Сувереном. Примите решение: 25 лет или 3 года.", footerDisclaimer:"*Юридическая ответственность лежит на Суверене и Полпреде. Технический интерфейс для прозрачности." }
@@ -578,18 +567,12 @@
         document.getElementById('languageSwitcher').addEventListener('change', (e) => applyLanguage(e.target.value));
         applyLanguage('en');
 
-        // --------------------------------------------------------------
-        // 2. BUY LINK (JUPITER)
-        // --------------------------------------------------------------
         const UNGT_ADDRESS = "EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs";
         document.getElementById('buyOnJupiter').addEventListener('click', (e) => {
             e.preventDefault();
             window.open(`https://jup.ag/swap/SOL-${UNGT_ADDRESS}`, '_blank');
         });
 
-        // --------------------------------------------------------------
-        // 3. REGISTRY DEMO DATA & FUNCTIONS
-        // --------------------------------------------------------------
         let demoAssets = [
             { id: "UNGT-001", institution: "State Bank of Empire (Archival)", value: 1250000000, ungtAmount: 12500000, term: "25 years", status: "Active" },
             { id: "UNGT-002", institution: "Northern Trust Metals", value: 450000000, ungtAmount: 4500000, term: "3 years", status: "Forced term" }
@@ -602,9 +585,6 @@
         }
         renderRegistry();
 
-        // --------------------------------------------------------------
-        // 4. UPLOAD & SUBMIT (DEMO)
-        // --------------------------------------------------------------
         document.getElementById('submitAssetBtn')?.addEventListener('click', () => {
             const name = document.getElementById('assetName')?.value;
             const value = parseFloat(document.getElementById('assetValue')?.value);
@@ -618,14 +598,8 @@
             setTimeout(() => { if(statusDiv) statusDiv.innerHTML = ""; }, 4000);
         });
 
-        // --------------------------------------------------------------
-        // 5. WALLET CONNECT DEMO
-        // --------------------------------------------------------------
         document.getElementById('connectWalletBtn')?.addEventListener('click', () => alert("🔐 Wallet demo: would connect to Solana mainnet. Real integration with Phantom available."));
 
-        // --------------------------------------------------------------
-        // 6. NAVIGATION
-        // --------------------------------------------------------------
         function showSection(sectionId) {
             document.getElementById('howSection').classList.add('hidden-section');
             document.getElementById('institutionSection').classList.add('hidden-section');
@@ -646,9 +620,6 @@
         document.getElementById('ctaInstitutionBtn')?.addEventListener('click', () => showSection('institutionSection'));
         document.getElementById('ctaRegistryBtn')?.addEventListener('click', () => { showSection('registrySection'); renderRegistry(); });
 
-        // --------------------------------------------------------------
-        // 7. ADMIN PANEL
-        // --------------------------------------------------------------
         const adminContainer = document.getElementById('pendingReviews');
         if (adminContainer) {
             adminContainer.innerHTML = `<div style="margin-top:20px;"><p><i class="fas fa-file-alt"></i> Pending audit: ${demoAssets.filter(a=>a.status==='Audit requested').length} submission(s)</p>
@@ -670,4 +641,4 @@
         showSection('howSection');
     </script>
 </body>
-    </html>
+</html>
