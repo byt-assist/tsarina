@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>UNGT · Tsarina RWA | Digital Transformation of Imperial Crown Assets</title>
-    <meta name="description" content="UNGT token - Digital transformation of Imperial crown assets. Audit, recognition and tokenization of historical obligations on Solana blockchain.">
+    <meta name="description" content="Turn historical Imperial obligations into UNGT tokens. Keep your assets for 25 years. For banks, trusts, and financial institutions holding assets of the Imperial Crown.">
     <meta property="og:title" content="UNGT · Tsarina RWA">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://byt-assist.github.io/tsarina/">
+    <meta property="og:description" content="Digitize your obligations via audit and receive UNGT tokens. Voluntary participation = 25 years custody + 3% fee + 22 years usage rights + 15% buyback discount.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -25,7 +26,7 @@
             position: relative;
         }
 
-        /* Impenrial background + blockchain mesh */
+        /* Imperial background + blockchain mesh */
         .imperial-bg {
             position: fixed;
             top: 0;
@@ -344,12 +345,12 @@
             display: none;
         }
 
-        .gecko-widget {
+        .dextools-widget {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 24px;
             padding: 20px;
             margin: 30px 0;
-            min-height: 550px;
+            min-height: 650px;
         }
 
         .inline-links {
@@ -387,9 +388,55 @@
             color: #d4af37;
             align-self: center;
         }
+        .incentives-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .incentive-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 28px;
+            padding: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        .incentive-card.voluntary { border-color: #2a7a2a; }
+        .incentive-card.forced { border-color: #8b3a3a; }
+        .incentive-title {
+            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 20px;
+        }
+        .incentive-list { list-style: none; padding: 0; }
+        .incentive-list li { margin: 15px 0; padding-left: 24px; position: relative; }
+        .incentive-list li i { position: absolute; left: 0; top: 4px; color: #d4af37; }
+        .badge-voluntary { background: #2a7a2a; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; }
+        .badge-forced { background: #8b3a3a; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; }
         @media (max-width: 768px) {
             .pipeline-steps { flex-direction: column; align-items: center; }
             .step-arrow { transform: rotate(90deg); }
+            .incentives-grid { grid-template-columns: 1fr; }
+        }
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 850px;
+            margin: 20px auto 0;
+            line-height: 1.6;
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            border-radius: 20px;
+        }
+        .hero-description p {
+            margin: 8px 0;
+        }
+        .main-title {
+            font-size: 3.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            text-shadow: 0 2px 12px black;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .main-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -429,9 +476,15 @@
     </header>
 
     <main>
-        <div class="container hero" style="text-align:center; padding: 60px 0 40px;">
-            <h1 id="heroTitle" style="font-size:3.2rem; font-family:'Cormorant Garamond'; text-shadow:0 2px 12px black;">Digital transformation of Imperial crown assets</h1>
-            <p id="heroDesc" style="font-size:1.2rem; max-width:750px; margin:24px auto;">Audit, recognition and tokenization of historical obligations on Solana blockchain. Voluntary participation grants 25‑year custody extension.</p>
+        <div class="container hero" style="text-align:center; padding: 40px 0 30px;">
+            <h1 class="main-title" id="heroTitle">Turn historical Imperial obligations into UNGT tokens.<br>Keep your assets for 25 years.</h1>
+            
+            <div class="hero-description" id="heroDescContainer">
+                <p id="heroDescLine1">📜 <strong>For banks, trusts, and financial institutions holding assets of the Imperial Crown.</strong></p>
+                <p id="heroDescLine2">💰 Digitize your obligations via audit and receive UNGT tokens.</p>
+                <p id="heroDescLine3">🎁 Voluntary participation = <strong>25 years custody + 3% fee + 22 years usage rights + 15% buyback discount.</strong></p>
+                <p id="heroDescLine4">⚠️ Forced transformation = 3 years custody, no benefits.</p>
+            </div>
             
             <div class="metrics-grid" id="metricsArea">
                 <div class="metric-card"><div class="metric-value" id="priceValue">$67.68</div><div class="metric-label">UNGT Price</div></div>
@@ -444,19 +497,19 @@
                 <a href="https://solscan.io/token/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" class="btn-outline-light"><i class="fas fa-file-contract"></i> Solscan</a>
                 <a href="https://dexscreener.com/solana/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" class="btn-outline-light"><i class="fas fa-chart-line"></i> DexScreener</a>
                 <a href="https://www.lme.com/Metals/Precious-metals/LMEprecious#Gold" target="_blank" class="btn-outline-light"><i class="fas fa-coins"></i> LME Gold</a>
-                <a href="#" id="buyOnJupiter" class="btn-outline-light"><i class="fas fa-rocket"></i> Buy on Jupiter</a>
+                <a href="#" id="buyOnJupiter" class="btn-outline-light"><i class="fas fa-rocket"></i> Buy UNGT on Jupiter</a>
             </div>
             
-            <div class="btn-group" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
-                <button id="ctaInstitutionBtn" class="btn-primary"><i class="fas fa-upload"></i> <span id="ctaInstText">Institution dashboard</span></button>
-                <button id="ctaRegistryBtn" class="btn-secondary"><i class="fas fa-chart-line"></i> <span id="ctaRegText">View public registry</span></button>
+            <div class="btn-group" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+                <button id="ctaInstitutionBtn" class="btn-primary"><i class="fas fa-upload"></i> <span id="ctaInstText">For Institutions: Start Digitization</span></button>
+                <button id="ctaRegistryBtn" class="btn-secondary"><i class="fas fa-chart-line"></i> <span id="ctaRegText">View Public Registry</span></button>
             </div>
         </div>
 
-        <!-- GeckoTerminal Widget -->
+        <!-- DEXTools Widget -->
         <div class="container">
-            <div class="gecko-widget">
-                <iframe src="https://www.geckoterminal.com/solana/pools/BwMS4vGpDMAzLnYnUsz7ebWQXEHZbxBPYmHtMXwPJZSi?embed=1&theme=dark" width="100%" height="550" style="border:0; border-radius:20px;"></iframe>
+            <div class="dextools-widget">
+                <iframe src="https://www.dextools.io/app/solana/pair-explorer/BwMS4vGpDMAzLnYnUsz7ebWQXEHZbxBPYmHtMXwPJZSi?embed=1&theme=dark&tabs=empty" width="100%" height="650" style="border:0; border-radius:20px;"></iframe>
             </div>
         </div>
 
@@ -469,25 +522,54 @@
                     <div class="pipeline-step">
                         <i class="fas fa-chart-line" style="font-size: 2rem; color: #d4af37;"></i>
                         <h3 style="margin: 10px 0;">1. Trade Gold on LME</h3>
-                        <p style="font-size: 0.9rem;">Gold futures (code: AU) traded on <strong>LMEselect</strong> electronic platform. Contract size: <strong>100 fine troy ounces</strong>. Trading hours: 01:00 – 20:00 London time [citation:1][citation:2].</p>
+                        <p style="font-size: 0.9rem;">Gold futures (code: AU) traded on <strong>LMEselect</strong> electronic platform. Contract size: <strong>100 fine troy ounces</strong>. Trading hours: 01:00 – 20:00 London time.</p>
                         <a href="https://www.lme.com/Metals/Precious-metals/LMEprecious#Gold" target="_blank" class="btn-outline-light" style="margin-top: 10px; display: inline-block;"><i class="fas fa-external-link-alt"></i> LME Gold Info</a>
                     </div>
                     <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
                     <div class="pipeline-step">
                         <i class="fas fa-exchange-alt" style="font-size: 2rem; color: #d4af37;"></i>
                         <h3 style="margin: 10px 0;">2. Fiat → SOL via Jupiter</h3>
-                        <p style="font-size: 0.9rem;">Use <strong>Jupiter Onramp</strong> (powered by Onramper) to convert fiat directly to SOL. Supports credit/debit cards, Apple Pay, Google Pay, and bank transfers [citation:4].</p>
+                        <p style="font-size: 0.9rem;">Use <strong>Jupiter Onramp</strong> (powered by Onramper) to convert fiat directly to SOL. Supports credit/debit cards, Apple Pay, Google Pay, and bank transfers.</p>
                         <a href="https://onramp.jup.ag/" target="_blank" class="btn-outline-light" style="margin-top: 10px; display: inline-block;"><i class="fas fa-shopping-cart"></i> Buy SOL with Fiat</a>
                     </div>
                     <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
                     <div class="pipeline-step">
                         <i class="fas fa-chart-simple" style="font-size: 2rem; color: #d4af37;"></i>
                         <h3 style="margin: 10px 0;">3. SOL → UNGT on Jupiter</h3>
-                        <p style="font-size: 0.9rem;">Swap your SOL for UNGT using Jupiter's aggregator. It routes through Meteora DLMM, Raydium, and other DEXes for best rates [citation:3][citation:7][citation:10].</p>
+                        <p style="font-size: 0.9rem;">Swap your SOL for UNGT using Jupiter's aggregator. It routes through Meteora DLMM, Raydium, and other DEXes for best rates.</p>
                         <a href="#" id="pipelineBuyBtn" class="btn-outline-light" style="margin-top: 10px; display: inline-block;"><i class="fas fa-rocket"></i> Swap SOL for UNGT</a>
                     </div>
                 </div>
-                <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.8;"><i class="fas fa-info-circle"></i> Note: LME Gold futures are physically deliverable (unallocated gold) and traded via LME members. The process described is the theoretical pipeline for converting gold exposure into UNGT tokens [citation:2][citation:6][citation:9].</p>
+                <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.8;"><i class="fas fa-info-circle"></i> Note: LME Gold futures are physically deliverable (unallocated gold) and traded via LME members. The process described is the theoretical pipeline for converting gold exposure into UNGT tokens.</p>
+            </div>
+        </div>
+
+        <!-- Economic Incentives Section -->
+        <div class="container">
+            <div class="conversion-pipeline" style="margin-top: 0;">
+                <h2 style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin-bottom: 10px;">💰 Economic Incentives: Voluntary vs. Forced</h2>
+                <p style="margin-bottom: 30px;">Financial institutions that voluntarily digitize their assets receive exclusive benefits. Forced transformation eliminates all privileges.</p>
+                <div class="incentives-grid">
+                    <div class="incentive-card voluntary">
+                        <div class="badge-voluntary">✅ VOLUNTARY TRANSFORMATION</div>
+                        <div class="incentive-title">25 years custody + Incentives</div>
+                        <ul class="incentive-list">
+                            <li><i class="fas fa-percent"></i> <strong>3% fee</strong> – Direct profit from the asset value for the transformation process</li>
+                            <li><i class="fas fa-hand-holding-usd"></i> <strong>22 years usage right</strong> – Use assets as credit/collateral leverage in your financial activities</li>
+                            <li><i class="fas fa-tags"></i> <strong>15% discount</strong> – On buyback of hard assets for own needs without third-party organizations or exchanges</li>
+                        </ul>
+                    </div>
+                    <div class="incentive-card forced">
+                        <div class="badge-forced">⚠️ FORCED TRANSFORMATION</div>
+                        <div class="incentive-title">3 years custody + No benefits</div>
+                        <ul class="incentive-list">
+                            <li><i class="fas fa-times-circle"></i> <strong>No fee</strong> – 0% profit from transformation</li>
+                            <li><i class="fas fa-times-circle"></i> <strong>No usage right</strong> – Assets cannot be used as credit/collateral leverage</li>
+                            <li><i class="fas fa-times-circle"></i> <strong>No discount</strong> – Buyback only at market price with third-party involvement</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.8;"><i class="fas fa-gavel"></i> The choice is clear: voluntary participation maximizes value for institutions while respecting the Sovereign rights.</p>
             </div>
         </div>
 
@@ -562,26 +644,30 @@
     </footer>
 
     <script>
-        // Translations (12 languages) - keeping only essential for brevity
+        // Translations (12 languages) - simplified for hero lines
         const langData = {
-            en: { heroTitle:"Digital transformation of Imperial crown assets", heroDesc:"Audit, recognition and tokenization of historical obligations on Solana blockchain. Voluntary participation grants 25‑year custody extension.", ctaInstText:"Institution dashboard", ctaRegText:"View public registry", howTitle:"⚖️ How the transformation works", step1Title:"Upload & Audit", step1Desc:"Institution submits asset proofs (encrypted → IPFS). Plenipotentiary reviews historical obligations.", step2Title:"Sovereign Order", step2Desc:"Plenipotentiary issues transformation order: 25 years (voluntary) or 3 years (forced).", step3Title:"UNGT Acquisition", step3Desc:"Institution buys UNGT tokens via SOL and holds them in master wallet (legal agreement).", step4Title:"Registry & Storage", step4Desc:"Asset appears in public registry. Physical asset remains with institution for chosen term.", incentiveNote:"Voluntary = 25 years custody · Forced = only 3 years", instTitle:"🏛️ Asset transformation request", assetNameLabel:"Asset name / description", valuationLabel:"Valuation (USD)", docsLabel:"Upload supporting documents (PDF/Image)", submitBtnText:"Submit for audit", legalNote:"*Documents are client-side encrypted and stored on IPFS/Arweave. Only plenipotentiary can view originals.", regTitle:"📜 Public registry of digitalized assets", thId:"Asset ID", thInst:"Institution", thValue:"Value (USD)", thUngt:"UNGT amount", thTerm:"Custody term", thStatus:"Status", loadingMsg:"Loading registry...", adminTitle:"👑 Plenipotentiary Audit & Ruling", adminNote:"🔐 Only wallet authorized by Suzerain can access. Review documents, then decide term.", footerDisclaimer:"*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization." },
-            ru: { heroTitle:"Цифровая трансформация активов Императорской короны", heroDesc:"Аудит, признание и токенизация исторических обязательств на блокчейне Solana. Добровольное участие даёт 25 лет хранения.", ctaInstText:"Кабинет института", ctaRegText:"Посмотреть реестр", howTitle:"⚖️ Как проходит трансформация", step1Title:"Загрузка и аудит", step1Desc:"Институт загружает документы (шифрование → IPFS). Полпред проверяет.", step2Title:"Приказ Суверена", step2Desc:"Полпред выдаёт предписание: 25 лет (добровольно) или 3 года (принудительно).", step3Title:"Приобретение UNGT", step3Desc:"Институт покупает UNGT через SOL и хранит на мастер-кошельке.", step4Title:"Реестр и хранение", step4Desc:"Актив в реестре. Физически остаётся у института на указанный срок.", incentiveNote:"Добровольно = 25 лет хранения · Принудительно = 3 года", instTitle:"🏛️ Заявка на оцифровку", assetNameLabel:"Название актива", valuationLabel:"Оценка (USD)", docsLabel:"Загрузить документы (PDF/изображения)", submitBtnText:"Отправить на аудит", legalNote:"*Документы шифруются и хранятся в IPFS. Только полпред может просматривать оригиналы.", regTitle:"📜 Публичный реестр оцифрованных активов", thId:"ID актива", thInst:"Институт", thValue:"Стоимость (USD)", thUngt:"Кол-во UNGT", thTerm:"Срок хранения", thStatus:"Статус", loadingMsg:"Загрузка реестра...", adminTitle:"👑 Панель полпреда", adminNote:"🔐 Только кошелёк, авторизованный Сувереном. Примите решение: 25 лет или 3 года.", footerDisclaimer:"*Юридическая ответственность лежит на Суверене и Полпреде. Технический интерфейс для прозрачности." }
+            en: { heroTitle:"Turn historical Imperial obligations into UNGT tokens. Keep your assets for 25 years.", heroLine1:"📜 For banks, trusts, and financial institutions holding assets of the Imperial Crown.", heroLine2:"💰 Digitize your obligations via audit and receive UNGT tokens.", heroLine3:"🎁 Voluntary participation = 25 years custody + 3% fee + 22 years usage rights + 15% buyback discount.", heroLine4:"⚠️ Forced transformation = 3 years custody, no benefits.", ctaInstText:"For Institutions: Start Digitization", ctaRegText:"View Public Registry", howTitle:"⚖️ How the transformation works", step1Title:"Upload & Audit", step1Desc:"Institution submits asset proofs (encrypted → IPFS). Plenipotentiary reviews historical obligations.", step2Title:"Sovereign Order", step2Desc:"Plenipotentiary issues transformation order: 25 years (voluntary) or 3 years (forced).", step3Title:"UNGT Acquisition", step3Desc:"Institution buys UNGT tokens via SOL and holds them in master wallet (legal agreement).", step4Title:"Registry & Storage", step4Desc:"Asset appears in public registry. Physical asset remains with institution for chosen term.", incentiveNote:"Voluntary = 25 years custody · Forced = only 3 years", instTitle:"🏛️ Asset transformation request", assetNameLabel:"Asset name / description", valuationLabel:"Valuation (USD)", docsLabel:"Upload supporting documents (PDF/Image)", submitBtnText:"Submit for audit", legalNote:"*Documents are client-side encrypted and stored on IPFS/Arweave. Only plenipotentiary can view originals.", regTitle:"📜 Public registry of digitalized assets", thId:"Asset ID", thInst:"Institution", thValue:"Value (USD)", thUngt:"UNGT amount", thTerm:"Custody term", thStatus:"Status", loadingMsg:"Loading registry...", adminTitle:"👑 Plenipotentiary Audit & Ruling", adminNote:"🔐 Only wallet authorized by Suzerain can access. Review documents, then decide term.", footerDisclaimer:"*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization." },
+            ru: { heroTitle:"Превратите исторические обязательства Империи в токены UNGT. Сохраните активы на 25 лет.", heroLine1:"📜 Для банков, трастов и финансовых институтов, владеющих активами Императорской Короны.", heroLine2:"💰 Оцифруйте свои обязательства через аудит и получите токены UNGT.", heroLine3:"🎁 Добровольное участие = 25 лет хранения + 3% вознаграждения + 22 года права использования + 15% дисконта на выкуп.", heroLine4:"⚠️ Принудительная трансформация = 3 года хранения, без льгот.", ctaInstText:"Институтам: начать оцифровку", ctaRegText:"Просмотреть реестр", howTitle:"⚖️ Как проходит трансформация", step1Title:"Загрузка и аудит", step1Desc:"Институт загружает документы (шифрование → IPFS). Полпред проверяет.", step2Title:"Приказ Суверена", step2Desc:"Полпред выдаёт предписание: 25 лет (добровольно) или 3 года (принудительно).", step3Title:"Приобретение UNGT", step3Desc:"Институт покупает UNGT через SOL и хранит на мастер-кошельке.", step4Title:"Реестр и хранение", step4Desc:"Актив в реестре. Физически остаётся у института на указанный срок.", incentiveNote:"Добровольно = 25 лет хранения · Принудительно = 3 года", instTitle:"🏛️ Заявка на оцифровку", assetNameLabel:"Название актива", valuationLabel:"Оценка (USD)", docsLabel:"Загрузить документы (PDF/изображения)", submitBtnText:"Отправить на аудит", legalNote:"*Документы шифруются и хранятся в IPFS. Только полпред может просматривать оригиналы.", regTitle:"📜 Публичный реестр оцифрованных активов", thId:"ID актива", thInst:"Институт", thValue:"Стоимость (USD)", thUngt:"Кол-во UNGT", thTerm:"Срок хранения", thStatus:"Статус", loadingMsg:"Загрузка реестра...", adminTitle:"👑 Панель полпреда", adminNote:"🔐 Только кошелёк, авторизованный Сувереном. Примите решение: 25 лет или 3 года.", footerDisclaimer:"*Юридическая ответственность лежит на Суверене и Полпреде. Технический интерфейс для прозрачности." }
         };
+        // fill missing languages
         for (let lang in langData) if (lang !== 'en') for (let key in langData.en) if (!langData[lang][key]) langData[lang][key] = langData.en[key];
-        langData.es = {...langData.en, heroTitle:"Transformación digital de activos de la corona imperial", ctaInstText:"Panel de instituciones", ctaRegText:"Ver registro", howTitle:"⚖️ Cómo funciona", step1Title:"Carga y auditoría", step2Title:"Orden soberana", step3Title:"Adquisición de UNGT", step4Title:"Registro y custodia", incentiveNote:"Voluntario = 25 años · Forzoso = 3 años", instTitle:"🏛️ Solicitud de transformación", submitBtnText:"Enviar a auditoría", regTitle:"📜 Registro público de activos digitalizados", adminTitle:"👑 Panel Plenipotenciario"};
-        langData.fr = {...langData.en, heroTitle:"Transformation numérique des actifs de la couronne impériale", ctaInstText:"Espace institution", ctaRegText:"Voir registre", howTitle:"⚖️ Processus", step1Title:"Dépôt & audit", step2Title:"Ordre souverain", step3Title:"Acquisition UNGT", step4Title:"Registre et garde", incentiveNote:"Volontaire = 25 ans · Forcé = 3 ans", instTitle:"🏛️ Demande de transformation", submitBtnText:"Soumettre à l'audit", regTitle:"📜 Registre public des actifs numérisés", adminTitle:"👑 Panel Plénipotentiaire"};
-        langData.de = {...langData.en, heroTitle:"Digitale Transformation von Reichskronvermögen", ctaInstText:"Dashboard", ctaRegText:"Register anzeigen", howTitle:"⚖️ Ablauf", step1Title:"Upload & Audit", step2Title:"Souveräner Befehl", step3Title:"UNGT-Erwerb", step4Title:"Register & Verwahrung", incentiveNote:"Freiwillig = 25 Jahre · Zwangsweise = 3 Jahre", instTitle:"🏛️ Antrag auf Transformation", submitBtnText:"Zum Audit einreichen", regTitle:"📜 Öffentliches Register digitalisierter Vermögenswerte", adminTitle:"👑 Panel des Bevollmächtigten"};
-        langData.zh = {...langData.en, heroTitle:"皇冠资产的数字化变革", ctaInstText:"机构面板", ctaRegText:"查看注册表", howTitle:"⚖️ 变革机制", step1Title:"上传与审计", step2Title:"主权命令", step3Title:"获取UNGT", step4Title:"注册与保管", incentiveNote:"自愿 = 25年保管 · 强制 = 仅3年", instTitle:"🏛️ 资产数字化申请", submitBtnText:"提交审计", regTitle:"📜 数字化资产公共注册表", adminTitle:"👑 全权代表面板"};
-        langData.ar = {...langData.en, heroTitle:"التحول الرقمي لأصول التاج الإمبراطوري", ctaInstText:"لوحة المؤسسات", ctaRegText:"عرض السجل", howTitle:"⚖️ آلية التحول", step1Title:"الرفع والتدقيق", step2Title:"الأمر السيادي", step3Title:"الحصول على UNGT", step4Title:"التسجيل والحفظ", incentiveNote:"طوعي = 25 سنة · إجباري = 3 سنوات", instTitle:"🏛️ طلب تحويل الأصول", submitBtnText:"إرسال للتدقيق", regTitle:"📜 السجل العام للأصول الرقمية", adminTitle:"👑 لوحة المفوض"};
-        langData.hi = {...langData.en, heroTitle:"शाही ताज की संपत्तियों का डिजिटल परिवर्तन", ctaInstText:"संस्थान डैशबोर्ड", ctaRegText:"रजिस्ट्री देखें", howTitle:"⚖️ परिवर्तन प्रक्रिया", step1Title:"अपलोड और ऑडिट", step2Title:"संप्रभु आदेश", step3Title:"UNGT अधिग्रहण", step4Title:"रजिस्ट्री और भंडारण", incentiveNote:"स्वैच्छिक = 25 साल · अनिवार्य = 3 साल", instTitle:"🏛️ परिसंपत्ति परिवर्तन अनुरोध", submitBtnText:"ऑडिट के लिए जमा करें", regTitle:"📜 डिजिटल संपत्तियों की सार्वजनिक रजिस्ट्री", adminTitle:"👑 पूर्णाधिकारी पैनल"};
-        langData.ja = {...langData.en, heroTitle:"皇室資産のデジタル変革", ctaInstText:"機関ダッシュボード", ctaRegText:"レジストリを見る", howTitle:"⚖️ 変革の仕組み", step1Title:"アップロードと監査", step2Title:"主権命令", step3Title:"UNGTの取得", step4Title:"レジストリと保管", incentiveNote:"任意 = 25年保管 · 強制 = 3年", instTitle:"🏛️ 資産変革リクエスト", submitBtnText:"監査に提出", regTitle:"📜 デジタル資産の公開レジストリ", adminTitle:"👑 全権代表パネル"};
-        langData.tr = {...langData.en, heroTitle:"İmparatorluk tacı varlıklarının dijital dönüşümü", ctaInstText:"Kurum paneli", ctaRegText:"Sicili görüntüle", howTitle:"⚖️ Dönüşüm mekanizması", step1Title:"Yükleme ve Denetim", step2Title:"Egemen Kararı", step3Title:"UNGT Edinimi", step4Title:"Sicil ve Saklama", incentiveNote:"Gönüllü = 25 yıl · Zorunlu = 3 yıl", instTitle:"🏛️ Varlık dönüşüm talebi", submitBtnText:"Denetime gönder", regTitle:"📜 Dijital varlıkların kamu sicili", adminTitle:"👑 Tam Yetkili Paneli"};
+        langData.es = {...langData.en, heroTitle:"Convierta obligaciones históricas Imperiales en tokens UNGT. Mantenga sus activos por 25 años.", ctaInstText:"Instituciones: Iniciar Digitalización", ctaRegText:"Ver Registro Público"};
+        langData.fr = {...langData.en, heroTitle:"Transformez les obligations historiques impériales en jetons UNGT. Gardez vos actifs pendant 25 ans.", ctaInstText:"Institutions : Commencer la digitalisation", ctaRegText:"Voir le registre public"};
+        langData.de = {...langData.en, heroTitle:"Wandeln Sie historische imperiale Verpflichtungen in UNGT-Token um. Behalten Sie Ihre Vermögenswerte für 25 Jahre.", ctaInstText:"Für Institutionen: Digitalisierung starten", ctaRegText:"Öffentliches Register anzeigen"};
+        langData.zh = {...langData.en, heroTitle:"将历史性的帝国义务转化为UNGT代币。保留您的资产25年。", ctaInstText:"机构：开始数字化", ctaRegText:"查看公共注册表"};
+        langData.ar = {...langData.en, heroTitle:"تحويل الالتزامات الإمبراطورية التاريخية إلى رموز UNGT. احتفظ بأصولك لمدة 25 عامًا.", ctaInstText:"للمؤسسات: ابدأ الرقمنة", ctaRegText:"عرض السجل العام"};
+        langData.hi = {...langData.en, heroTitle:"ऐतिहासिक शाही दायित्वों को UNGT टोकन में बदलें। 25 वर्षों तक अपनी संपत्ति रखें।", ctaInstText:"संस्थानों के लिए: डिजिटलीकरण शुरू करें", ctaRegText:"सार्वजनिक रजिस्ट्री देखें"};
+        langData.ja = {...langData.en, heroTitle:"歴史的な帝国の義務をUNGTトークンに変換。資産を25年間維持。", ctaInstText:"機関向け：デジタル化を開始", ctaRegText:"公開レジストリを表示"};
+        langData.tr = {...langData.en, heroTitle:"Tarihsel İmparatorluk yükümlülüklerini UNGT tokenlerine dönüştürün. Varlıklarınızı 25 yıl boyunca saklayın.", ctaInstText:"Kurumlar: Dijitalleştirmeye Başlayın", ctaRegText:"Kamu Sicilini Görüntüle"};
 
         function applyLanguage(lang) {
             const t = langData[lang];
             if(!t) return;
             document.getElementById('heroTitle').innerText = t.heroTitle;
-            document.getElementById('heroDesc').innerText = t.heroDesc;
+            document.getElementById('heroDescLine1').innerHTML = t.heroLine1;
+            document.getElementById('heroDescLine2').innerHTML = t.heroLine2;
+            document.getElementById('heroDescLine3').innerHTML = t.heroLine3;
+            document.getElementById('heroDescLine4').innerHTML = t.heroLine4;
             document.getElementById('ctaInstText').innerText = t.ctaInstText;
             document.getElementById('ctaRegText').innerText = t.ctaRegText;
             document.getElementById('howTitle').innerHTML = t.howTitle;
@@ -616,9 +702,7 @@
         applyLanguage('en');
 
         const UNGT_ADDRESS = "EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs";
-        function openJupiterSwap() {
-            window.open(`https://jup.ag/swap/SOL-${UNGT_ADDRESS}`, '_blank');
-        }
+        function openJupiterSwap() { window.open(`https://jup.ag/swap/SOL-${UNGT_ADDRESS}`, '_blank'); }
         document.getElementById('buyOnJupiter')?.addEventListener('click', (e) => { e.preventDefault(); openJupiterSwap(); });
         document.getElementById('pipelineBuyBtn')?.addEventListener('click', (e) => { e.preventDefault(); openJupiterSwap(); });
 
