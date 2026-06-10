@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>UNGT · Institution Portal | Registration & Asset Digitization</title>
-    <meta name="description" content="Financial institution registration portal for UNGT. Complete KYC, submit asset documentation, track audit status.">
+    <title>UNGT · Царина · Портал учреждений | Регистрация и оцифровка активов</title>
+    <meta name="description" content="Портал регистрации финансовых учреждений для токена UNGT. KYC, подача документов, отслеживание статуса аудита.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.js"></script>
@@ -24,7 +24,7 @@
         .nav-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
         .nav-links a { color: #ecdca8; text-decoration: none; font-weight: 500; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; transition: 0.2s; }
         .nav-links a:hover { color: #f3d572; }
-        .btn-outline { background: transparent; border: 1px solid #d4af37; padding: 8px 20px; border-radius: 40px; color: #ebd6b0; text-decoration: none; transition: 0.2s; display: inline-block; }
+        .btn-outline { background: transparent; border: 1px solid #d4af37; padding: 8px 20px; border-radius: 40px; color: #ebd6b0; text-decoration: none; transition: 0.2s; display: inline-block; cursor: pointer; }
         .btn-outline:hover { background: #d4af37; color: #1e160c; }
         .btn-primary { background: linear-gradient(145deg, #d4af37, #b8860b); border: none; padding: 12px 28px; border-radius: 48px; font-weight: 600; color: #1e160c; cursor: pointer; transition: 0.2s; }
         .btn-primary:hover { transform: scale(1.02); background: #c49a2a; }
@@ -66,13 +66,13 @@
                         <circle cx="50" cy="58" r="9" fill="#d4af37"/>
                         <text x="50" y="80" font-family="Georgia, serif" font-size="17" fill="#f2dea4" text-anchor="middle" font-weight="bold">UNGT</text>
                     </svg>
-                    <span class="logo-text">TSARINA·UNGT</span>
+                    <span class="logo-text">ЦАРИНА·УНГТ</span>
                 </div>
                 <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="institution-portal.html" style="color:#d4af37;">Institution Portal</a>
-                    <a href="index.html#registry">Public Registry</a>
-                    <button id="connectWalletBtn" class="btn-outline" style="padding:6px 18px;"><i class="fas fa-wallet"></i> Connect</button>
+                    <a href="index.html">Главная</a>
+                    <a href="institution-portal.html" style="color:#d4af37;">Портал учреждений</a>
+                    <a href="index.html#registry">Государственный реестр</a>
+                    <button id="connectWalletBtn" class="btn-outline" style="padding:6px 18px;"><i class="fas fa-wallet"></i> <span id="walletBtnText">Подключение</span></button>
                 </div>
             </div>
         </div>
@@ -80,55 +80,55 @@
 
     <main>
         <div class="container" style="text-align:center; padding: 40px 0 20px;">
-            <h1 style="font-size:2.8rem; font-family:'Cormorant Garamond'; margin-bottom:16px;">🏛️ Institution Portal</h1>
-            <p style="font-size:1.2rem; max-width:800px; margin:0 auto;">Register your financial institution, submit asset documentation, and track the entire digitization process.</p>
+            <h1 style="font-size:2.8rem; font-family:'Cormorant Garamond'; margin-bottom:16px;">🏛️ Портал учреждений</h1>
+            <p style="font-size:1.2rem; max-width:800px; margin:0 auto;">Зарегистрируйте своё финансовое учреждение и начните процесс оцифровки активов Imperial Crown</p>
         </div>
 
         <!-- Registration Section -->
         <div class="section">
             <div class="container">
-                <div class="section-title">📝 Step 1: Institution Registration</div>
+                <div class="section-title">📝 Шаг 1: Регистрация учреждения</div>
                 <div class="form-card">
                     <div class="form-row">
-                        <label>Full Legal Name of Institution *</label>
-                        <input type="text" id="instName" placeholder="e.g. Northern Trust Bank PLC">
+                        <label>Полное юридическое название учреждения *</label>
+                        <input type="text" id="instName" placeholder="например: Northern Trust Bank PLC">
                     </div>
                     <div class="form-row">
-                        <label>Country of Registration *</label>
-                        <input type="text" id="instCountry" placeholder="e.g. United Kingdom">
+                        <label>Страна регистрации *</label>
+                        <input type="text" id="instCountry" placeholder="например: Великобритания">
                     </div>
                     <div class="form-row">
-                        <label>Registration Number / LEI</label>
-                        <input type="text" id="instRegNumber" placeholder="e.g. 213800XXXXXX">
+                        <label>Регистрационный номер / LEI</label>
+                        <input type="text" id="instRegNumber" placeholder="например: 213800XXXXXX">
                     </div>
                     <div class="form-row">
-                        <label>Official Email *</label>
+                        <label>Официальный email *</label>
                         <input type="email" id="instEmail" placeholder="compliance@bank.com">
                     </div>
                     <div class="form-row">
-                        <label>Authorized Person (Full Name) *</label>
-                        <input type="text" id="instRep" placeholder="John Doe, Chief Compliance Officer">
+                        <label>Уполномоченное лицо (ФИО) *</label>
+                        <input type="text" id="instRep" placeholder="Иван Иванов, комплаенс-офицер">
                     </div>
                     <div class="form-row">
-                        <label>Solana Master Wallet Address (for UNGT custody) *</label>
-                        <input type="text" id="instWallet" placeholder="Solana address starting with ...">
+                        <label>Solana мастер-кошелёк (для хранения UNGT) *</label>
+                        <input type="text" id="instWallet" placeholder="Solana адрес начинающийся с ...">
                     </div>
                     <div class="form-row">
-                        <label>Type of Assets Held (Imperial Crown related)</label>
+                        <label>Тип активов (относящихся к Императорской Короне)</label>
                         <select id="assetType">
-                            <option>Gold reserves / Metal accounts</option>
-                            <option>Imperial bonds / Promissory notes</option>
-                            <option>Real estate / Land holdings</option>
-                            <option>Mixed portfolio</option>
-                            <option>Other (please specify)</option>
+                            <option>Золотые резервы / Металлические счета</option>
+                            <option>Имперские облигации / Векселя</option>
+                            <option>Недвижимость / Земельные владения</option>
+                            <option>Смешанный портфель</option>
+                            <option>Другое (уточните)</option>
                         </select>
                     </div>
                     <div class="form-row">
-                        <label>Estimated Total Value (USD)</label>
-                        <input type="number" id="estimatedValue" placeholder="e.g. 750000000">
+                        <label>Оценочная общая стоимость (USD)</label>
+                        <input type="number" id="estimatedValue" placeholder="например: 750000000">
                     </div>
-                    <button id="registerBtn" class="btn-primary" style="width:100%;"><i class="fas fa-check-circle"></i> Register Institution</button>
-                    <p style="margin-top:20px; font-size:0.75rem; text-align:center;">*After registration, you can submit asset documentation for audit.</p>
+                    <button id="registerBtn" class="btn-primary" style="width:100%;"><i class="fas fa-check-circle"></i> Зарегистрировать учреждение</button>
+                    <p style="margin-top:20px; font-size:0.75rem; text-align:center;">*После регистрации вы сможете подать документы на аудит.</p>
                 </div>
             </div>
         </div>
@@ -136,16 +136,16 @@
         <!-- Detailed Process Description -->
         <div class="section">
             <div class="container">
-                <div class="section-title">📋 Asset Digitization Process</div>
+                <div class="section-title">📋 Процесс оцифровки активов</div>
                 <div class="process-steps">
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-clipboard-list"></i></div><div class="step-title">1. Inventory & Documentation</div><p>Prepare detailed list of Imperial Crown assets with historical records, account statements, metal bills.</p></div>
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-upload"></i></div><div class="step-title">2. Submission for Audit</div><p>Upload encrypted documents (PDF, images) through secure portal. Stored on IPFS/Arweave.</p></div>
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-search"></i></div><div class="step-title">3. Plenipotentiary Audit</div><p>Authorized Plenipotentiary reviews documentation and verifies historical obligations.</p></div>
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-balance-scale"></i></div><div class="step-title">4. Ruling & Term Assignment</div><p>Decision: 25 years (voluntary) with full incentives, or 3 years (forced) with no benefits.</p></div>
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-coins"></i></div><div class="step-title">5. UNGT Acquisition</div><p>Institution acquires UNGT tokens via SOL (Jupiter or DEX) based on audited valuation.</p></div>
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-file-signature"></i></div><div class="step-title">6. Legal Agreement</div><p>Both parties sign digital agreement confirming custody term and benefits.</p></div>
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-database"></i></div><div class="step-title">7. Public Registry Entry</div><p>Asset details recorded in public blockchain registry with status "Active" or "Forced term".</p></div>
-                    <div class="process-step"><div class="step-icon"><i class="fas fa-chart-line"></i></div><div class="step-title">8. Ongoing Monitoring</div><p>Assets remain physically with institution. UNGT tokens held in master wallet.</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-clipboard-list"></i></div><div class="step-title">1. Инвентаризация и документация</div><p>Подготовьте детальный список активов Императорской Короны с историческими записями, выписками по счетам, металлическими векселями.</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-upload"></i></div><div class="step-title">2. Подача на аудит</div><p>Загрузите зашифрованные документы (PDF, изображения) через защищённый портал. Хранение на IPFS/Arweave.</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-search"></i></div><div class="step-title">3. Аудит Полпреда</div><p>Уполномоченный Полпред проверяет документацию и подтверждает исторические обязательства.</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-balance-scale"></i></div><div class="step-title">4. Решение и срок</div><p>Решение: 25 лет (добровольно) с полными льготами, или 3 года (принудительно) без льгот.</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-coins"></i></div><div class="step-title">5. Приобретение UNGT</div><p>Учреждение приобретает токены UNGT через SOL (Jupiter или DEX) на основе аудированной оценки.</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-file-signature"></i></div><div class="step-title">6. Юридическое соглашение</div><p>Стороны подписывают цифровое соглашение, подтверждающее срок хранения и льготы.</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-database"></i></div><div class="step-title">7. Запись в реестр</div><p>Данные об активе записываются в публичный блокчейн-реестр со статусом "Активен" или "Принудительный срок".</p></div>
+                    <div class="process-step"><div class="step-icon"><i class="fas fa-chart-line"></i></div><div class="step-title">8. Постоянный мониторинг</div><p>Активы физически остаются в учреждении. Токены UNGT хранятся в мастер-кошельке.</p></div>
                 </div>
             </div>
         </div>
@@ -153,22 +153,22 @@
         <!-- Benefits Summary -->
         <div class="section">
             <div class="container">
-                <div class="section-title">🎁 Benefits for Voluntary Participation</div>
+                <div class="section-title">🎁 Льготы при добровольном участии</div>
                 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
-                    <div style="background:rgba(42,122,42,0.2); border-radius:24px; padding:24px; text-align:center;"><i class="fas fa-percent" style="font-size:2rem; color:#d4af37;"></i><h3 style="margin:12px 0;">3% Fee</h3><p>Direct profit from asset value for transformation process.</p></div>
-                    <div style="background:rgba(42,122,42,0.2); border-radius:24px; padding:24px; text-align:center;"><i class="fas fa-hand-holding-usd" style="font-size:2rem; color:#d4af37;"></i><h3 style="margin:12px 0;">22 Years Usage Right</h3><p>Use assets as credit/collateral leverage in financial activities.</p></div>
-                    <div style="background:rgba(42,122,42,0.2); border-radius:24px; padding:24px; text-align:center;"><i class="fas fa-tags" style="font-size:2rem; color:#d4af37;"></i><h3 style="margin:12px 0;">15% Buyback Discount</h3><p>Purchase hard assets for own needs without third-party involvement.</p></div>
+                    <div style="background:rgba(42,122,42,0.2); border-radius:24px; padding:24px; text-align:center;"><i class="fas fa-percent" style="font-size:2rem; color:#d4af37;"></i><h3 style="margin:12px 0;">3% вознаграждения</h3><p>Прямая прибыль от стоимости актива за процесс трансформации.</p></div>
+                    <div style="background:rgba(42,122,42,0.2); border-radius:24px; padding:24px; text-align:center;"><i class="fas fa-hand-holding-usd" style="font-size:2rem; color:#d4af37;"></i><h3 style="margin:12px 0;">22 года права использования</h3><p>Используйте активы как кредитное/залоговое плечо.</p></div>
+                    <div style="background:rgba(42,122,42,0.2); border-radius:24px; padding:24px; text-align:center;"><i class="fas fa-tags" style="font-size:2rem; color:#d4af37;"></i><h3 style="margin:12px 0;">15% дисконта на выкуп</h3><p>Выкуп активов для собственных нужд без посредников.</p></div>
                 </div>
-                <div style="margin-top:30px; text-align:center; background:rgba(139,58,58,0.2); border-radius:24px; padding:20px;"><i class="fas fa-exclamation-triangle"></i> <strong>Forced transformation</strong> = 3 years custody, no fee, no usage rights, no discount.</div>
+                <div style="margin-top:30px; text-align:center; background:rgba(139,58,58,0.2); border-radius:24px; padding:20px;"><i class="fas fa-exclamation-triangle"></i> <strong>Принудительная трансформация</strong> = 3 года хранения, без вознаграждения, без прав использования, без дисконта.</div>
             </div>
         </div>
 
         <!-- Dashboard: My Submissions -->
         <div class="section">
             <div class="container">
-                <div class="section-title">📊 My Submissions & Status</div>
+                <div class="section-title">📊 Мои заявки и статус</div>
                 <div id="submissionsContainer" class="dashboard-card" style="text-align:center; padding:30px;">
-                    <p><i class="fas fa-spinner fa-spin"></i> Loading your submissions...</p>
+                    <p><i class="fas fa-spinner fa-spin"></i> Загрузка ваших заявок...</p>
                 </div>
             </div>
         </div>
@@ -176,14 +176,14 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© UNGT Digital Asset Trust — Tsarina Program. Smart contract: <code style="color:#d4af37;">EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs</code></p>
-            <p style="margin-top:10px;">*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization.</p>
+            <p>© UNGT Digital Asset Trust — Программа Царина. Смарт-контракт: <code style="color:#d4af37;">EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs</code></p>
+            <p style="margin-top:10px;">*Юридическая ответственность за активы лежит на Сузериане и Полпреде. Технический интерфейс для прозрачной оцифровки.</p>
         </div>
     </footer>
 
     <script>
         // ============================================================
-        // 1. WALLET CONNECTION
+        // 1. REAL PHANTOM WALLET CONNECTION
         // ============================================================
         let currentWallet = null;
         
@@ -192,21 +192,29 @@
                 try {
                     const response = await window.solana.connect();
                     currentWallet = response.publicKey.toString();
-                    const btn = document.getElementById('connectWalletBtn');
-                    if (btn) btn.innerHTML = `<i class="fas fa-wallet"></i> ${currentWallet.slice(0,4)}...${currentWallet.slice(-4)}`;
+                    const btnText = document.getElementById('walletBtnText');
+                    if (btnText) btnText.innerText = `${currentWallet.slice(0,4)}...${currentWallet.slice(-4)}`;
+                    // Auto-fill wallet field if empty
+                    const walletInput = document.getElementById('instWallet');
+                    if (walletInput && !walletInput.value) walletInput.value = currentWallet;
                     loadSubmissions();
                     return currentWallet;
-                } catch (err) { console.error('Wallet connection rejected', err); return null; }
+                } catch (err) { 
+                    console.error('Wallet connection rejected', err);
+                    alert('Подключение к кошельку отклонено.');
+                    return null;
+                }
             } else {
-                alert('Phantom wallet not installed. Please install from phantom.app');
+                alert('Phantom кошелёк не установлен. Пожалуйста, установите из phantom.app');
                 window.open('https://phantom.app/', '_blank');
                 return null;
             }
         }
+        
         document.getElementById('connectWalletBtn')?.addEventListener('click', connectWallet);
         
         // ============================================================
-        // 2. INSTITUTION REGISTRATION (сохраняем в localStorage)
+        // 2. INSTITUTION REGISTRATION
         // ============================================================
         function registerInstitution() {
             const name = document.getElementById('instName').value;
@@ -219,7 +227,7 @@
             const regNumber = document.getElementById('instRegNumber').value;
             
             if (!name || !country || !email || !rep || !wallet) {
-                alert("Please fill all required fields (Name, Country, Email, Authorized Person, Wallet).");
+                alert("Пожалуйста, заполните все обязательные поля (Название, Страна, Email, Уполномоченное лицо, Кошелёк).");
                 return false;
             }
             
@@ -245,66 +253,58 @@
         document.getElementById('registerBtn')?.addEventListener('click', () => {
             const institution = registerInstitution();
             if (institution) {
-                alert(`Registration successful!\nInstitution ID: ${institution.id}\nNow you can submit asset documents from the main site.`);
+                alert(`Регистрация успешна!\nID учреждения: ${institution.id}\nТеперь вы можете подать документы на аудит с главной страницы.`);
                 loadSubmissions();
-                // Auto-fill wallet if connected
-                if (currentWallet) document.getElementById('instWallet').value = currentWallet;
             }
         });
         
-        // Auto-fill wallet if already connected
-        if (currentWallet) document.getElementById('instWallet').value = currentWallet;
-        
         // ============================================================
-        // 3. LOAD SUBMISSIONS (из localStorage главного сайта)
+        // 3. LOAD SUBMISSIONS
         // ============================================================
         function loadSubmissions() {
             const container = document.getElementById('submissionsContainer');
             if (!container) return;
             
-            // Получаем заявки из localStorage (главный сайт сохраняет их как ungtdemo_assets)
             let allAssets = [];
             const stored = localStorage.getItem('ungtdemo_assets');
             if (stored) {
                 allAssets = JSON.parse(stored);
             } else {
-                // Демо-данные для показа
                 allAssets = [
                     { id: "UNGT-001", institution: "State Bank of Empire (Archival)", value: 1250000000, term: "25 years", status: "Active", submittedAt: "2025-01-15" },
                     { id: "UNGT-002", institution: "Northern Trust Metals", value: 450000000, term: "3 years", status: "Forced term", submittedAt: "2025-01-20" }
                 ];
             }
             
-            // Фильтруем по кошельку или по названию института из регистрации
             const instData = localStorage.getItem('ungt_institution_data');
             let myAssets = [];
             if (instData) {
                 const inst = JSON.parse(instData);
                 myAssets = allAssets.filter(a => a.institution === inst.name || a.wallet === inst.wallet);
             } else {
-                myAssets = allAssets.slice(0, 2); // показываем демо
+                myAssets = allAssets.slice(0, 2);
             }
             
             if (myAssets.length === 0) {
-                container.innerHTML = `<p><i class="fas fa-info-circle"></i> No submissions yet. <a href="index.html#institution" style="color:#d4af37;">Go to main site → For Institutions</a> to submit your first asset.</p>`;
+                container.innerHTML = `<p><i class="fas fa-info-circle"></i> Нет поданных заявок. <a href="index.html#institution" style="color:#d4af37;">Перейти на главную → Для учреждений</a> чтобы подать первый актив.</p>`;
                 return;
             }
             
-            let html = `<h3 style="margin-bottom:20px;">📄 Your Submissions (${myAssets.length})</h3>`;
+            let html = `<h3 style="margin-bottom:20px;">📄 Ваши заявки (${myAssets.length})</h3>`;
             myAssets.forEach(asset => {
                 const statusClass = asset.status === 'Active' ? 'status-approved' : (asset.status === 'Forced term' ? 'status-pending' : 'status-audit');
-                const statusText = asset.status === 'Active' ? '✅ Approved (25 years)' : (asset.status === 'Forced term' ? '⚠️ Forced (3 years)' : '⏳ Under Audit');
+                const statusText = asset.status === 'Active' ? '✅ Одобрено (25 лет)' : (asset.status === 'Forced term' ? '⚠️ Принудительно (3 года)' : '⏳ На аудите');
                 html += `
                     <div class="submission-item">
                         <p><strong>${asset.id}</strong> - ${asset.institution}</p>
-                        <p>Value: $${asset.value?.toLocaleString() || 'N/A'} | Term: ${asset.term || 'pending'}</p>
-                        <p>Status: <span class="status-badge ${statusClass}">${statusText}</span></p>
-                        <p>Submitted: ${asset.submittedAt || new Date().toLocaleDateString()}</p>
-                        ${asset.ipfsUrl ? `<p><i class="fas fa-file-alt"></i> <a href="${asset.ipfsUrl}" target="_blank">View Document</a></p>` : ''}
+                        <p>Стоимость: $${asset.value?.toLocaleString() || 'N/A'} | Срок: ${asset.term || 'ожидание'}</p>
+                        <p>Статус: <span class="status-badge ${statusClass}">${statusText}</span></p>
+                        <p>Подано: ${asset.submittedAt || new Date().toLocaleDateString()}</p>
+                        ${asset.ipfsUrl ? `<p><i class="fas fa-file-alt"></i> <a href="${asset.ipfsUrl}" target="_blank">Просмотреть документ</a></p>` : ''}
                     </div>
                 `;
             });
-            html += `<p style="margin-top:20px;"><a href="index.html#institution" class="btn-outline"><i class="fas fa-plus-circle"></i> Submit New Asset</a></p>`;
+            html += `<p style="margin-top:20px;"><a href="index.html#institution" class="btn-outline"><i class="fas fa-plus-circle"></i> Подать новый актив</a></p>`;
             container.innerHTML = html;
         }
         
@@ -322,12 +322,7 @@
             document.getElementById('instRep').value = inst.representative || '';
             document.getElementById('instWallet').value = inst.wallet || '';
             document.getElementById('estimatedValue').value = inst.estimatedValue || '';
-            document.getElementById('assetType').value = inst.assetType || 'Gold reserves / Metal accounts';
-        }
-        
-        // If wallet connected, use it
-        if (currentWallet && !document.getElementById('instWallet').value) {
-            document.getElementById('instWallet').value = currentWallet;
+            document.getElementById('assetType').value = inst.assetType || 'Золотые резервы / Металлические счета';
         }
     </script>
 </body>
