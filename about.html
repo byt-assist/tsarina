@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>UNGT · About | Tsarina RWA Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0602; color: #e8e0d0; line-height: 1.6; }
+        .imperial-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 20% 30%, #1f1408, #020100); z-index: -3; }
+        .heritage-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.15"><path fill="none" stroke="%23d4af37" stroke-width="1.5" d="M15,45 L35,28 L55,45 L48,68 L28,68 Z M90,25 L110,12 L128,28 L120,50 L100,50 Z M150,55 L172,40 L190,58 L180,80 L158,78 Z M70,82 L88,72 L100,85 L92,96 L76,95 Z M130,10 L142,3 L155,12 L148,24 L136,22 Z"/><circle cx="172" cy="32" r="6" stroke="%23f1cf5e" fill="none" stroke-width="1.2"/><polygon points="55,15 65,8 74,15 69,26 60,26" stroke="%23e6b422" fill="none"/></svg>'); background-repeat: repeat; background-size: 70px 70px; pointer-events: none; z-index: -2; }
+        .crypto-mesh { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(90deg, rgba(0,255,200,0.06) 1px, transparent 1px), linear-gradient(0deg, rgba(0,255,200,0.06) 1px, transparent 1px), repeating-linear-gradient(45deg, rgba(70,200,210,0.04) 0px, rgba(70,200,210,0.04) 2px, transparent 2px, transparent 18px); background-size: 55px 55px, 55px 55px, 22px 22px; pointer-events: none; z-index: -1; }
+        .transition-glow { position: fixed; bottom: 0; right: 0; width: 70%; height: 70%; background: radial-gradient(ellipse at 85% 90%, rgba(212,175,55,0.2), transparent 80%); pointer-events: none; z-index: -1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 5; }
+        .header { background: rgba(8,6,3,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(212,175,55,0.4); position: sticky; top: 0; z-index: 110; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 16px 0; gap: 20px; }
+        .logo { display: flex; align-items: center; gap: 14px; }
+        .logo-svg { width: 54px; height: 54px; filter: drop-shadow(0 0 6px #d4af37); }
+        .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ffe4b5, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .nav-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { color: #ecdca8; text-decoration: none; font-weight: 500; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; transition: 0.2s; }
+        .nav-links a:hover { color: #f3d572; }
+        .section { padding: 60px 0; border-bottom: 1px solid rgba(212,175,55,0.15); }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; text-align: center; margin-bottom: 40px; background: linear-gradient(135deg, #fcf0dc, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .card { background: rgba(0,0,0,0.5); border-radius: 24px; padding: 30px; border: 1px solid rgba(212,175,55,0.3); }
+        .footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(212,175,55,0.25); color: #bba87a; font-size: 0.85rem; }
+        .legal-doc { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; margin-top: 20px; font-family: monospace; font-size: 0.8rem; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; align-items: stretch; } .nav-links { justify-content: center; } }
+    </style>
+</head>
+<body>
+    <div class="imperial-bg"></div>
+    <div class="heritage-pattern"></div>
+    <div class="crypto-mesh"></div>
+    <div class="transition-glow"></div>
+
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="46" fill="#1f180c" stroke="#d4af37" stroke-width="2.2"/>
+                        <path d="M30 20 L40 10 L50 20 L50 35 L30 35 Z" fill="#d4af37"/>
+                        <path d="M50 20 L60 10 L70 20 L70 35 L50 35 Z" fill="#e6b422"/>
+                        <circle cx="50" cy="58" r="9" fill="#d4af37"/>
+                        <text x="50" y="80" font-family="Georgia, serif" font-size="17" fill="#f2dea4" text-anchor="middle" font-weight="bold">UNGT</text>
+                    </svg>
+                    <span class="logo-text">TSARINA·UNGT</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="institution-portal.html">Institution Portal</a>
+                    <a href="registry.html">Public Registry</a>
+                    <a href="plenipotentiary.html">Plenipotentiary</a>
+                    <a href="about.html" style="color:#d4af37;">About</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="calculator.html">Calculator</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container" style="text-align:center; padding: 40px 0 20px;">
+            <h1 style="font-size:2.8rem; font-family:'Cormorant Garamond'; margin-bottom:16px;">About the Tsarina UNGT Project</h1>
+            <p style="font-size:1.2rem; max-width:800px; margin:0 auto;">Restoring historical justice through digital transformation of Imperial Crown assets</p>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="grid-2">
+                    <div class="card">
+                        <i class="fas fa-crown" style="font-size:2rem; color:#d4af37; margin-bottom:16px; display:inline-block;"></i>
+                        <h2 style="margin-bottom:16px;">Our Mission</h2>
+                        <p>The UNGT (Unredeemed Note of the Great Tsarina) project is a digital transformation initiative aimed at auditing, recognizing, and tokenizing historical obligations and assets of the Imperial Crown. We provide a transparent, blockchain-based mechanism for financial institutions to voluntarily digitize their holdings while maintaining physical custody.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-gavel" style="font-size:2rem; color:#d4af37; margin-bottom:16px; display:inline-block;"></i>
+                        <h2 style="margin-bottom:16px;">Legal Framework</h2>
+                        <p>Based on Consulting Agreement #07022024ZRU598 and Power of Attorney from March 5, 2024, the project operates under the authority of the Suzerain (Heir of the Imperial Crown) and the Plenipotentiary (authorized representative).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="section-title">Key Entities</div>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><i class="fas fa-user-tie"></i> Suzerain</h3>
+                        <p><strong>Svetlana Nikolaevna Aristova</strong><br>Heir of the Imperial Crown, founder of Global Trust/Family Heritage Foundation. Acts as the legal successor and ultimate authority over the digitization process.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-shield-alt"></i> Plenipotentiary</h3>
+                        <p>Authorized representative appointed by the Suzerain to conduct audits, review documentation, and issue transformation rulings (25 years voluntary / 3 years forced).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="section-title">Legal Documents</div>
+                <div class="legal-doc">
+                    <p><strong>Consulting Agreement #07022024ZRU598</strong> — Dated February 14, 2024<br>
+                    Establishes the framework for digital transformation of Trust assets, including gold metal bills, demand bills, and central bank codes.</p>
+                </div>
+                <div class="legal-doc">
+                    <p><strong>Power of Attorney (March 5, 2024)</strong> — Authorizes the Plenipotentiary to act on behalf of the Suzerain for investment projects up to $3.7 trillion USD in the Republic of Uzbekistan.</p>
+                </div>
+                <div class="legal-doc">
+                    <p><strong>Smart Contract Address (Solana)</strong><br>
+                    <code style="color:#d4af37;">EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs</code></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="section-title">Contact</div>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><i class="fas fa-envelope"></i> Official Contacts</h3>
+                        <p>Suzerain: <a href="mailto:svetlana321aristova@yandex.ru" style="color:#d4af37;">svetlana321aristova@yandex.ru</a></p>
+                        <p>Consultant: <a href="mailto:1.nanokompozit@bk.ru" style="color:#d4af37;">1.nanokompozit@bk.ru</a></p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-link"></i> Resources</h3>
+                        <p><a href="https://solscan.io/token/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" style="color:#d4af37;">Solscan Explorer</a></p>
+                        <p><a href="https://dexscreener.com/solana/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" style="color:#d4af37;">DexScreener</a></p>
+                        <p><a href="https://jup.ag/swap/SOL-EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" style="color:#d4af37;">Buy UNGT on Jupiter</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© UNGT Digital Asset Trust — Tsarina Program. Smart contract: <code style="color:#d4af37;">EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs</code></p>
+        </div>
+    </footer>
+</body>
+</html>
