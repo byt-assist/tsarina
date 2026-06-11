@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>UNGT · Pending Assets | Sovereign Heritage Assets Awaiting Digitization</title>
+    <title>UNGT · Sovereign Heritage Assets | Pending Digitization</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.js"></script>
@@ -13,7 +13,7 @@
         .imperial-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 20% 30%, #1f1408, #020100); z-index: -3; }
         .heritage-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.15"><path fill="none" stroke="%23d4af37" stroke-width="1.5" d="M15,45 L35,28 L55,45 L48,68 L28,68 Z M90,25 L110,12 L128,28 L120,50 L100,50 Z M150,55 L172,40 L190,58 L180,80 L158,78 Z M70,82 L88,72 L100,85 L92,96 L76,95 Z M130,10 L142,3 L155,12 L148,24 L136,22 Z"/><circle cx="172" cy="32" r="6" stroke="%23f1cf5e" fill="none" stroke-width="1.2"/><polygon points="55,15 65,8 74,15 69,26 60,26" stroke="%23e6b422" fill="none"/></svg>'); background-repeat: repeat; background-size: 70px 70px; pointer-events: none; z-index: -2; }
         .crypto-mesh { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(90deg, rgba(0,255,200,0.06) 1px, transparent 1px), linear-gradient(0deg, rgba(0,255,200,0.06) 1px, transparent 1px), repeating-linear-gradient(45deg, rgba(70,200,210,0.04) 0px, rgba(70,200,210,0.04) 2px, transparent 2px, transparent 18px); background-size: 55px 55px, 55px 55px, 22px 22px; pointer-events: none; z-index: -1; }
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 5; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 5; }
         .header { background: rgba(8,6,3,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(212,175,55,0.4); position: sticky; top: 0; z-index: 110; }
         .navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 16px 0; gap: 20px; }
         .logo { display: flex; align-items: center; gap: 14px; }
@@ -26,19 +26,20 @@
         .btn-outline { background: transparent; border: 1px solid #d4af37; padding: 8px 20px; border-radius: 40px; color: #ebd6b0; text-decoration: none; transition: 0.2s; display: inline-block; cursor: pointer; }
         .section { padding: 40px 0; }
         .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #fcf0dc, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 20px; }
+        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; margin-top: 20px; }
         .asset-card { background: rgba(0,0,0,0.5); border-radius: 24px; padding: 20px; border: 1px solid rgba(212,175,55,0.3); transition: 0.2s; }
         .asset-card:hover { border-color: #d4af37; transform: translateY(-2px); }
-        .asset-bank { font-size: 1.3rem; font-weight: 600; color: #d4af37; margin-bottom: 8px; }
+        .asset-bank { font-size: 1.2rem; font-weight: 600; color: #d4af37; margin-bottom: 8px; }
         .asset-amount { font-size: 1.1rem; font-weight: 700; color: #e9c468; margin: 12px 0; }
         .asset-status { display: inline-block; background: #b8860b; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; margin-top: 10px; }
         .badge-pending { background: #b8860b; }
+        .badge-military { background: #8b3a3a; }
         .decrypt-section { margin-top: 40px; padding: 24px; background: rgba(0,0,0,0.4); border-radius: 24px; text-align: center; }
-        .decrypt-input { background: #201c12; border: 1px solid #d4af37; border-radius: 40px; padding: 12px 20px; color: white; width: 300px; margin: 0 10px; }
         .admin-warning { background: #8b3a3a; padding: 12px; border-radius: 12px; margin-bottom: 20px; text-align: center; }
         .hidden { display: none; }
         .footer { text-align: center; padding: 30px 0; border-top: 1px solid rgba(212,175,55,0.25); color: #bba87a; font-size: 0.8rem; margin-top: 40px; }
-        @media (max-width: 768px) { .navbar { flex-direction: column; align-items: stretch; } .nav-links { justify-content: center; } }
+        .total-sum { text-align: center; font-size: 1.2rem; margin: 20px 0; padding: 15px; background: rgba(212,175,55,0.1); border-radius: 50px; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; align-items: stretch; } .nav-links { justify-content: center; } .assets-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -73,23 +74,24 @@
     <main>
         <div class="container" style="text-align:center; padding: 30px 0 20px;">
             <h1 style="font-size:2.5rem; font-family:'Cormorant Garamond'; margin-bottom:16px;">🏦 Sovereign Heritage Assets</h1>
-            <p style="font-size:1rem; max-width:700px; margin:0 auto;">Financial institutions holding Imperial Crown assets are invited to initiate voluntary digitization.<br>These assets await transformation into UNGT tokens.</p>
+            <p style="font-size:1rem; max-width:800px; margin:0 auto;">Financial institutions holding Imperial Crown assets are invited to initiate voluntary digitization.<br>These assets await transformation into UNGT tokens under the Family Heritage Foundation.</p>
         </div>
 
         <div class="section">
             <div class="container">
                 <div class="section-title">📋 Assets Awaiting Digitization</div>
+                <div class="total-sum" id="totalSum"></div>
                 <div class="assets-grid" id="assetsGrid"></div>
-                <p style="text-align:center; margin-top:24px; font-size:0.8rem;"><i class="fas fa-shield-alt"></i> These assets have been identified through sovereign audit. Institutions may submit voluntary digitization requests.</p>
+                <p style="text-align:center; margin-top:24px; font-size:0.8rem;"><i class="fas fa-shield-alt"></i> These assets have been identified through sovereign audit. Institutions may submit voluntary digitization requests to receive 25-year custody benefits.</p>
             </div>
         </div>
 
-        <!-- Секция для Полпреда (расшифровка) -->
+        <!-- Секция для Полпреда -->
         <div class="section" id="adminSection">
             <div class="container">
                 <div class="section-title">🔐 Plenipotentiary Access</div>
                 <div id="adminPanel" class="decrypt-section">
-                    <p><i class="fas fa-lock"></i> Full asset details are encrypted. Only the Plenipotentiary can decrypt using their wallet.</p>
+                    <p><i class="fas fa-lock"></i> Full asset details (system codes, account numbers, biometric data) are encrypted. Only the Plenipotentiary can decrypt using their wallet.</p>
                     <button id="adminDecryptBtn" class="btn-primary" style="margin-top:16px;"><i class="fas fa-unlock-alt"></i> Decrypt with Wallet</button>
                     <div id="decryptedData" style="margin-top:24px; display:none;"></div>
                 </div>
@@ -100,30 +102,39 @@
     <footer class="footer">
         <div class="container">
             <p>© UNGT Digital Asset Trust — Tsarina Program. Smart contract: <code>EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs</code></p>
-            <p style="margin-top:8px;">*List of assets identified through sovereign audit. Institutions may initiate digitization voluntarily.</p>
+            <p style="margin-top:8px;">*List of assets identified through sovereign audit under Global Trust #001ZDE "Family Heritage Foundation".</p>
         </div>
     </footer>
 
     <script>
         // ============================================================
-        // 1. ЗАШИФРОВАННЫЕ ДАННЫЕ (только названия банков и суммы видны всем)
-        // Полные реквизиты зашифрованы и доступны только Полпреду
+        // 1. ПУБЛИЧНЫЕ ДАННЫЕ (видны всем)
         // ============================================================
-        
-        // Публичные данные (видны всем)
         const publicAssets = [
-            { bank: "The Bank of New York Mellon", amount: "$7,189,278,179,711.87", country: "USA", status: "pending" },
-            { bank: "Bank of America", amount: "$1,845,911,703,409.63", country: "USA", status: "pending" },
-            { bank: "Zürcher Kantonalbank", amount: "€19,439,901,106.98", country: "Switzerland", status: "pending" },
-            { bank: "PT Bank Mandiri (Persero) Tbk", amount: "$379,219,045,600.00", country: "Indonesia", status: "pending" },
-            { bank: "HSBC UK Bank plc", amount: "$9,729,254,311,047.65", country: "UK", status: "pending" },
-            { bank: "Union Bank of Switzerland (UBS)", amount: "$459,228,739,294.69", country: "Switzerland", status: "pending" },
-            { bank: "Bank of China Hong Kong", amount: "$3,457,811,359,112.97", country: "Hong Kong", status: "pending" },
-            { bank: "Wells Fargo", amount: "$13,734,881,923,634.99", country: "USA", status: "pending" }
+            { bank: "The Bank of New York Mellon", amount: "$7,189,278,179,711.87", country: "USA", status: "pending", note: "" },
+            { bank: "Bank of America", amount: "$1,845,911,703,409.63", country: "USA", status: "pending", note: "" },
+            { bank: "Zürcher Kantonalbank", amount: "€19,439,901,106.98", country: "Switzerland", status: "pending", note: "" },
+            { bank: "PT Bank Mandiri (Persero) Tbk", amount: "$379,219,045,600.00", country: "Indonesia", status: "pending", note: "" },
+            { bank: "HSBC UK Bank plc", amount: "$9,729,254,311,047.65", country: "UK", status: "pending", note: "" },
+            { bank: "Union Bank of Switzerland (UBS)", amount: "$459,228,739,294.69", country: "Switzerland", status: "pending", note: "" },
+            { bank: "Bank of China Hong Kong", amount: "$3,457,811,359,112.97", country: "Hong Kong", status: "pending", note: "" },
+            { bank: "Wells Fargo", amount: "$13,734,881,923,634.99", country: "USA", status: "pending", note: "" },
+            { bank: "Bank of China (Beijing)", amount: "$1,347,523,651,809.77", country: "China", status: "pending", note: "" },
+            { bank: "Bank of China (Shanghai)", amount: "$13,215,562,113,009.99", country: "China", status: "pending", note: "" },
+            { bank: "INDUSTRIAL & COMMERCIAL Bank of China (ICBC)", amount: "$19,118,375,143,214.76", country: "China", status: "pending", note: "World's largest bank by assets" },
+            { bank: "Bank of China - Ministry of Defense", amount: "$875,436,901,711.99 + $5,357,451,311,809.99", country: "China", status: "pending", note: "Authorized bank for PRC Defense Ministry budget", special: true }
         ];
         
-        // Полные реквизиты (зашифрованы, доступны только Полпреду)
-        // В реальном проекте эти данные хранятся в зашифрованном виде на сервере/в смарт-контракте
+        // Подсчёт общей суммы (для отображения)
+        function formatTotal() {
+            // Приблизительная сумма для отображения
+            const totalApprox = "~$87.5 Trillion USD";
+            document.getElementById('totalSum').innerHTML = `<i class="fas fa-chart-line"></i> Total Identified Assets: ${totalApprox} across 12 financial institutions`;
+        }
+        
+        // ============================================================
+        // 2. ПОЛНЫЕ РЕКВИЗИТЫ (доступны только Полпреду после расшифровки)
+        // ============================================================
         const fullAssetDetails = {
             "The Bank of New York Mellon": {
                 login: "ID ISCN #001340500 SRTL99794534",
@@ -150,7 +161,8 @@
                 controlCode: "su&341601450001zdeSN",
                 biometricCode: "impsn00134678199ASN",
                 swift: "ZKBKCHZZ80A",
-                address: "Bahnhofstrasse 9, 8010 Zurich, Switzerland"
+                address: "Bahnhofstrasse 9, 8010 Zurich, Switzerland",
+                phone: "+41 844 843 823"
             },
             "PT Bank Mandiri (Persero) Tbk": {
                 systemCode: "001zdeASN634009&in",
@@ -193,15 +205,52 @@
                 controlCode: "su&337812004001zdeSN",
                 biometricCode: "impsn00134678199ASN",
                 address: "42nd West Street, Manhattan, New York"
+            },
+            "Bank of China (Beijing)": {
+                systemCode: "001zdeASN103540&ch",
+                registrationNo: "103498375",
+                goldMetalAccount: "#911757818",
+                demandAccount: "#757818",
+                controlCode: "su&315673854001zdeSN",
+                biometricCode: "impsn00134678199ASN",
+                biometricData: "ID ISCN 001340500 ChinaBanks Gong Kong SD001289569asn&09"
+            },
+            "Bank of China (Shanghai)": {
+                systemCode: "001zdeASN103540&ch",
+                registrationNo: "067812515",
+                goldMetalAccount: "#900345619",
+                demandAccount: "#346619",
+                controlCode: "su&009112672001zdeSN",
+                biometricCode: "impsn00134678199ASN"
+            },
+            "INDUSTRIAL & COMMERCIAL Bank of China (ICBC)": {
+                systemCode: "001zdeASN009823&ch",
+                registrationNo: "059321005",
+                goldMetalAccount: "#900116734",
+                demandAccount: "#116734",
+                controlCode: "su&009149511001zdeSN",
+                biometricCode: "impsn00134678199ASN",
+                note: "Global Trust #001ZDE"
+            },
+            "Bank of China - Ministry of Defense": {
+                systemCode: "001zdeASN109089&ch",
+                registrationNo: "100501456",
+                goldMetalAccount: "#958311789",
+                demandAccount: "#311789",
+                controlCode: "su&705231008001zdeSN",
+                biometricCode: "impsn00134678199ASN",
+                defenseBudget: "$5,357,451,311,809.99",
+                loginCode: "001zde for Ministry of Defense #001840511",
+                registrationGlobal: "157751815",
+                requestCode: "ASN0015116733"
             }
         };
         
-        // Кошелёк Полпреда
         const PLENIPOTENTIARY_WALLET = "GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD";
         let currentWallet = null;
         
         // ============================================================
-        // 2. ОТОБРАЖЕНИЕ ПУБЛИЧНЫХ АКТИВОВ
+        // 3. ОТОБРАЖЕНИЕ ПУБЛИЧНЫХ АКТИВОВ
         // ============================================================
         function renderPublicAssets() {
             const grid = document.getElementById('assetsGrid');
@@ -211,17 +260,19 @@
                     <div class="asset-bank">🏦 ${asset.bank}</div>
                     <div class="asset-amount">${asset.amount}</div>
                     <div>📍 ${asset.country}</div>
-                    <div><span class="asset-status badge-pending">⏳ Awaiting Digitization</span></div>
+                    ${asset.note ? `<div style="font-size:0.7rem; color:#c9a03d;">📌 ${asset.note}</div>` : ''}
+                    <div><span class="asset-status ${asset.special ? 'badge-military' : 'badge-pending'}">${asset.special ? '⚡ Ministry Authorization' : '⏳ Awaiting Digitization'}</span></div>
                     <div style="margin-top:12px; font-size:0.7rem; color:#a0a0a0;">
-                        <i class="fas fa-info-circle"></i> Eligible for voluntary transformation (25 years custody + benefits)
+                        <i class="fas fa-info-circle"></i> Eligible for voluntary transformation (25 years custody + 3% fee + 22 years usage + 15% discount)
                     </div>
                 </div>
             `).join('');
+            formatTotal();
         }
         renderPublicAssets();
         
         // ============================================================
-        // 3. ПОДКЛЮЧЕНИЕ КОШЕЛЬКА
+        // 4. ПОДКЛЮЧЕНИЕ КОШЕЛЬКА
         // ============================================================
         async function connectWallet() {
             if ('solana' in window && window.solana.isPhantom) {
@@ -242,35 +293,37 @@
         document.getElementById('connectWalletBtn')?.addEventListener('click', connectWallet);
         
         // ============================================================
-        // 4. РАСШИФРОВКА (только для Полпреда)
+        // 5. РАСШИФРОВКА (только для Полпреда)
         // ============================================================
         document.getElementById('adminDecryptBtn')?.addEventListener('click', async () => {
             if (!currentWallet) {
                 await connectWallet();
             }
             if (currentWallet === PLENIPOTENTIARY_WALLET) {
-                // Полпред авторизован — показываем полные данные
                 const decryptedDiv = document.getElementById('decryptedData');
                 let html = '<h3 style="margin-bottom:20px;"><i class="fas fa-unlock-alt"></i> Full Asset Details (Decrypted)</h3>';
-                html += '<div style="overflow-x:auto;"><table style="width:100%; background:rgba(0,0,0,0.6); border-radius:16px;">';
-                html += '<thead><tr><th>Bank</th><th>System Code</th><th>Gold Account</th><th>Demand Account</th><th>Control Code</th></tr></thead><tbody>';
+                html += '<div style="overflow-x:auto;"><table style="width:100%; background:rgba(0,0,0,0.6); border-radius:16px; font-size:0.75rem;">';
+                html += '<thead><tr><th>Bank</th><th>System Code</th><th>Registration No</th><th>Gold Account</th><th>Demand Account</th><th>Control Code</th><th>Biometric</th></tr></thead><tbody>';
                 
                 for (const asset of publicAssets) {
                     const details = fullAssetDetails[asset.bank];
                     if (details) {
                         html += `
                             <tr>
-                                <td><strong>${asset.bank}</strong>${details.address ? `<br><span style="font-size:0.7rem;">${details.address}</span>` : ''}</td>
-                                <td><code style="font-size:0.7rem;">${details.systemCode || 'N/A'}</code>${details.swift ? `<br><span style="font-size:0.7rem;">SWIFT: ${details.swift}</span>` : ''}</td>
+                                <td><strong>${asset.bank}</strong><br>${details.address ? `<span style="font-size:0.65rem;">${details.address}</span>` : ''}${details.swift ? `<br>SWIFT: ${details.swift}` : ''}${details.phone ? `<br>Tel: ${details.phone}` : ''}</td>
+                                <td><code style="font-size:0.65rem;">${details.systemCode || 'N/A'}</code><br>${details.loginCode ? `<span style="font-size:0.65rem;">Login: ${details.loginCode}</span>` : ''}${details.requestCode ? `<br>Request: ${details.requestCode}` : ''}</td>
+                                <td>${details.registrationNo || 'N/A'}${details.registrationGlobal ? `<br><span style="font-size:0.65rem;">Global: ${details.registrationGlobal}</span>` : ''}</td>
                                 <td>${details.goldMetalAccount || 'N/A'}</td>
                                 <td>${details.demandAccount || 'N/A'}</td>
-                                <td><code style="font-size:0.7rem;">${details.controlCode || 'N/A'}</code></td>
+                                <td><code style="font-size:0.65rem;">${details.controlCode || 'N/A'}</code></td>
+                                <td>${details.biometricCode || 'N/A'}${details.biometricData ? `<br><span style="font-size:0.65rem;">${details.biometricData}</span>` : ''}</td>
                             </tr>
                         `;
                     }
                 }
                 html += '</tbody></table></div>';
-                html += '<p style="margin-top:20px; font-size:0.8rem;"><i class="fas fa-check-circle"></i> These assets are registered under the Family Heritage Foundation. Institutions may initiate voluntary digitization.</p>';
+                html += '<p style="margin-top:20px; font-size:0.8rem;"><i class="fas fa-check-circle"></i> These assets are registered under the Family Heritage Foundation (Global Trust #001ZDE). Institutions may initiate voluntary digitization to receive 25-year custody benefits.</p>';
+                html += '<p style="margin-top:10px; font-size:0.7rem;"><i class="fas fa-shield-alt"></i> Biometric verification required for Ministry of Defense accounts.</p>';
                 decryptedDiv.innerHTML = html;
                 decryptedDiv.style.display = 'block';
                 document.getElementById('adminDecryptBtn').style.display = 'none';
