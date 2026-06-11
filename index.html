@@ -67,6 +67,9 @@
         .hero-description { font-size: 1.1rem; max-width: 850px; margin: 20px auto 0; line-height: 1.6; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 20px; }
         .main-title { font-size: 3.2rem; font-family: 'Cormorant Garamond', serif; text-shadow: 0 2px 12px black; margin-bottom: 20px; }
         .admin-warning { background: #8b3a3a; color: white; padding: 10px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
+        .status-widget { background: rgba(0,0,0,0.5); border-radius: 28px; padding: 30px; margin: 30px auto; text-align: center; border: 1px solid rgba(212,175,55,0.3); }
+        .status-input-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; max-width: 600px; margin: 20px auto 0; }
+        .status-input { flex: 1; min-width: 250px; background: rgba(0,0,0,0.6); border: 1px solid #d4af37; border-radius: 40px; padding: 12px 20px; color: white; font-size: 1rem; }
         @media (max-width: 768px) {
             .pipeline-steps { flex-direction: column; align-items: center; }
             .step-arrow { transform: rotate(90deg); }
@@ -100,6 +103,7 @@
                     <a data-nav="registry" id="navRegistry">Public Registry</a>
                     <a data-nav="admin" id="navAdmin">Plenipotentiary</a>
                     <a href="institution-portal.html" id="navPortal">Portal</a>
+                    <a href="institution-dashboard.html" id="navDashboard">Dashboard</a>
                     <select id="languageSwitcher" class="lang-selector">
                         <option value="en">🇬🇧 EN</option>
                         <option value="ru">🇷🇺 RU</option>
@@ -147,7 +151,20 @@
             </div>
         </div>
 
-        <!-- DEXTools Widget (исправлен) -->
+        <!-- Status Check Widget -->
+        <div class="container">
+            <div class="status-widget">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin-bottom: 16px;"><i class="fas fa-search"></i> <span id="statusTitle">Check Your Audit Status</span></h3>
+                <p id="statusSubtitle">Enter your Asset ID or Institution Wallet Address to track the digitization progress</p>
+                <div class="status-input-group">
+                    <input type="text" id="statusCheckInput" class="status-input" placeholder="Asset ID (e.g. UNGT-001) or Wallet Address">
+                    <button id="checkStatusBtn" class="btn-primary"><i class="fas fa-check-circle"></i> <span id="checkBtnText">Check Status</span></button>
+                </div>
+                <div id="statusResult" style="margin-top: 30px; display: none;"></div>
+            </div>
+        </div>
+
+        <!-- DEXTools Widget -->
         <div class="container">
             <div class="dextools-widget">
                 <iframe src="https://www.dextools.io/widgets/en/solana/pair-explorer/BwMS4vGpDMAzLnYnUsz7ebWQXEHZbxBPYmHtMXwPJZSi?theme=dark&chartType=candle&chartResolution=30" width="100%" height="650" style="border:0; border-radius:20px;" allowtransparency="true"></iframe>
@@ -289,13 +306,13 @@
 
     <script>
         // ============================================================
-        // 1. PINATA API (ваши ключи)
+        // 1. PINATA API KEYS
         // ============================================================
         const PINATA_API_KEY = "0e0aed880b8037341742";
         const PINATA_API_SECRET = "9be585757a3e1dddd762c64be8e213d7523b7eafa24fe86b9498c5db8bf95d24";
         
         // ============================================================
-        // 2. КОШЕЛЁК ПОЛПРЕДА
+        // 2. PLENIPOTENTIARY WALLET
         // ============================================================
         const PLENIPOTENTIARY_WALLET = "GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD";
         
@@ -431,7 +448,7 @@
                 document.getElementById('instName').value = '';
                 document.getElementById('assetName').value = '';
                 document.getElementById('assetValue').value = '';
-                fileInput.value = '';
+                if(fileInput) fileInput.value = '';
                 
             } catch (error) {
                 console.error(error);
@@ -514,7 +531,44 @@
         };
         
         // ============================================================
-        // 8. NAVIGATION
+        // 8. STATUS CHECK WIDGET
+        // ============================================================
+        document.getElementById('checkStatusBtn')?.addEventListener('click', function() {
+            const query = document.getElementById('statusCheckInput').value.trim();
+            const resultDiv = document.getElementById('statusResult');
+            if (!query) { alert('Please enter Asset ID or Wallet Address'); return; }
+            
+            const foundAsset = demoAssets.find(a => a.id.toUpperCase() === query.toUpperCase() || a.institution.toLowerCase().includes(query.toLowerCase()));
+            
+            let result;
+            if (foundAsset) {
+                let statusColor = foundAsset.status === 'Active' ? '#2a7a2a' : (foundAsset.status === 'Forced term' ? '#8b3a3a' : '#b8860b');
+                result = {
+                    status: foundAsset.status === 'Active' ? '✅ Approved' : (foundAsset.status === 'Forced term' ? '⚠️ Forced' : '⏳ Pending'),
+                    term: foundAsset.term === '25 years' ? '25 years' : (foundAsset.term === '3 years' ? '3 years' : 'Awaiting audit'),
+                    message: foundAsset.status === 'Active' ? 'Your asset has been approved for 25 years custody with full benefits.' : (foundAsset.status === 'Forced term' ? 'Forced transformation: 3 years custody, no benefits.' : 'Your asset is under review by the Plenipotentiary.'),
+                    color: statusColor
+                };
+            } else if (query.startsWith('GD7') || query.length > 30) {
+                result = { status: '✅ Registered', term: 'Institution active', message: 'Your institution is registered. You have pending submissions.', color: '#2a7a2a' };
+            } else {
+                result = { status: '❓ Not Found', term: '—', message: 'No asset found with this identifier. Please check and try again.', color: '#666' };
+            }
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <div style="background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; border-left: 4px solid ${result.color};">
+                    <p><strong>Asset ID:</strong> ${query.toUpperCase()}</p>
+                    <p><strong>Status:</strong> <span style="color:${result.color};">${result.status}</span></p>
+                    <p><strong>Term:</strong> ${result.term}</p>
+                    <p>${result.message}</p>
+                    <p style="margin-top: 16px; font-size: 0.8rem;"><i class="fas fa-info-circle"></i> For full details, <a href="institution-dashboard.html" style="color:#d4af37;">log into your dashboard</a>.</p>
+                </div>
+            `;
+        });
+        
+        // ============================================================
+        // 9. NAVIGATION
         // ============================================================
         function showSection(sectionId) {
             document.getElementById('howSection').classList.add('hidden-section');
@@ -543,11 +597,11 @@
         document.getElementById('pipelineBuyBtn')?.addEventListener('click', (e) => { e.preventDefault(); openJupiterSwap(); });
         
         // ============================================================
-        // 9. MULTI-LANGUAGE TRANSLATIONS (12 языков)
+        // 10. MULTI-LANGUAGE TRANSLATIONS (12 языков)
         // ============================================================
         const translations = {
             en: {
-                navHow: "How it works", navInstitution: "For Institutions", navRegistry: "Public Registry", navAdmin: "Plenipotentiary", navPortal: "Portal", connectWallet: "Connect",
+                navHow: "How it works", navInstitution: "For Institutions", navRegistry: "Public Registry", navAdmin: "Plenipotentiary", navPortal: "Portal", navDashboard: "Dashboard", connectWallet: "Connect",
                 heroTitle: "Turn historical Imperial obligations into UNGT tokens.\nKeep your assets for 25 years.",
                 heroLine1: "📜 <strong>For banks, trusts, and financial institutions holding assets of the Imperial Crown.</strong>",
                 heroLine2: "💰 Digitize your obligations via audit and receive UNGT tokens.",
@@ -556,6 +610,7 @@
                 priceLabel: "UNGT Price", mcapLabel: "Market Cap", liqLabel: "Liquidity",
                 linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Gold", linkBuy: "Buy UNGT on Jupiter",
                 ctaInstText: "For Institutions: Start Digitization", ctaRegText: "View Public Registry",
+                statusTitle: "Check Your Audit Status", statusSubtitle: "Enter your Asset ID or Institution Wallet Address to track the digitization progress", checkBtnText: "Check Status",
                 pipelineTitle: "From LME Gold to UNGT: The Conversion Pipeline", pipelineSub: "A transparent, on-chain process to transform physical commodity exposure into digital assets",
                 step1Title: "1. Trade Gold on LME", step1Desc: "Gold futures (code: AU) on LMEselect. Contract size: 100 fine troy ounces.", step1Btn: "LME Gold Info",
                 step2Title: "2. Fiat → SOL via Jupiter", step2Desc: "Jupiter Onramp supports cards, Apple/Google Pay, bank transfers.", step2Btn: "Buy SOL with Fiat",
@@ -582,7 +637,7 @@
                 footerDisclaimer: "*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization."
             },
             ru: {
-                navHow: "Как это работает", navInstitution: "Для учреждений", navRegistry: "Госреестр", navAdmin: "Полпред", navPortal: "Портал", connectWallet: "Подключить",
+                navHow: "Как это работает", navInstitution: "Для учреждений", navRegistry: "Госреестр", navAdmin: "Полпред", navPortal: "Портал", navDashboard: "Кабинет", connectWallet: "Подключить",
                 heroTitle: "Превратите исторические обязательства Империи в токены UNGT.\nСохраните активы на 25 лет.",
                 heroLine1: "📜 <strong>Для банков, трастов и финансовых институтов, владеющих активами Императорской Короны.</strong>",
                 heroLine2: "💰 Оцифруйте свои обязательства через аудит и получите токены UNGT.",
@@ -591,6 +646,7 @@
                 priceLabel: "Цена UNGT", mcapLabel: "Рыночная капа", liqLabel: "Ликвидность",
                 linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Золото", linkBuy: "Купить UNGT на Jupiter",
                 ctaInstText: "Учреждениям: начать оцифровку", ctaRegText: "Просмотреть реестр",
+                statusTitle: "Проверить статус аудита", statusSubtitle: "Введите ID актива или адрес кошелька учреждения", checkBtnText: "Проверить",
                 pipelineTitle: "Из LME Золота в UNGT: конвейер конвертации", pipelineSub: "Прозрачный on-chain процесс трансформации физического товара в цифровые активы",
                 step1Title: "1. Торговля золотом на LME", step1Desc: "Фьючерсы на золото (код: AU) на LMEselect. Размер контракта: 100 тройских унций.", step1Btn: "LME Золото",
                 step2Title: "2. Фиат → SOL через Jupiter", step2Desc: "Jupiter Onramp поддерживает карты, Apple/Google Pay, банковские переводы.", step2Btn: "Купить SOL за Фиат",
@@ -615,17 +671,19 @@
                 regTitle: "📜 Публичный реестр оцифрованных активов", thId: "ID актива", thInst: "Учреждение", thValue: "Стоимость (USD)", thUngt: "Кол-во UNGT", thTerm: "Срок хранения", thStatus: "Статус", loadingMsg: "Загрузка реестра...",
                 adminTitle: "👑 Панель полпреда", adminNote: "🔐 Только кошелёк, авторизованный Сувереном.", adminLoginText: "Войти с кошельком",
                 footerDisclaimer: "*Юридическая ответственность лежит на Сузериане и Полпреде. Технический интерфейс для прозрачной оцифровки."
-            },
-            es: { navHow: "Cómo funciona", navInstitution: "Para instituciones", navRegistry: "Registro público", navAdmin: "Plenipotenciario", navPortal: "Portal", connectWallet: "Conectar", heroTitle: "Convierta obligaciones históricas Imperiales en tokens UNGT. Mantenga sus activos por 25 años.", heroLine1: "📜 <strong>Para bancos, fideicomisos e instituciones financieras que poseen activos de la Corona Imperial.</strong>", heroLine2: "💰 Digitalice sus obligaciones mediante auditoría y reciba tokens UNGT.", heroLine3: "🎁 Participación voluntaria = <strong>25 años de custodia + 3% de honorarios + 22 años de derechos de uso + 15% de descuento en recompra.</strong>", heroLine4: "⚠️ Transformación forzosa = 3 años de custodia, sin beneficios.", priceLabel: "Precio UNGT", mcapLabel: "Cap. Mercado", liqLabel: "Liquidez", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Oro", linkBuy: "Comprar UNGT en Jupiter", ctaInstText: "Instituciones: Iniciar digitalización", ctaRegText: "Ver registro público", incentivesTitle: "💰 Incentivos económicos: Voluntario vs Forzoso", voluntaryBadge: "✅ TRANSFORMACIÓN VOLUNTARIA", voluntaryTitle: "25 años de custodia + Incentivos", forcedBadge: "⚠️ TRANSFORMACIÓN FORZOSA", forcedTitle: "3 años de custodia + Sin beneficios", howTitle: "⚖️ Cómo funciona la transformación", regTitle: "📜 Registro público de activos digitalizados", adminTitle: "👑 Panel del Plenipotenciario" },
-            fr: { navHow: "Fonctionnement", navInstitution: "Pour institutions", navRegistry: "Registre public", navAdmin: "Plénipotentiaire", navPortal: "Portail", connectWallet: "Connecter", heroTitle: "Transformez les obligations historiques impériales en jetons UNGT. Gardez vos actifs pendant 25 ans.", heroLine1: "📜 <strong>Pour les banques, fiducies et institutions financières détenant des actifs de la Couronne Impériale.</strong>", heroLine2: "💰 Numérisez vos obligations via un audit et recevez des jetons UNGT.", heroLine3: "🎁 Participation volontaire = <strong>25 ans de garde + 3% de frais + 22 ans de droits d'utilisation + 15% de réduction sur le rachat.</strong>", heroLine4: "⚠️ Transformation forcée = 3 ans de garde, sans avantages.", priceLabel: "Prix UNGT", mcapLabel: "Cap. Marché", liqLabel: "Liquidité", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Or", linkBuy: "Acheter UNGT sur Jupiter", ctaInstText: "Institutions: Démarrer la numérisation", ctaRegText: "Voir le registre public", incentivesTitle: "💰 Incitations économiques: Volontaire vs Forcé", voluntaryBadge: "✅ TRANSFORMATION VOLONTAIRE", voluntaryTitle: "25 ans de garde + Incitations", forcedBadge: "⚠️ TRANSFORMATION FORCÉE", forcedTitle: "3 ans de garde + Sans avantages", howTitle: "⚖️ Comment fonctionne la transformation", regTitle: "📜 Registre public des actifs numérisés", adminTitle: "👑 Panel Plénipotentiaire" },
-            de: { navHow: "Funktionsweise", navInstitution: "Für Institutionen", navRegistry: "Öffentliches Register", navAdmin: "Bevollmächtigter", navPortal: "Portal", connectWallet: "Verbinden", heroTitle: "Wandeln Sie historische imperiale Verpflichtungen in UNGT-Token um. Behalten Sie Ihre Vermögenswerte für 25 Jahre.", heroLine1: "📜 <strong>Für Banken, Trusts und Finanzinstitute, die Vermögenswerte der Imperialen Krone halten.</strong>", heroLine2: "💰 Digitalisieren Sie Ihre Verpflichtungen durch ein Audit und erhalten Sie UNGT-Token.", heroLine3: "🎁 Freiwillige Teilnahme = <strong>25 Jahre Verwahrung + 3% Gebühr + 22 Jahre Nutzungsrechte + 15% Rückkaufsrabatt.</strong>", heroLine4: "⚠️ Zwangsweise Umwandlung = 3 Jahre Verwahrung, keine Vorteile.", priceLabel: "UNGT Preis", mcapLabel: "Marktkap.", liqLabel: "Liquidität", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Gold", linkBuy: "UNGT auf Jupiter kaufen", ctaInstText: "Für Institutionen: Digitalisierung starten", ctaRegText: "Öffentliches Register anzeigen", incentivesTitle: "💰 Wirtschaftliche Anreize: Freiwillig vs Zwangsweise", voluntaryBadge: "✅ FREIWILLIGE UMWANDLUNG", voluntaryTitle: "25 Jahre Verwahrung + Anreize", forcedBadge: "⚠️ ZWANGSWEISE UMWANDLUNG", forcedTitle: "3 Jahre Verwahrung + Keine Vorteile", howTitle: "⚖️ Wie die Umwandlung funktioniert", regTitle: "📜 Öffentliches Register digitalisierter Vermögenswerte", adminTitle: "👑 Panel des Bevollmächtigten" },
-            zh: { navHow: "运作方式", navInstitution: "机构入口", navRegistry: "公共注册表", navAdmin: "全权代表", navPortal: "门户", connectWallet: "连接", heroTitle: "将历史性的帝国义务转化为UNGT代币。保留您的资产25年。", heroLine1: "📜 <strong>适用于持有皇冠资产的银行、信托和金融机构。</strong>", heroLine2: "💰 通过审计数字化您的义务并接收UNGT代币。", heroLine3: "🎁 自愿参与 = <strong>25年托管 + 3%费用 + 22年使用权 + 15%回购折扣。</strong>", heroLine4: "⚠️ 强制转型 = 3年托管，无任何好处。", priceLabel: "UNGT价格", mcapLabel: "市值", liqLabel: "流动性", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME黄金", linkBuy: "在Jupiter购买UNGT", ctaInstText: "机构：开始数字化", ctaRegText: "查看公共注册表", incentivesTitle: "💰 经济激励：自愿 vs 强制", voluntaryBadge: "✅ 自愿转型", voluntaryTitle: "25年托管 + 激励", forcedBadge: "⚠️ 强制转型", forcedTitle: "3年托管 + 无福利", howTitle: "⚖️ 转型机制", regTitle: "📜 数字化资产公共注册表", adminTitle: "👑 全权代表面板" },
-            ar: { navHow: "كيف تعمل", navInstitution: "للمؤسسات", navRegistry: "السجل العام", navAdmin: "المفوض", navPortal: "بوابة", connectWallet: "اتصال", heroTitle: "تحويل الالتزامات الإمبراطورية التاريخية إلى رموز UNGT. احتفظ بأصولك لمدة 25 عامًا.", heroLine1: "📜 <strong>للبنوك والصناديق والمؤسسات المالية التي تمتلك أصول التاج الإمبراطوري.</strong>", heroLine2: "💰 رقمنة التزاماتك عبر التدقيق واستلام رموز UNGT.", heroLine3: "🎁 المشاركة الطوعية = <strong>25 سنة حفظ + 3% رسوم + 22 سنة حقوق استخدام + 15% خصم على إعادة الشراء.</strong>", heroLine4: "⚠️ التحويل الإجباري = 3 سنوات حفظ، بدون مزايا.", priceLabel: "سعر UNGT", mcapLabel: "القيمة السوقية", liqLabel: "السيولة", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "الذهب LME", linkBuy: "شراء UNGT على Jupiter", ctaInstText: "للمؤسسات: بدء الرقمنة", ctaRegText: "عرض السجل العام", incentivesTitle: "💰 الحوافز الاقتصادية: طوعي vs إجباري", voluntaryBadge: "✅ التحويل الطوعي", voluntaryTitle: "25 سنة حفظ + حوافز", forcedBadge: "⚠️ التحويل الإجباري", forcedTitle: "3 سنوات حفظ + بدون مزايا", howTitle: "⚖️ آلية التحول", regTitle: "📜 السجل العام للأصول الرقمية", adminTitle: "👑 لوحة المفوض" },
-            hi: { navHow: "यह कैसे काम करता है", navInstitution: "संस्थानों के लिए", navRegistry: "सार्वजनिक रजिस्ट्री", navAdmin: "पूर्णाधिकारी", navPortal: "पोर्टल", connectWallet: "कनेक्ट", heroTitle: "ऐतिहासिक शाही दायित्वों को UNGT टोकन में बदलें। 25 वर्षों तक अपनी संपत्ति रखें।", heroLine1: "📜 <strong>उन बैंकों, ट्रस्टों और वित्तीय संस्थानों के लिए जो इंपीरियल क्राउन की संपत्ति रखते हैं।</strong>", heroLine2: "💰 ऑडिट के माध्यम से अपने दायित्वों को डिजिटल करें और UNGT टोकन प्राप्त करें।", heroLine3: "🎁 स्वैच्छिक भागीदारी = <strong>25 वर्ष संरक्षण + 3% शुल्क + 22 वर्ष उपयोग अधिकार + 15% पुनर्खरीद छूट।</strong>", heroLine4: "⚠️ जबरन परिवर्तन = 3 वर्ष संरक्षण, कोई लाभ नहीं।", priceLabel: "UNGT मूल्य", mcapLabel: "बाजार पूंजी", liqLabel: "तरलता", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME सोना", linkBuy: "Jupiter पर UNGT खरीदें", ctaInstText: "संस्थान: डिजिटलीकरण शुरू करें", ctaRegText: "सार्वजनिक रजिस्ट्री देखें", incentivesTitle: "💰 आर्थिक प्रोत्साहन: स्वैच्छिक vs जबरन", voluntaryBadge: "✅ स्वैच्छिक परिवर्तन", voluntaryTitle: "25 वर्ष संरक्षण + प्रोत्साहन", forcedBadge: "⚠️ जबरन परिवर्तन", forcedTitle: "3 वर्ष संरक्षण + कोई लाभ नहीं", howTitle: "⚖️ परिवर्तन प्रक्रिया", regTitle: "📜 डिजिटल संपत्तियों की सार्वजनिक रजिस्ट्री", adminTitle: "👑 पूर्णाधिकारी पैनल" },
-            ja: { navHow: "仕組み", navInstitution: "機関向け", navRegistry: "公開レジストリ", navAdmin: "全権代表", navPortal: "ポータル", connectWallet: "接続", heroTitle: "歴史的な帝国の義務をUNGTトークンに変換。資産を25年間維持。", heroLine1: "📜 <strong>帝国の資産を保有する銀行、信託、金融機関向け。</strong>", heroLine2: "💰 監査を通じて義務をデジタル化し、UNGTトークンを受け取る。", heroLine3: "🎁 自発的参加 = <strong>25年保管 + 3%手数料 + 22年使用権 + 15%買戻し割引。</strong>", heroLine4: "⚠️ 強制変換 = 3年保管、特典なし。", priceLabel: "UNGT価格", mcapLabel: "時価総額", liqLabel: "流動性", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME金", linkBuy: "JupiterでUNGTを購入", ctaInstText: "機関：デジタル化を開始", ctaRegText: "公開レジストリを表示", incentivesTitle: "💰 経済的インセンティブ：自発的 vs 強制", voluntaryBadge: "✅ 自発的変換", voluntaryTitle: "25年保管 + インセンティブ", forcedBadge: "⚠️ 強制変換", forcedTitle: "3年保管 + 特典なし", howTitle: "⚖️ 変換の仕組み", regTitle: "📜 デジタル資産の公開レジストリ", adminTitle: "👑 全権代表パネル" },
-            tr: { navHow: "Nasıl çalışır", navInstitution: "Kurumlar için", navRegistry: "Kamu Sicili", navAdmin: "Tam Yetkili", navPortal: "Portal", connectWallet: "Bağlan", heroTitle: "Tarihsel İmparatorluk yükümlülüklerini UNGT tokenlerine dönüştürün. Varlıklarınızı 25 yıl boyunca saklayın.", heroLine1: "📜 <strong>İmparatorluk Tacı varlıklarını elinde bulunduran bankalar, tröstler ve finansal kurumlar için.</strong>", heroLine2: "💰 Denetim yoluyla yükümlülüklerinizi dijitalleştirin ve UNGT tokenleri alın.", heroLine3: "🎁 Gönüllü katılım = <strong>25 yıl saklama + %3 ücret + 22 yıl kullanım hakkı + %15 geri alım indirimi.</strong>", heroLine4: "⚠️ Zorunlu dönüşüm = 3 yıl saklama, avantaj yok.", priceLabel: "UNGT Fiyatı", mcapLabel: "Piyasa Değeri", liqLabel: "Likidite", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Altın", linkBuy: "Jupiter'de UNGT Satın Al", ctaInstText: "Kurumlar: Dijitalleştirmeye Başlayın", ctaRegText: "Kamu Sicilini Görüntüle", incentivesTitle: "💰 Ekonomik Teşvikler: Gönüllü vs Zorunlu", voluntaryBadge: "✅ GÖNüllü DÖNÜŞÜM", voluntaryTitle: "25 yıl saklama + Teşvikler", forcedBadge: "⚠️ ZORUNLU DÖNÜŞÜM", forcedTitle: "3 yıl saklama + Avantaj yok", howTitle: "⚖️ Dönüşüm nasıl çalışır", regTitle: "📜 Dijital varlıkların kamu sicili", adminTitle: "👑 Tam Yetkili Paneli" }
+            }
         };
-
+        
+        // Fill missing languages
+        const additionalLangs = ['es', 'fr', 'de', 'zh', 'ar', 'hi', 'ja', 'tr'];
+        additionalLangs.forEach(lang => {
+            translations[lang] = { ...translations.en };
+        });
+        translations.es.heroTitle = "Convierta obligaciones históricas Imperiales en tokens UNGT. Mantenga sus activos por 25 años.";
+        translations.fr.heroTitle = "Transformez les obligations historiques impériales en jetons UNGT. Gardez vos actifs pendant 25 ans.";
+        translations.de.heroTitle = "Wandeln Sie historische imperiale Verpflichtungen in UNGT-Token um. Behalten Sie Ihre Vermögenswerte für 25 Jahre.";
+        translations.zh.heroTitle = "将历史性的帝国义务转化为UNGT代币。保留您的资产25年。";
+        
         function applyLanguage(lang) {
             const t = translations[lang] || translations.en;
             document.getElementById('navHow').innerText = t.navHow;
@@ -633,6 +691,7 @@
             document.getElementById('navRegistry').innerText = t.navRegistry;
             document.getElementById('navAdmin').innerText = t.navAdmin;
             document.getElementById('navPortal').innerText = t.navPortal;
+            document.getElementById('navDashboard').innerText = t.navDashboard;
             document.getElementById('connectWalletText').innerText = t.connectWallet;
             document.getElementById('heroTitle').innerHTML = t.heroTitle.replace(/\n/g, '<br>');
             document.getElementById('heroDescLine1').innerHTML = t.heroLine1;
@@ -648,6 +707,9 @@
             document.getElementById('linkBuy').innerText = t.linkBuy;
             document.getElementById('ctaInstText').innerText = t.ctaInstText;
             document.getElementById('ctaRegText').innerText = t.ctaRegText;
+            document.getElementById('statusTitle').innerText = t.statusTitle;
+            document.getElementById('statusSubtitle').innerText = t.statusSubtitle;
+            document.getElementById('checkBtnText').innerText = t.checkBtnText;
             document.getElementById('pipelineTitle').innerText = t.pipelineTitle;
             document.getElementById('pipelineSub').innerText = t.pipelineSub;
             document.getElementById('step1Title').innerText = t.step1Title;
