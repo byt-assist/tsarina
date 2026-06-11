@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>UNGT · API Documentation | For Institutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0602; color: #e8e0d0; line-height: 1.6; }
+        .imperial-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 20% 30%, #1f1408, #020100); z-index: -3; }
+        .heritage-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.15"><path fill="none" stroke="%23d4af37" stroke-width="1.5" d="M15,45 L35,28 L55,45 L48,68 L28,68 Z M90,25 L110,12 L128,28 L120,50 L100,50 Z M150,55 L172,40 L190,58 L180,80 L158,78 Z M70,82 L88,72 L100,85 L92,96 L76,95 Z M130,10 L142,3 L155,12 L148,24 L136,22 Z"/><circle cx="172" cy="32" r="6" stroke="%23f1cf5e" fill="none" stroke-width="1.2"/><polygon points="55,15 65,8 74,15 69,26 60,26" stroke="%23e6b422" fill="none"/></svg>'); background-repeat: repeat; background-size: 70px 70px; pointer-events: none; z-index: -2; }
+        .crypto-mesh { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(90deg, rgba(0,255,200,0.06) 1px, transparent 1px), linear-gradient(0deg, rgba(0,255,200,0.06) 1px, transparent 1px), repeating-linear-gradient(45deg, rgba(70,200,210,0.04) 0px, rgba(70,200,210,0.04) 2px, transparent 2px, transparent 18px); background-size: 55px 55px, 55px 55px, 22px 22px; pointer-events: none; z-index: -1; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 5; }
+        .header { background: rgba(8,6,3,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(212,175,55,0.4); position: sticky; top: 0; z-index: 110; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 16px 0; gap: 20px; }
+        .logo { display: flex; align-items: center; gap: 14px; }
+        .logo-svg { width: 54px; height: 54px; filter: drop-shadow(0 0 6px #d4af37); }
+        .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ffe4b5, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .nav-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { color: #ecdca8; text-decoration: none; font-weight: 500; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; transition: 0.2s; }
+        .nav-links a:hover { color: #f3d572; }
+        .section { padding: 50px 0; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; text-align: center; margin-bottom: 40px; background: linear-gradient(135deg, #fcf0dc, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .api-endpoint { background: rgba(0,0,0,0.5); border-radius: 20px; padding: 24px; margin-bottom: 24px; border: 1px solid rgba(212,175,55,0.3); }
+        .method { display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; margin-right: 12px; }
+        .method-get { background: #2a7a2a; color: white; }
+        .method-post { background: #b8860b; color: white; }
+        .endpoint-url { font-family: monospace; font-size: 1.1rem; color: #d4af37; }
+        pre { background: #0a0602; padding: 16px; border-radius: 12px; overflow-x: auto; margin-top: 12px; border: 1px solid rgba(212,175,55,0.2); }
+        code { font-family: monospace; }
+        .footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(212,175,55,0.25); color: #bba87a; font-size: 0.85rem; margin-top: 40px; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; align-items: stretch; } .nav-links { justify-content: center; } }
+    </style>
+</head>
+<body>
+    <div class="imperial-bg"></div>
+    <div class="heritage-pattern"></div>
+    <div class="crypto-mesh"></div>
+
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="46" fill="#1f180c" stroke="#d4af37" stroke-width="2.2"/>
+                        <path d="M30 20 L40 10 L50 20 L50 35 L30 35 Z" fill="#d4af37"/>
+                        <path d="M50 20 L60 10 L70 20 L70 35 L50 35 Z" fill="#e6b422"/>
+                        <circle cx="50" cy="58" r="9" fill="#d4af37"/>
+                        <text x="50" y="80" font-family="Georgia, serif" font-size="17" fill="#f2dea4" text-anchor="middle" font-weight="bold">UNGT</text>
+                    </svg>
+                    <span class="logo-text">TSARINA·UNGT</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="institution-portal.html">Portal</a>
+                    <a href="registry.html">Registry</a>
+                    <a href="api-docs.html" style="color:#d4af37;">API Docs</a>
+                    <a href="legal.html">Legal</a>
+                    <a href="partners.html">Partners</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container" style="text-align:center; padding: 40px 0 20px;">
+            <h1 style="font-size:2.8rem; font-family:'Cormorant Garamond'; margin-bottom:16px;">🔌 API Documentation</h1>
+            <p style="font-size:1.2rem;">REST API for institutions to automate asset submission and status checking</p>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="api-endpoint">
+                    <span class="method method-get">GET</span>
+                    <span class="endpoint-url">/api/asset/:id</span>
+                    <p style="margin-top: 12px;">Get asset status by ID</p>
+                    <pre><code>{
+  "id": "UNGT-001",
+  "institution": "State Bank of Empire",
+  "status": "Active",
+  "term": "25 years",
+  "value": 1250000000,
+  "ungtAmount": 12500000,
+  "ipfsUrl": "https://gateway.pinata.cloud/ipfs/Qm...",
+  "submittedAt": "2024-12-15T00:00:00Z",
+  "decidedAt": "2024-12-20T00:00:00Z"
+}</code></pre>
+                </div>
+
+                <div class="api-endpoint">
+                    <span class="method method-get">GET</span>
+                    <span class="endpoint-url">/api/institution/:wallet</span>
+                    <p style="margin-top: 12px;">Get all assets for an institution by wallet address</p>
+                    <pre><code>{
+  "wallet": "GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD",
+  "institutionName": "State Bank of Empire",
+  "assets": [
+    {
+      "id": "UNGT-001",
+      "status": "Active",
+      "term": "25 years",
+      "value": 1250000000
+    }
+  ]
+}</code></pre>
+                </div>
+
+                <div class="api-endpoint">
+                    <span class="method method-post">POST</span>
+                    <span class="endpoint-url">/api/submit</span>
+                    <p style="margin-top: 12px;">Submit new asset for audit (requires API key)</p>
+                    <pre><code>// Request
+{
+  "institutionWallet": "GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD",
+  "assetName": "Gold Reserves",
+  "valuation": 1250000000,
+  "documentCid": "QmExample123..."
+}
+
+// Response
+{
+  "assetId": "UNGT-101",
+  "status": "Audit requested",
+  "message": "Asset submitted successfully. Awaiting plenipotentiary review."
+}</code></pre>
+                </div>
+
+                <div class="api-endpoint">
+                    <span class="method method-get">GET</span>
+                    <span class="endpoint-url">/api/stats</span>
+                    <p style="margin-top: 12px;">Get global statistics</p>
+                    <pre><code>{
+  "totalAssets": 8,
+  "totalValueLocked": 8920000000,
+  "activeAssets": 5,
+  "forcedAssets": 2,
+  "pendingAssets": 1,
+  "lastUpdated": "2025-01-25T10:00:00Z"
+}</code></pre>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; margin-top: 30px;">
+                    <h3><i class="fas fa-key"></i> Authentication</h3>
+                    <p>For POST requests, include your API key in the header:</p>
+                    <pre><code>X-API-Key: your_api_key_here</code></pre>
+                    <p style="margin-top: 12px;">To obtain an API key, please contact the Plenipotentiary after institution registration.</p>
+                    <p style="margin-top: 12px; color: #d4af37;">Base URL: <code>https://api.ungt.io/v1</code> (coming soon)</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© UNGT Digital Asset Trust — Tsarina Program. API status: <span style="color:#2a7a2a;">● Planning</span></p>
+        </div>
+    </footer>
+</body>
+</html>
