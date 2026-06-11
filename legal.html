@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>UNGT · Legal Center | Documents & Compliance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0602; color: #e8e0d0; line-height: 1.6; }
+        .imperial-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 20% 30%, #1f1408, #020100); z-index: -3; }
+        .heritage-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.15"><path fill="none" stroke="%23d4af37" stroke-width="1.5" d="M15,45 L35,28 L55,45 L48,68 L28,68 Z M90,25 L110,12 L128,28 L120,50 L100,50 Z M150,55 L172,40 L190,58 L180,80 L158,78 Z M70,82 L88,72 L100,85 L92,96 L76,95 Z M130,10 L142,3 L155,12 L148,24 L136,22 Z"/><circle cx="172" cy="32" r="6" stroke="%23f1cf5e" fill="none" stroke-width="1.2"/><polygon points="55,15 65,8 74,15 69,26 60,26" stroke="%23e6b422" fill="none"/></svg>'); background-repeat: repeat; background-size: 70px 70px; pointer-events: none; z-index: -2; }
+        .crypto-mesh { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(90deg, rgba(0,255,200,0.06) 1px, transparent 1px), linear-gradient(0deg, rgba(0,255,200,0.06) 1px, transparent 1px), repeating-linear-gradient(45deg, rgba(70,200,210,0.04) 0px, rgba(70,200,210,0.04) 2px, transparent 2px, transparent 18px); background-size: 55px 55px, 55px 55px, 22px 22px; pointer-events: none; z-index: -1; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 5; }
+        .header { background: rgba(8,6,3,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(212,175,55,0.4); position: sticky; top: 0; z-index: 110; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 16px 0; gap: 20px; }
+        .logo { display: flex; align-items: center; gap: 14px; }
+        .logo-svg { width: 54px; height: 54px; filter: drop-shadow(0 0 6px #d4af37); }
+        .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ffe4b5, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .nav-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { color: #ecdca8; text-decoration: none; font-weight: 500; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; transition: 0.2s; }
+        .nav-links a:hover { color: #f3d572; }
+        .section { padding: 50px 0; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 30px; border-left: 4px solid #d4af37; padding-left: 20px; }
+        .doc-card { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 24px; margin-bottom: 24px; border: 1px solid rgba(212,175,55,0.2); }
+        .footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(212,175,55,0.25); color: #bba87a; font-size: 0.85rem; margin-top: 40px; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; align-items: stretch; } .nav-links { justify-content: center; } }
+    </style>
+</head>
+<body>
+    <div class="imperial-bg"></div>
+    <div class="heritage-pattern"></div>
+    <div class="crypto-mesh"></div>
+
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="46" fill="#1f180c" stroke="#d4af37" stroke-width="2.2"/>
+                        <path d="M30 20 L40 10 L50 20 L50 35 L30 35 Z" fill="#d4af37"/>
+                        <path d="M50 20 L60 10 L70 20 L70 35 L50 35 Z" fill="#e6b422"/>
+                        <circle cx="50" cy="58" r="9" fill="#d4af37"/>
+                        <text x="50" y="80" font-family="Georgia, serif" font-size="17" fill="#f2dea4" text-anchor="middle" font-weight="bold">UNGT</text>
+                    </svg>
+                    <span class="logo-text">TSARINA·UNGT</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="registry.html">Registry</a>
+                    <a href="legal.html" style="color:#d4af37;">Legal</a>
+                    <a href="api-docs.html">API</a>
+                    <a href="partners.html">Partners</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container" style="text-align:center; padding: 40px 0 20px;">
+            <h1 style="font-size:2.8rem; font-family:'Cormorant Garamond'; margin-bottom:16px;">⚖️ Legal Center</h1>
+            <p style="font-size:1.2rem;">Official documents, agreements, and compliance information</p>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="section-title">📄 Foundation Documents</div>
+                <div class="doc-card">
+                    <h3><i class="fas fa-file-contract"></i> Consulting Agreement #07022024ZRU598</h3>
+                    <p>Dated: February 14, 2024</p>
+                    <p>Between: Svetlana N. Aristova (Global Trust/Family Heritage Foundation) and NEFTEGAZ NANOKOMPOZIT BUILDING LLC</p>
+                    <p>Scope: Digital transformation of Trust assets, including metal bills, demand bills, and central bank codes.</p>
+                    <a href="#" class="btn-outline" style="display:inline-block; margin-top:12px; padding:6px 16px;">Download PDF (coming soon)</a>
+                </div>
+
+                <div class="doc-card">
+                    <h3><i class="fas fa-gavel"></i> Power of Attorney</h3>
+                    <p>Dated: March 5, 2024</p>
+                    <p>Issued by: Svetlana N. Aristova</p>
+                    <p>Authorized representative: Ismailov B.I.</p>
+                    <p>Validity: Until December 30, 2034</p>
+                    <a href="#" class="btn-outline" style="display:inline-block; margin-top:12px; padding:6px 16px;">Download PDF (coming soon)</a>
+                </div>
+
+                <div class="section-title">📋 Token Documents</div>
+                <div class="doc-card">
+                    <h3><i class="fas fa-chart-line"></i> UNGT Tokenomics</h3>
+                    <p><strong>Token Name:</strong> Unredeemed Note of the Great Tsarina</p>
+                    <p><strong>Symbol:</strong> UNGT</p>
+                    <p><strong>Blockchain:</strong> Solana</p>
+                    <p><strong>Total Supply:</strong> 10,000,000,000 UNGT</p>
+                    <p><strong>Mint Authority:</strong> Revoked</p>
+                    <p><strong>Freeze Authority:</strong> Revoked</p>
+                    <a href="https://solscan.io/token/EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs" target="_blank" class="btn-outline" style="display:inline-block; margin-top:12px; padding:6px 16px;">View on Solscan</a>
+                </div>
+
+                <div class="section-title">🔒 Privacy & Compliance</div>
+                <div class="doc-card">
+                    <h3><i class="fas fa-shield-alt"></i> Privacy Policy</h3>
+                    <p>We collect only necessary information for asset digitization and audit processes. Documents are client-side encrypted before IPFS upload. Personal data is not shared with third parties without consent.</p>
+                    <a href="#" class="btn-outline" style="display:inline-block; margin-top:12px; padding:6px 16px;">Read Full Policy (coming soon)</a>
+                </div>
+
+                <div class="doc-card">
+                    <h3><i class="fas fa-ban"></i> AML/KYC Policy</h3>
+                    <p>All participating institutions undergo verification. Transactions are monitored for compliance with international regulations (FATF recommendations).</p>
+                </div>
+
+                <div class="section-title">📞 Regulatory Contacts</div>
+                <div class="doc-card">
+                    <p><strong>Suzerain (Legal Successor):</strong> Svetlana N. Aristova</p>
+                    <p><strong>Email:</strong> svetlana321aristova@yandex.ru</p>
+                    <p><strong>Plenipotentiary Representative:</strong> Ismailov B.I.</p>
+                    <p><strong>Consultant:</strong> NEFTEGAZ NANOKOMPOZIT BUILDING LLC, Uzbekistan</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© UNGT Digital Asset Trust — Tsarina Program. All legal documents are binding under international law.</p>
+        </div>
+    </footer>
+</body>
+</html>
