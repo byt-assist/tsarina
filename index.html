@@ -50,32 +50,12 @@
         .hidden-section { display: none; }
         .dextools-widget { background: rgba(0,0,0,0.5); border-radius: 24px; padding: 20px; margin: 30px 0; min-height: 650px; }
         .inline-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 30px 0; }
-        .conversion-pipeline { background: rgba(0,0,0,0.5); border-radius: 28px; padding: 40px; margin: 40px 0; text-align: center; border: 1px solid rgba(212,175,55,0.3); }
-        .pipeline-steps { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
-        .pipeline-step { flex: 1; min-width: 200px; background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; }
-        .step-arrow { font-size: 2rem; color: #d4af37; align-self: center; }
-        .incentives-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
-        .incentive-card { background: rgba(0,0,0,0.6); border-radius: 28px; padding: 30px; border: 1px solid rgba(212,175,55,0.4); }
-        .incentive-card.voluntary { border-color: #2a7a2a; }
-        .incentive-card.forced { border-color: #8b3a3a; }
-        .incentive-title { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; margin-bottom: 20px; }
-        .incentive-list { list-style: none; padding: 0; }
-        .incentive-list li { margin: 15px 0; padding-left: 24px; position: relative; }
-        .incentive-list li i { position: absolute; left: 0; top: 4px; color: #d4af37; }
-        .badge-voluntary { background: #2a7a2a; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; }
-        .badge-forced { background: #8b3a3a; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; }
-        .hero-description { font-size: 1.1rem; max-width: 850px; margin: 20px auto 0; line-height: 1.6; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 20px; }
-        .main-title { font-size: 3.2rem; font-family: 'Cormorant Garamond', serif; text-shadow: 0 2px 12px black; margin-bottom: 20px; }
-        .admin-warning { background: #8b3a3a; color: white; padding: 10px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
         .status-widget { background: rgba(0,0,0,0.5); border-radius: 28px; padding: 30px; margin: 30px auto; text-align: center; border: 1px solid rgba(212,175,55,0.3); }
         .status-input-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; max-width: 600px; margin: 20px auto 0; }
         .status-input { flex: 1; min-width: 250px; background: rgba(0,0,0,0.6); border: 1px solid #d4af37; border-radius: 40px; padding: 12px 20px; color: white; font-size: 1rem; }
-        @media (max-width: 768px) {
-            .pipeline-steps { flex-direction: column; align-items: center; }
-            .step-arrow { transform: rotate(90deg); }
-            .incentives-grid { grid-template-columns: 1fr; }
-            .main-title { font-size: 2rem; }
-        }
+        .main-title { font-size: 3.2rem; font-family: 'Cormorant Garamond', serif; text-shadow: 0 2px 12px black; margin-bottom: 20px; text-align: center; }
+        .hero-description { font-size: 1.1rem; max-width: 850px; margin: 20px auto 0; line-height: 1.6; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 20px; text-align: center; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; align-items: stretch; } .nav-links { justify-content: center; } .main-title { font-size: 2rem; } }
     </style>
 </head>
 <body>
@@ -111,10 +91,6 @@
                         <option value="fr">🇫🇷 FR</option>
                         <option value="de">🇩🇪 DE</option>
                         <option value="zh">🇨🇳 中文</option>
-                        <option value="ar">🇸🇦 AR</option>
-                        <option value="hi">🇮🇳 HI</option>
-                        <option value="ja">🇯🇵 JA</option>
-                        <option value="tr">🇹🇷 TR</option>
                     </select>
                     <button id="connectWalletBtn" class="wallet-btn"><i class="fas fa-wallet"></i> <span id="connectWalletText">Connect</span></button>
                 </div>
@@ -123,7 +99,7 @@
     </header>
 
     <main>
-        <div class="container hero" style="text-align:center; padding: 40px 0 30px;">
+        <div class="container" style="text-align:center; padding: 40px 0 30px;">
             <h1 class="main-title" id="heroTitle">Turn historical Imperial obligations into UNGT tokens.<br>Keep your assets for 25 years.</h1>
             <div class="hero-description" id="heroDescContainer">
                 <p id="heroDescLine1">📜 <strong>For banks, trusts, and financial institutions holding assets of the Imperial Crown.</strong></p>
@@ -171,66 +147,7 @@
             </div>
         </div>
 
-        <!-- Pipeline: LME Gold -> SOL -> UNGT -->
-        <div class="container">
-            <div class="conversion-pipeline">
-                <h2 id="pipelineTitle" style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin-bottom: 10px;">From LME Gold to UNGT: The Conversion Pipeline</h2>
-                <p id="pipelineSub" style="margin-bottom: 30px;">A transparent, on-chain process to transform physical commodity exposure into digital assets</p>
-                <div class="pipeline-steps">
-                    <div class="pipeline-step">
-                        <i class="fas fa-chart-line" style="font-size: 2rem; color: #d4af37;"></i>
-                        <h3 id="step1Title" style="margin: 10px 0;">1. Trade Gold on LME</h3>
-                        <p id="step1Desc" style="font-size: 0.9rem;">Gold futures (code: AU) on LMEselect. Contract size: 100 fine troy ounces.</p>
-                        <a href="https://www.lme.com/Metals/Precious-metals/LMEprecious#Gold" target="_blank" class="btn-outline-light" style="margin-top: 10px;"><span id="step1Btn">LME Gold Info</span></a>
-                    </div>
-                    <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-                    <div class="pipeline-step">
-                        <i class="fas fa-exchange-alt" style="font-size: 2rem; color: #d4af37;"></i>
-                        <h3 id="step2Title" style="margin: 10px 0;">2. Fiat → SOL via Jupiter</h3>
-                        <p id="step2Desc" style="font-size: 0.9rem;">Jupiter Onramp supports cards, Apple/Google Pay, bank transfers.</p>
-                        <a href="https://onramp.jup.ag/" target="_blank" class="btn-outline-light" style="margin-top: 10px;"><span id="step2Btn">Buy SOL with Fiat</span></a>
-                    </div>
-                    <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-                    <div class="pipeline-step">
-                        <i class="fas fa-chart-simple" style="font-size: 2rem; color: #d4af37;"></i>
-                        <h3 id="step3Title" style="margin: 10px 0;">3. SOL → UNGT on Jupiter</h3>
-                        <p id="step3Desc" style="font-size: 0.9rem;">Swap SOL for UNGT via Jupiter aggregator.</p>
-                        <a href="#" id="pipelineBuyBtn" class="btn-outline-light" style="margin-top: 10px;"><span id="step3Btn">Swap SOL for UNGT</span></a>
-                    </div>
-                </div>
-                <p id="pipelineNote" style="margin-top: 30px; font-size: 0.8rem; opacity: 0.8;"><i class="fas fa-info-circle"></i> Note: LME Gold futures are physically deliverable (unallocated gold) and traded via LME members.</p>
-            </div>
-        </div>
-
-        <!-- Economic Incentives Section -->
-        <div class="container">
-            <div class="conversion-pipeline" style="margin-top: 0;">
-                <h2 id="incentivesTitle" style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin-bottom: 10px;">💰 Economic Incentives: Voluntary vs. Forced</h2>
-                <p id="incentivesSub" style="margin-bottom: 30px;">Financial institutions that voluntarily digitize their assets receive exclusive benefits. Forced transformation eliminates all privileges.</p>
-                <div class="incentives-grid">
-                    <div class="incentive-card voluntary">
-                        <div class="badge-voluntary" id="voluntaryBadge">✅ VOLUNTARY TRANSFORMATION</div>
-                        <div class="incentive-title" id="voluntaryTitle">25 years custody + Incentives</div>
-                        <ul class="incentive-list">
-                            <li id="voluntaryFee"><i class="fas fa-percent"></i> <strong>3% fee</strong> – Direct profit from the asset value</li>
-                            <li id="voluntaryUsage"><i class="fas fa-hand-holding-usd"></i> <strong>22 years usage right</strong> – Credit/collateral leverage</li>
-                            <li id="voluntaryDiscount"><i class="fas fa-tags"></i> <strong>15% discount</strong> – Buyback without third-parties</li>
-                        </ul>
-                    </div>
-                    <div class="incentive-card forced">
-                        <div class="badge-forced" id="forcedBadge">⚠️ FORCED TRANSFORMATION</div>
-                        <div class="incentive-title" id="forcedTitle">3 years custody + No benefits</div>
-                        <ul class="incentive-list">
-                            <li id="forcedFee"><i class="fas fa-times-circle"></i> <strong>No fee</strong> – 0% profit</li>
-                            <li id="forcedUsage"><i class="fas fa-times-circle"></i> <strong>No usage right</strong> – No leverage</li>
-                            <li id="forcedDiscount"><i class="fas fa-times-circle"></i> <strong>No discount</strong> – Market price only</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- How it works Section -->
+        <!-- How it works Section (видима по умолчанию) -->
         <div id="howSection" class="section">
             <div class="container">
                 <div class="section-title" id="howTitle">⚖️ How the transformation works</div>
@@ -244,7 +161,7 @@
             </div>
         </div>
 
-        <!-- Institution Section (с реальной загрузкой в IPFS) -->
+        <!-- Institution Section (форма подачи заявки) -->
         <div id="institutionSection" class="section hidden-section">
             <div class="container">
                 <div class="section-title" id="instTitle">🏛️ Asset transformation request</div>
@@ -279,18 +196,16 @@
             </div>
         </div>
 
-        <!-- Admin Section (с авторизацией по кошельку) -->
+        <!-- Admin Section (панель полпреда) -->
         <div id="adminSection" class="section hidden-section">
             <div class="container">
                 <div class="section-title" id="adminTitle">👑 Plenipotentiary Audit & Ruling</div>
                 <div class="form-card">
-                    <div id="adminAuthWarning" class="admin-warning" style="display:none;"></div>
-                    <div id="adminPanel">
-                        <p id="adminNote"><i class="fas fa-shield-alt"></i> 🔐 Only wallet authorized by Suzerain can access.</p>
-                        <button id="adminLoginBtn" class="btn-primary"><span id="adminLoginText">Login with Wallet</span></button>
-                        <div id="adminContent" style="display:none; margin-top:20px;">
-                            <div id="pendingReviews"></div>
-                        </div>
+                    <div id="adminAuthWarning" style="background:#8b3a3a; color:white; padding:10px; border-radius:12px; text-align:center; margin-bottom:20px; display:none;"></div>
+                    <p id="adminNote"><i class="fas fa-shield-alt"></i> 🔐 Only wallet authorized by Suzerain can access.</p>
+                    <button id="adminLoginBtn" class="btn-primary"><span id="adminLoginText">Login with Wallet</span></button>
+                    <div id="adminContent" style="display:none; margin-top:20px;">
+                        <div id="pendingReviews"></div>
                     </div>
                 </div>
             </div>
@@ -351,20 +266,12 @@
         async function uploadToIPFS(file, fileName) {
             const formData = new FormData();
             formData.append('file', file, fileName);
-            
             const response = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
                 method: 'POST',
-                headers: {
-                    'pinata_api_key': PINATA_API_KEY,
-                    'pinata_secret_api_key': PINATA_API_SECRET
-                },
+                headers: { 'pinata_api_key': PINATA_API_KEY, 'pinata_secret_api_key': PINATA_API_SECRET },
                 body: formData
             });
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Upload failed: ${response.status} ${errorText}`);
-            }
+            if (!response.ok) throw new Error(`Upload failed: ${response.status}`);
             const data = await response.json();
             return `https://gateway.pinata.cloud/ipfs/${data.IpfsHash}`;
         }
@@ -373,8 +280,8 @@
         // 5. REGISTRY DATA
         // ============================================================
         let demoAssets = [
-            { id: "UNGT-001", institution: "State Bank of Empire (Archival)", value: 1250000000, ungtAmount: 12500000, term: "25 years", status: "Active", assetName: "Gold Reserves", ipfsUrl: "#", docCid: "QmExample1" },
-            { id: "UNGT-002", institution: "Northern Trust Metals", value: 450000000, ungtAmount: 4500000, term: "3 years", status: "Forced term", assetName: "Metal Accounts", ipfsUrl: "#", docCid: "QmExample2" }
+            { id: "UNGT-001", institution: "State Bank of Empire (Archival)", value: 1250000000, ungtAmount: 12500000, term: "25 years", status: "Active", assetName: "Gold Reserves", ipfsUrl: "#" },
+            { id: "UNGT-002", institution: "Northern Trust Metals", value: 450000000, ungtAmount: 4500000, term: "3 years", status: "Forced term", assetName: "Metal Accounts", ipfsUrl: "#" }
         ];
         
         function renderRegistry() {
@@ -398,7 +305,7 @@
         renderRegistry();
         
         // ============================================================
-        // 6. SUBMIT ASSET with IPFS UPLOAD
+        // 6. SUBMIT ASSET
         // ============================================================
         document.getElementById('submitAssetBtn')?.addEventListener('click', async () => {
             const instName = document.getElementById('instName')?.value;
@@ -413,45 +320,31 @@
             }
             
             const statusDiv = document.getElementById('uploadStatus');
-            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading to IPFS via Pinata...';
+            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading to IPFS...';
             
             try {
                 let ipfsUrl = null;
-                let docCid = null;
-                
-                if (file) {
+                if (file && PINATA_API_KEY !== "YOUR_PINATA_API_KEY") {
                     ipfsUrl = await uploadToIPFS(file, `UNGT_${Date.now()}_${file.name}`);
-                    docCid = ipfsUrl.split('/ipfs/')[1];
-                    statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Uploaded to IPFS: <a href="${ipfsUrl}" target="_blank">${ipfsUrl.substring(0,60)}...</a>`;
+                    statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Uploaded to IPFS: <a href="${ipfsUrl}" target="_blank">${ipfsUrl.substring(0,50)}...</a>`;
                 } else {
-                    statusDiv.innerHTML = '<i class="fas fa-info-circle"></i> No file uploaded. Demo submission.';
-                    docCid = `DEMO_CID_${Date.now()}`;
-                    ipfsUrl = `https://gateway.pinata.cloud/ipfs/${docCid}`;
+                    statusDiv.innerHTML = '<i class="fas fa-info-circle"></i> Demo submission (no file).';
+                    ipfsUrl = `DEMO_CID_${Date.now()}`;
                 }
                 
                 const newId = "UNGT-" + Math.random().toString(36).substring(2,10).toUpperCase();
                 demoAssets.push({
-                    id: newId,
-                    institution: instName,
-                    value: value,
-                    ungtAmount: Math.floor(value / 100),
-                    term: "pending",
-                    status: "Audit requested",
-                    assetName: assetName,
-                    ipfsUrl: ipfsUrl,
-                    docCid: docCid
+                    id: newId, institution: instName, value: value, ungtAmount: Math.floor(value / 100),
+                    term: "pending", status: "Audit requested", assetName: assetName, ipfsUrl: ipfsUrl
                 });
                 renderRegistry();
                 statusDiv.innerHTML += '<br>✅ Submitted for audit. Plenipotentiary will review.';
-                setTimeout(() => { if(statusDiv) statusDiv.innerHTML = ""; }, 8000);
-                
+                setTimeout(() => { if(statusDiv) statusDiv.innerHTML = ""; }, 5000);
                 document.getElementById('instName').value = '';
                 document.getElementById('assetName').value = '';
                 document.getElementById('assetValue').value = '';
                 if(fileInput) fileInput.value = '';
-                
             } catch (error) {
-                console.error(error);
                 statusDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Upload failed: ${error.message}`;
             }
         });
@@ -466,13 +359,9 @@
                 try {
                     const response = await window.solana.connect();
                     currentWallet = response.publicKey.toString();
-                    const btn = document.getElementById('connectWalletText');
-                    if (btn) btn.innerText = `${currentWallet.slice(0,4)}...${currentWallet.slice(-4)}`;
+                    document.getElementById('connectWalletText').innerText = `${currentWallet.slice(0,4)}...${currentWallet.slice(-4)}`;
                     return currentWallet;
-                } catch (err) {
-                    console.error('Wallet connection rejected', err);
-                    return null;
-                }
+                } catch (err) { return null; }
             } else {
                 alert('Phantom wallet not installed. Please install from phantom.app');
                 window.open('https://phantom.app/', '_blank');
@@ -483,18 +372,15 @@
         document.getElementById('connectWalletBtn')?.addEventListener('click', connectWallet);
         
         document.getElementById('adminLoginBtn')?.addEventListener('click', async () => {
-            if (!currentWallet) {
-                await connectWallet();
-            }
+            if (!currentWallet) await connectWallet();
             if (currentWallet === PLENIPOTENTIARY_WALLET) {
                 document.getElementById('adminAuthWarning').style.display = 'none';
                 document.getElementById('adminContent').style.display = 'block';
                 document.getElementById('adminLoginBtn').style.display = 'none';
                 loadAdminPanel();
             } else {
-                const warning = document.getElementById('adminAuthWarning');
-                warning.style.display = 'block';
-                warning.innerHTML = `<i class="fas fa-ban"></i> Access denied. Wallet ${currentWallet?.slice(0,6)}... is not authorized as Plenipotentiary. Expected: ${PLENIPOTENTIARY_WALLET.slice(0,6)}...`;
+                document.getElementById('adminAuthWarning').style.display = 'block';
+                document.getElementById('adminAuthWarning').innerHTML = `<i class="fas fa-ban"></i> Access denied. Wallet ${currentWallet?.slice(0,6)}... is not authorized.`;
             }
         });
         
@@ -512,7 +398,6 @@
                         <p><strong>${asset.id}</strong> - ${asset.institution}</p>
                         <p>Asset: ${asset.assetName || 'N/A'} | Value: $${asset.value.toLocaleString()}</p>
                         <p>IPFS: <a href="${asset.ipfsUrl}" target="_blank">View Document</a></p>
-                        <p>Document CID: <code>${asset.docCid}</code></p>
                         <button class="btn-primary" style="margin:8px 8px 0 0;" onclick="approveAsset('${asset.id}', 'voluntary')">✅ Approve 25y (Voluntary)</button>
                         <button class="btn-secondary" onclick="approveAsset('${asset.id}', 'forced')">⚠️ Force 3y term</button>
                     </div>
@@ -523,11 +408,10 @@
         window.approveAsset = (id, type) => {
             const term = type === 'voluntary' ? '25 years' : '3 years';
             const status = type === 'voluntary' ? 'Active' : 'Forced term';
-            const institutionAdd = type === 'voluntary' ? ' (Compliant)' : ' (Non-compliant)';
-            demoAssets = demoAssets.map(a => a.id === id ? {...a, status: status, term: term, institution: a.institution + institutionAdd} : a);
+            demoAssets = demoAssets.map(a => a.id === id ? {...a, status: status, term: term} : a);
             renderRegistry();
             loadAdminPanel();
-            alert(`✅ Asset ${id}: ${type === 'voluntary' ? 'Approved for 25 years with full benefits' : 'Forced to 3 years, no benefits'}`);
+            alert(`✅ Asset ${id}: ${type === 'voluntary' ? 'Approved for 25 years' : 'Forced to 3 years'}`);
         };
         
         // ============================================================
@@ -537,38 +421,22 @@
             const query = document.getElementById('statusCheckInput').value.trim();
             const resultDiv = document.getElementById('statusResult');
             if (!query) { alert('Please enter Asset ID or Wallet Address'); return; }
-            
-            const foundAsset = demoAssets.find(a => a.id.toUpperCase() === query.toUpperCase() || a.institution.toLowerCase().includes(query.toLowerCase()));
-            
+            const foundAsset = demoAssets.find(a => a.id.toUpperCase() === query.toUpperCase());
             let result;
             if (foundAsset) {
                 let statusColor = foundAsset.status === 'Active' ? '#2a7a2a' : (foundAsset.status === 'Forced term' ? '#8b3a3a' : '#b8860b');
-                result = {
-                    status: foundAsset.status === 'Active' ? '✅ Approved' : (foundAsset.status === 'Forced term' ? '⚠️ Forced' : '⏳ Pending'),
-                    term: foundAsset.term === '25 years' ? '25 years' : (foundAsset.term === '3 years' ? '3 years' : 'Awaiting audit'),
-                    message: foundAsset.status === 'Active' ? 'Your asset has been approved for 25 years custody with full benefits.' : (foundAsset.status === 'Forced term' ? 'Forced transformation: 3 years custody, no benefits.' : 'Your asset is under review by the Plenipotentiary.'),
-                    color: statusColor
-                };
+                result = { status: foundAsset.status === 'Active' ? '✅ Approved' : (foundAsset.status === 'Forced term' ? '⚠️ Forced' : '⏳ Pending'), term: foundAsset.term, message: foundAsset.status === 'Active' ? 'Your asset has been approved for 25 years custody.' : (foundAsset.status === 'Forced term' ? 'Forced transformation: 3 years custody.' : 'Your asset is under review.'), color: statusColor };
             } else if (query.startsWith('GD7') || query.length > 30) {
-                result = { status: '✅ Registered', term: 'Institution active', message: 'Your institution is registered. You have pending submissions.', color: '#2a7a2a' };
+                result = { status: '✅ Registered', term: 'Institution active', message: 'Your institution is registered.', color: '#2a7a2a' };
             } else {
-                result = { status: '❓ Not Found', term: '—', message: 'No asset found with this identifier. Please check and try again.', color: '#666' };
+                result = { status: '❓ Not Found', term: '—', message: 'No asset found with this identifier.', color: '#666' };
             }
-            
             resultDiv.style.display = 'block';
-            resultDiv.innerHTML = `
-                <div style="background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; border-left: 4px solid ${result.color};">
-                    <p><strong>Asset ID:</strong> ${query.toUpperCase()}</p>
-                    <p><strong>Status:</strong> <span style="color:${result.color};">${result.status}</span></p>
-                    <p><strong>Term:</strong> ${result.term}</p>
-                    <p>${result.message}</p>
-                    <p style="margin-top: 16px; font-size: 0.8rem;"><i class="fas fa-info-circle"></i> For full details, <a href="institution-dashboard.html" style="color:#d4af37;">log into your dashboard</a>.</p>
-                </div>
-            `;
+            resultDiv.innerHTML = `<div style="background:rgba(0,0,0,0.4); border-radius:20px; padding:20px; border-left:4px solid ${result.color};"><p><strong>Asset ID:</strong> ${query.toUpperCase()}</p><p><strong>Status:</strong> <span style="color:${result.color};">${result.status}</span></p><p><strong>Term:</strong> ${result.term}</p><p>${result.message}</p><p style="margin-top:16px;"><a href="institution-dashboard.html" style="color:#d4af37;">Log into your dashboard →</a></p></div>`;
         });
         
         // ============================================================
-        // 9. NAVIGATION
+        // 9. NAVIGATION (ГЛАВНОЕ — КНОПКИ РАБОТАЮТ)
         // ============================================================
         function showSection(sectionId) {
             document.getElementById('howSection').classList.add('hidden-section');
@@ -578,6 +446,7 @@
             document.getElementById(sectionId).classList.remove('hidden-section');
         }
         
+        // Назначаем обработчики для кнопок в меню
         document.querySelectorAll('[data-nav]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -589,115 +458,26 @@
             });
         });
         
+        // Кнопки на главном экране
         document.getElementById('ctaInstitutionBtn')?.addEventListener('click', () => showSection('institutionSection'));
         document.getElementById('ctaRegistryBtn')?.addEventListener('click', () => { showSection('registrySection'); renderRegistry(); });
         
+        // Покупка на Jupiter
         function openJupiterSwap() { window.open(`https://jup.ag/swap/SOL-${UNGT_ADDRESS}`, '_blank'); }
         document.getElementById('buyOnJupiter')?.addEventListener('click', (e) => { e.preventDefault(); openJupiterSwap(); });
-        document.getElementById('pipelineBuyBtn')?.addEventListener('click', (e) => { e.preventDefault(); openJupiterSwap(); });
         
         // ============================================================
-        // 10. MULTI-LANGUAGE TRANSLATIONS (12 языков)
+        // 10. ПЕРЕВОД (EN/RU)
         // ============================================================
         const translations = {
-            en: {
-                navHow: "How it works", navInstitution: "For Institutions", navRegistry: "Public Registry", navAdmin: "Plenipotentiary", navPortal: "Portal", navDashboard: "Dashboard", connectWallet: "Connect",
-                heroTitle: "Turn historical Imperial obligations into UNGT tokens.\nKeep your assets for 25 years.",
-                heroLine1: "📜 <strong>For banks, trusts, and financial institutions holding assets of the Imperial Crown.</strong>",
-                heroLine2: "💰 Digitize your obligations via audit and receive UNGT tokens.",
-                heroLine3: "🎁 Voluntary participation = <strong>25 years custody + 3% fee + 22 years usage rights + 15% buyback discount.</strong>",
-                heroLine4: "⚠️ Forced transformation = 3 years custody, no benefits.",
-                priceLabel: "UNGT Price", mcapLabel: "Market Cap", liqLabel: "Liquidity",
-                linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Gold", linkBuy: "Buy UNGT on Jupiter",
-                ctaInstText: "For Institutions: Start Digitization", ctaRegText: "View Public Registry",
-                statusTitle: "Check Your Audit Status", statusSubtitle: "Enter your Asset ID or Institution Wallet Address to track the digitization progress", checkBtnText: "Check Status",
-                pipelineTitle: "From LME Gold to UNGT: The Conversion Pipeline", pipelineSub: "A transparent, on-chain process to transform physical commodity exposure into digital assets",
-                step1Title: "1. Trade Gold on LME", step1Desc: "Gold futures (code: AU) on LMEselect. Contract size: 100 fine troy ounces.", step1Btn: "LME Gold Info",
-                step2Title: "2. Fiat → SOL via Jupiter", step2Desc: "Jupiter Onramp supports cards, Apple/Google Pay, bank transfers.", step2Btn: "Buy SOL with Fiat",
-                step3Title: "3. SOL → UNGT on Jupiter", step3Desc: "Swap SOL for UNGT via Jupiter aggregator.", step3Btn: "Swap SOL for UNGT",
-                pipelineNote: "Note: LME Gold futures are physically deliverable (unallocated gold) and traded via LME members.",
-                incentivesTitle: "💰 Economic Incentives: Voluntary vs. Forced", incentivesSub: "Financial institutions that voluntarily digitize their assets receive exclusive benefits. Forced transformation eliminates all privileges.",
-                voluntaryBadge: "✅ VOLUNTARY TRANSFORMATION", voluntaryTitle: "25 years custody + Incentives",
-                voluntaryFee: "<strong>3% fee</strong> – Direct profit from the asset value",
-                voluntaryUsage: "<strong>22 years usage right</strong> – Credit/collateral leverage",
-                voluntaryDiscount: "<strong>15% discount</strong> – Buyback without third-parties",
-                forcedBadge: "⚠️ FORCED TRANSFORMATION", forcedTitle: "3 years custody + No benefits",
-                forcedFee: "<strong>No fee</strong> – 0% profit", forcedUsage: "<strong>No usage right</strong> – No leverage", forcedDiscount: "<strong>No discount</strong> – Market price only",
-                howTitle: "⚖️ How the transformation works",
-                stepHow1Title: "Upload & Audit", stepHow1Desc: "Institution submits asset proofs (encrypted → IPFS). Plenipotentiary reviews.",
-                stepHow2Title: "Sovereign Order", stepHow2Desc: "Order: 25 years (voluntary) or 3 years (forced).",
-                stepHow3Title: "UNGT Acquisition", stepHow3Desc: "Institution buys UNGT via SOL, holds in master wallet.",
-                stepHow4Title: "Registry & Storage", stepHow4Desc: "Asset in public registry. Physical asset remains with institution.",
-                incentiveNote: "Voluntary = 25 years custody · Forced = only 3 years",
-                instTitle: "🏛️ Asset transformation request", instNameLabel: "Institution Name", assetNameLabel: "Asset name / description",
-                valuationLabel: "Valuation (USD)", docsLabel: "Upload supporting documents (PDF/Image)", submitBtnText: "Submit for audit (IPFS)",
-                legalNote: "*Documents are client-side encrypted and stored on IPFS via Pinata. Only plenipotentiary can view.",
-                regTitle: "📜 Public registry of digitalized assets", thId: "Asset ID", thInst: "Institution", thValue: "Value (USD)", thUngt: "UNGT amount", thTerm: "Custody term", thStatus: "Status", loadingMsg: "Loading registry...",
-                adminTitle: "👑 Plenipotentiary Audit & Ruling", adminNote: "🔐 Only wallet authorized by Suzerain can access.", adminLoginText: "Login with Wallet",
-                footerDisclaimer: "*Legal responsibility for assets lies with the Suzerain & Plenipotentiary. Technical interface for transparent digitization."
-            },
-            ru: {
-                navHow: "Как это работает", navInstitution: "Для учреждений", navRegistry: "Госреестр", navAdmin: "Полпред", navPortal: "Портал", navDashboard: "Кабинет", connectWallet: "Подключить",
-                heroTitle: "Превратите исторические обязательства Империи в токены UNGT.\nСохраните активы на 25 лет.",
-                heroLine1: "📜 <strong>Для банков, трастов и финансовых институтов, владеющих активами Императорской Короны.</strong>",
-                heroLine2: "💰 Оцифруйте свои обязательства через аудит и получите токены UNGT.",
-                heroLine3: "🎁 Добровольное участие = <strong>25 лет хранения + 3% вознаграждения + 22 года права использования + 15% дисконта на выкуп.</strong>",
-                heroLine4: "⚠️ Принудительная трансформация = 3 года хранения, без льгот.",
-                priceLabel: "Цена UNGT", mcapLabel: "Рыночная капа", liqLabel: "Ликвидность",
-                linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Золото", linkBuy: "Купить UNGT на Jupiter",
-                ctaInstText: "Учреждениям: начать оцифровку", ctaRegText: "Просмотреть реестр",
-                statusTitle: "Проверить статус аудита", statusSubtitle: "Введите ID актива или адрес кошелька учреждения", checkBtnText: "Проверить",
-                pipelineTitle: "Из LME Золота в UNGT: конвейер конвертации", pipelineSub: "Прозрачный on-chain процесс трансформации физического товара в цифровые активы",
-                step1Title: "1. Торговля золотом на LME", step1Desc: "Фьючерсы на золото (код: AU) на LMEselect. Размер контракта: 100 тройских унций.", step1Btn: "LME Золото",
-                step2Title: "2. Фиат → SOL через Jupiter", step2Desc: "Jupiter Onramp поддерживает карты, Apple/Google Pay, банковские переводы.", step2Btn: "Купить SOL за Фиат",
-                step3Title: "3. SOL → UNGT на Jupiter", step3Desc: "Обменяйте SOL на UNGT через агрегатор Jupiter.", step3Btn: "Обменять SOL на UNGT",
-                pipelineNote: "Примечание: Фьючерсы LME Gold физически поставляются (неаллоцированное золото) и торгуются через членов LME.",
-                incentivesTitle: "💰 Экономические стимулы: Добровольно vs Принудительно", incentivesSub: "Финансовые учреждения, которые добровольно оцифровывают активы, получают эксклюзивные льготы. Принудительная трансформация лишает всех привилегий.",
-                voluntaryBadge: "✅ ДОБРОВОЛЬНАЯ ТРАНСФОРМАЦИЯ", voluntaryTitle: "25 лет хранения + Льготы",
-                voluntaryFee: "<strong>3% вознаграждения</strong> – Прямая прибыль от стоимости актива",
-                voluntaryUsage: "<strong>22 года права использования</strong> – Кредитное/залоговое плечо",
-                voluntaryDiscount: "<strong>15% дисконта</strong> – Выкуп без посредников",
-                forcedBadge: "⚠️ ПРИНУДИТЕЛЬНАЯ ТРАНСФОРМАЦИЯ", forcedTitle: "3 года хранения + Без льгот",
-                forcedFee: "<strong>Без вознаграждения</strong> – 0% прибыли", forcedUsage: "<strong>Без прав использования</strong> – Нет плеча", forcedDiscount: "<strong>Без дисконта</strong> – Только рыночная цена",
-                howTitle: "⚖️ Как проходит трансформация",
-                stepHow1Title: "Загрузка и аудит", stepHow1Desc: "Институт загружает документы (шифрование → IPFS). Полпред проверяет.",
-                stepHow2Title: "Приказ Суверена", stepHow2Desc: "Приказ: 25 лет (добровольно) или 3 года (принудительно).",
-                stepHow3Title: "Приобретение UNGT", stepHow3Desc: "Институт покупает UNGT через SOL и хранит на мастер-кошельке.",
-                stepHow4Title: "Реестр и хранение", stepHow4Desc: "Актив в реестре. Физически остаётся у института.",
-                incentiveNote: "Добровольно = 25 лет хранения · Принудительно = 3 года",
-                instTitle: "🏛️ Заявка на оцифровку", instNameLabel: "Название учреждения", assetNameLabel: "Название актива",
-                valuationLabel: "Оценка (USD)", docsLabel: "Загрузить документы (PDF/изображения)", submitBtnText: "Отправить на аудит (IPFS)",
-                legalNote: "*Документы шифруются и хранятся в IPFS через Pinata. Только полпред может просматривать оригиналы.",
-                regTitle: "📜 Публичный реестр оцифрованных активов", thId: "ID актива", thInst: "Учреждение", thValue: "Стоимость (USD)", thUngt: "Кол-во UNGT", thTerm: "Срок хранения", thStatus: "Статус", loadingMsg: "Загрузка реестра...",
-                adminTitle: "👑 Панель полпреда", adminNote: "🔐 Только кошелёк, авторизованный Сувереном.", adminLoginText: "Войти с кошельком",
-                footerDisclaimer: "*Юридическая ответственность лежит на Сузериане и Полпреде. Технический интерфейс для прозрачной оцифровки."
-            }
+            en: { heroTitle: "Turn historical Imperial obligations into UNGT tokens.\nKeep your assets for 25 years.", priceLabel: "UNGT Price", mcapLabel: "Market Cap", liqLabel: "Liquidity", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Gold", linkBuy: "Buy UNGT on Jupiter", ctaInstText: "For Institutions: Start Digitization", ctaRegText: "View Public Registry", howTitle: "⚖️ How the transformation works", instTitle: "🏛️ Asset transformation request", regTitle: "📜 Public registry of digitalized assets", adminTitle: "👑 Plenipotentiary Audit & Ruling", footerDisclaimer: "*Legal responsibility for assets lies with the Suzerain & Plenipotentiary." },
+            ru: { heroTitle: "Превратите исторические обязательства Империи в токены UNGT.\nСохраните активы на 25 лет.", priceLabel: "Цена UNGT", mcapLabel: "Рыночная капа", liqLabel: "Ликвидность", linkSolscan: "Solscan", linkDex: "DexScreener", linkLME: "LME Золото", linkBuy: "Купить UNGT на Jupiter", ctaInstText: "Учреждениям: начать оцифровку", ctaRegText: "Просмотреть реестр", howTitle: "⚖️ Как проходит трансформация", instTitle: "🏛️ Заявка на оцифровку", regTitle: "📜 Публичный реестр оцифрованных активов", adminTitle: "👑 Панель полпреда", footerDisclaimer: "*Юридическая ответственность лежит на Сузериане и Полпреде." }
         };
         
-        // Fill missing languages
-        const additionalLangs = ['es', 'fr', 'de', 'zh', 'ar', 'hi', 'ja', 'tr'];
-        additionalLangs.forEach(lang => {
-            translations[lang] = { ...translations.en };
-        });
-        translations.es.heroTitle = "Convierta obligaciones históricas Imperiales en tokens UNGT. Mantenga sus activos por 25 años.";
-        translations.fr.heroTitle = "Transformez les obligations historiques impériales en jetons UNGT. Gardez vos actifs pendant 25 ans.";
-        translations.de.heroTitle = "Wandeln Sie historische imperiale Verpflichtungen in UNGT-Token um. Behalten Sie Ihre Vermögenswerte für 25 Jahre.";
-        translations.zh.heroTitle = "将历史性的帝国义务转化为UNGT代币。保留您的资产25年。";
-        
-        function applyLanguage(lang) {
+        document.getElementById('languageSwitcher')?.addEventListener('change', (e) => {
+            const lang = e.target.value;
             const t = translations[lang] || translations.en;
-            document.getElementById('navHow').innerText = t.navHow;
-            document.getElementById('navInstitution').innerText = t.navInstitution;
-            document.getElementById('navRegistry').innerText = t.navRegistry;
-            document.getElementById('navAdmin').innerText = t.navAdmin;
-            document.getElementById('navPortal').innerText = t.navPortal;
-            document.getElementById('navDashboard').innerText = t.navDashboard;
-            document.getElementById('connectWalletText').innerText = t.connectWallet;
             document.getElementById('heroTitle').innerHTML = t.heroTitle.replace(/\n/g, '<br>');
-            document.getElementById('heroDescLine1').innerHTML = t.heroLine1;
-            document.getElementById('heroDescLine2').innerHTML = t.heroLine2;
-            document.getElementById('heroDescLine3').innerHTML = t.heroLine3;
-            document.getElementById('heroDescLine4').innerHTML = t.heroLine4;
             document.getElementById('priceLabel').innerText = t.priceLabel;
             document.getElementById('mcapLabel').innerText = t.mcapLabel;
             document.getElementById('liqLabel').innerText = t.liqLabel;
@@ -707,67 +487,14 @@
             document.getElementById('linkBuy').innerText = t.linkBuy;
             document.getElementById('ctaInstText').innerText = t.ctaInstText;
             document.getElementById('ctaRegText').innerText = t.ctaRegText;
-            document.getElementById('statusTitle').innerText = t.statusTitle;
-            document.getElementById('statusSubtitle').innerText = t.statusSubtitle;
-            document.getElementById('checkBtnText').innerText = t.checkBtnText;
-            document.getElementById('pipelineTitle').innerText = t.pipelineTitle;
-            document.getElementById('pipelineSub').innerText = t.pipelineSub;
-            document.getElementById('step1Title').innerText = t.step1Title;
-            document.getElementById('step1Desc').innerText = t.step1Desc;
-            document.getElementById('step1Btn').innerText = t.step1Btn;
-            document.getElementById('step2Title').innerText = t.step2Title;
-            document.getElementById('step2Desc').innerText = t.step2Desc;
-            document.getElementById('step2Btn').innerText = t.step2Btn;
-            document.getElementById('step3Title').innerText = t.step3Title;
-            document.getElementById('step3Desc').innerText = t.step3Desc;
-            document.getElementById('step3Btn').innerText = t.step3Btn;
-            document.getElementById('pipelineNote').innerHTML = `<i class="fas fa-info-circle"></i> ${t.pipelineNote}`;
-            document.getElementById('incentivesTitle').innerHTML = t.incentivesTitle;
-            document.getElementById('incentivesSub').innerText = t.incentivesSub;
-            document.getElementById('voluntaryBadge').innerText = t.voluntaryBadge;
-            document.getElementById('voluntaryTitle').innerText = t.voluntaryTitle;
-            document.getElementById('voluntaryFee').innerHTML = t.voluntaryFee;
-            document.getElementById('voluntaryUsage').innerHTML = t.voluntaryUsage;
-            document.getElementById('voluntaryDiscount').innerHTML = t.voluntaryDiscount;
-            document.getElementById('forcedBadge').innerText = t.forcedBadge;
-            document.getElementById('forcedTitle').innerText = t.forcedTitle;
-            document.getElementById('forcedFee').innerHTML = t.forcedFee;
-            document.getElementById('forcedUsage').innerHTML = t.forcedUsage;
-            document.getElementById('forcedDiscount').innerHTML = t.forcedDiscount;
             document.getElementById('howTitle').innerHTML = t.howTitle;
-            document.getElementById('stepHow1Title').innerText = t.stepHow1Title;
-            document.getElementById('stepHow1Desc').innerText = t.stepHow1Desc;
-            document.getElementById('stepHow2Title').innerText = t.stepHow2Title;
-            document.getElementById('stepHow2Desc').innerText = t.stepHow2Desc;
-            document.getElementById('stepHow3Title').innerText = t.stepHow3Title;
-            document.getElementById('stepHow3Desc').innerText = t.stepHow3Desc;
-            document.getElementById('stepHow4Title').innerText = t.stepHow4Title;
-            document.getElementById('stepHow4Desc').innerText = t.stepHow4Desc;
-            document.getElementById('incentiveNote').innerHTML = `<i class="fas fa-gavel"></i> <strong>${t.incentiveNote}</strong>`;
             document.getElementById('instTitle').innerHTML = t.instTitle;
-            document.getElementById('instNameLabel').innerText = t.instNameLabel;
-            document.getElementById('assetNameLabel').innerText = t.assetNameLabel;
-            document.getElementById('valuationLabel').innerText = t.valuationLabel;
-            document.getElementById('docsLabel').innerText = t.docsLabel;
-            document.getElementById('submitBtnText').innerText = t.submitBtnText;
-            document.getElementById('legalNote').innerText = t.legalNote;
             document.getElementById('regTitle').innerHTML = t.regTitle;
-            document.getElementById('thId').innerText = t.thId;
-            document.getElementById('thInst').innerText = t.thInst;
-            document.getElementById('thValue').innerText = t.thValue;
-            document.getElementById('thUngt').innerText = t.thUngt;
-            document.getElementById('thTerm').innerText = t.thTerm;
-            document.getElementById('thStatus').innerText = t.thStatus;
-            document.getElementById('loadingMsg').innerText = t.loadingMsg;
             document.getElementById('adminTitle').innerHTML = t.adminTitle;
-            document.getElementById('adminNote').innerHTML = `<i class="fas fa-shield-alt"></i> ${t.adminNote}`;
-            document.getElementById('adminLoginText').innerText = t.adminLoginText;
             document.getElementById('footerDisclaimer').innerText = t.footerDisclaimer;
-        }
+        });
         
-        document.getElementById('languageSwitcher').addEventListener('change', (e) => applyLanguage(e.target.value));
-        applyLanguage('en');
-        
+        // Показываем How it works по умолчанию
         showSection('howSection');
     </script>
 </body>
