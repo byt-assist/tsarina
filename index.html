@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>UNGT · Tsarina RWA | Digital Transformation of Imperial Crown Assets</title>
-    <meta name="description" content="Turn historical Imperial obligations into UNGT tokens. Keep your assets for 25 years.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNGT · Tsarina RWA</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -17,7 +16,7 @@
         .header { background: rgba(8,6,3,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(212,175,55,0.4); position: sticky; top: 0; z-index: 110; }
         .navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 12px 0; gap: 15px; }
         .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-svg { width: 45px; height: 45px; }
+        .logo-img { height: 48px; filter: drop-shadow(0 0 4px #d4af37); }
         .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #ffe4b5, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .nav-links { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
         .nav-links button { background: none; border: none; color: #ecdca8; font-family: 'Cormorant Garamond', serif; font-size: 1rem; cursor: pointer; padding: 8px 12px; transition: 0.2s; }
@@ -47,8 +46,6 @@
         .hero-title { font-size: 2rem; font-family: 'Cormorant Garamond'; text-align: center; margin: 30px 0 15px; }
         .hero-desc { text-align: center; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 20px; margin: 20px 0; font-size: 0.9rem; }
         .inline-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
-        .status-widget { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; margin: 30px 0; text-align: center; }
-        .status-input { background: #201c12; border: 1px solid #d4af37; border-radius: 40px; padding: 10px 16px; color: white; width: 250px; margin: 10px; }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; align-items: stretch; }
             .nav-links { justify-content: center; }
@@ -65,13 +62,8 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="46" fill="#1f180c" stroke="#d4af37" stroke-width="2"/>
-                        <path d="M30 20 L40 10 L50 20 L50 35 L30 35 Z" fill="#d4af37"/>
-                        <path d="M50 20 L60 10 L70 20 L70 35 L50 35 Z" fill="#e6b422"/>
-                        <circle cx="50" cy="58" r="8" fill="#d4af37"/>
-                        <text x="50" y="80" font-family="Georgia" font-size="16" fill="#f2dea4" text-anchor="middle" font-weight="bold">UNGT</text>
-                    </svg>
+                    <img src="tsarina_logo.png" alt="Tsarina Logo" class="logo-img" onerror="this.onerror=null; this.style.display='none'; document.getElementById('fallbackLogo').style.display='flex';">
+                    <div id="fallbackLogo" style="display:none; width:48px; height:48px; background:#d4af37; border-radius:50%; align-items:center; justify-content:center; font-weight:bold; color:#1e160c;">Ц</div>
                     <span class="logo-text">TSARINA·UNGT</span>
                 </div>
                 <div class="nav-links">
@@ -80,14 +72,10 @@
                     <button onclick="showSection('registry')">Public Registry</button>
                     <button onclick="showSection('admin')">Plenipotentiary</button>
                     <a href="institution-portal.html"><button>Portal</button></a>
-                    <a href="assets-pending.html"><button>Pending Assets</button></a>
+                    <a href="institution-dashboard.html"><button>Dashboard</button></a>
                     <select id="langSwitcher" class="lang-selector">
                         <option value="en">🇬🇧 EN</option>
                         <option value="ru">🇷🇺 RU</option>
-                        <option value="es">🇪🇸 ES</option>
-                        <option value="fr">🇫🇷 FR</option>
-                        <option value="de">🇩🇪 DE</option>
-                        <option value="zh">🇨🇳 中文</option>
                     </select>
                     <button id="connectWalletBtn" class="wallet-btn"><i class="fas fa-wallet"></i> Connect</button>
                 </div>
@@ -121,18 +109,8 @@
                 <button onclick="showSection('institution')" class="btn-primary">For Institutions: Start Digitization</button>
                 <button onclick="showSection('registry')" class="btn-secondary">View Public Registry</button>
             </div>
-
-            <!-- Status Check Widget -->
-            <div class="status-widget">
-                <h3><i class="fas fa-search"></i> Check Your Audit Status</h3>
-                <p>Enter your Asset ID or Institution Wallet Address</p>
-                <input type="text" id="statusInput" class="status-input" placeholder="e.g. UNGT-001 or wallet address">
-                <button onclick="checkStatus()" class="btn-primary">Check Status</button>
-                <div id="statusResult" style="margin-top:15px;"></div>
-            </div>
         </div>
 
-        <!-- HOW IT WORKS -->
         <div id="sectionHow" class="section">
             <div class="container">
                 <div class="section-title">⚖️ How the transformation works</div>
@@ -146,7 +124,6 @@
             </div>
         </div>
 
-        <!-- FOR INSTITUTIONS -->
         <div id="sectionInstitution" class="section hidden">
             <div class="container">
                 <div class="section-title">🏛️ Asset transformation request</div>
@@ -166,7 +143,6 @@
             </div>
         </div>
 
-        <!-- PUBLIC REGISTRY -->
         <div id="sectionRegistry" class="section hidden">
             <div class="container">
                 <div class="section-title">📜 Public registry of digitalized assets</div>
@@ -179,7 +155,6 @@
             </div>
         </div>
 
-        <!-- PLENIPOTENTIARY -->
         <div id="sectionAdmin" class="section hidden">
             <div class="container">
                 <div class="section-title">👑 Plenipotentiary Audit & Ruling</div>
@@ -197,14 +172,10 @@
     <footer class="footer">
         <div class="container">
             <p>© UNGT Digital Asset Trust — Tsarina Program. Smart contract: <code>EdZqtf7BQ9YPmdyGNxWWCQTKH7TMM4k5AXqHoKns1gQs</code></p>
-            <p style="margin-top:8px;">*Legal responsibility for assets lies with the Suzerain & Plenipotentiary.</p>
         </div>
     </footer>
 
     <script>
-        // ============================================================
-        // 1. НАВИГАЦИЯ
-        // ============================================================
         function showSection(sectionName) {
             document.getElementById('sectionHow').classList.add('hidden');
             document.getElementById('sectionInstitution').classList.add('hidden');
@@ -215,26 +186,20 @@
             if (sectionName === 'registry') { document.getElementById('sectionRegistry').classList.remove('hidden'); renderRegistry(); }
             if (sectionName === 'admin') document.getElementById('sectionAdmin').classList.remove('hidden');
         }
-        
-        // ============================================================
-        // 2. РЕЕСТР
-        // ============================================================
+
         let assets = [
             { id: "UNGT-001", institution: "State Bank of Empire", value: 1250000000, ungt: 12500000, term: "25 years", status: "Active" },
             { id: "UNGT-002", institution: "Northern Trust Metals", value: 450000000, ungt: 4500000, term: "3 years", status: "Forced term" }
         ];
-        
+
         function renderRegistry() {
             const tbody = document.getElementById('registryBody');
             if (!tbody) return;
-            if (assets.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No assets yet</td></tr>'; return; }
+            if (assets.length === 0) { tbody.innerHTML = '<tr><td colspan="6">No assets yet</td></tr>'; return; }
             tbody.innerHTML = assets.map(a => `<tr><td>${a.id}</td><td>${a.institution}</td><td>$${a.value.toLocaleString()}</td><td>${a.ungt.toLocaleString()}</td><td>${a.term}</td><td><span class="badge">${a.status}</span></td></tr>`).join('');
         }
         renderRegistry();
-        
-        // ============================================================
-        // 3. ФОРМА ПОДАЧИ
-        // ============================================================
+
         document.getElementById('submitBtn')?.addEventListener('click', function() {
             const name = document.getElementById('instName').value;
             const assetName = document.getElementById('assetName').value;
@@ -249,106 +214,37 @@
             document.getElementById('assetName').value = '';
             document.getElementById('assetValue').value = '';
         });
-        
-        // ============================================================
-        // 4. СТАТУС
-        // ============================================================
-        window.checkStatus = function() {
-            const query = document.getElementById('statusInput').value.trim();
-            const resultDiv = document.getElementById('statusResult');
-            if (!query) { alert('Enter Asset ID or Wallet Address'); return; }
-            const found = assets.find(a => a.id.toUpperCase() === query.toUpperCase());
-            if (found) {
-                resultDiv.innerHTML = `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:15px; border-left:4px solid #d4af37;">
-                    <p><strong>Asset ID:</strong> ${found.id}</p>
-                    <p><strong>Status:</strong> ${found.status}</p>
-                    <p><strong>Term:</strong> ${found.term}</p>
-                    <p><strong>Institution:</strong> ${found.institution}</p>
-                </div>`;
-            } else if (query.startsWith('GD7') || query.length > 30) {
-                resultDiv.innerHTML = `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:15px;"><p><strong>Wallet:</strong> ${query.slice(0,8)}...</p><p>Institution registered. <a href="institution-dashboard.html" style="color:#d4af37;">View dashboard →</a></p></div>`;
-            } else {
-                resultDiv.innerHTML = `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:15px;"><p>❌ No asset found with ID: ${query}</p></div>`;
-            }
-        };
-        
-        // ============================================================
-        // 5. КОШЕЛЁК И АДМИНКА
-        // ============================================================
+
         const PLENIPOTENTIARY_WALLET = "GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD";
         let currentWallet = null;
-        
         async function connectWallet() {
             if ('solana' in window && window.solana.isPhantom) {
-                try {
-                    const resp = await window.solana.connect();
-                    currentWallet = resp.publicKey.toString();
-                    document.getElementById('connectWalletBtn').innerHTML = `<i class="fas fa-wallet"></i> ${currentWallet.slice(0,4)}...${currentWallet.slice(-4)}`;
-                    return currentWallet;
-                } catch(e) { return null; }
-            } else {
-                alert('Install Phantom wallet');
-                window.open('https://phantom.app/', '_blank');
-                return null;
-            }
+                try { const resp = await window.solana.connect(); currentWallet = resp.publicKey.toString(); document.getElementById('connectWalletBtn').innerHTML = `<i class="fas fa-wallet"></i> ${currentWallet.slice(0,4)}...${currentWallet.slice(-4)}`; return currentWallet; }
+                catch(e) { return null; }
+            } else { alert('Install Phantom wallet'); window.open('https://phantom.app/', '_blank'); return null; }
         }
-        
         document.getElementById('connectWalletBtn')?.addEventListener('click', connectWallet);
-        
         document.getElementById('adminLoginBtn')?.addEventListener('click', async function() {
             if (!currentWallet) await connectWallet();
-            if (currentWallet === PLENIPOTENTIARY_WALLET) {
-                document.getElementById('adminPanel').style.display = 'block';
-                this.style.display = 'none';
-                loadAdmin();
-            } else {
-                alert('Access denied. You are not the Plenipotentiary.');
-            }
+            if (currentWallet === PLENIPOTENTIARY_WALLET) { document.getElementById('adminPanel').style.display = 'block'; this.style.display = 'none'; loadAdmin(); }
+            else { alert('Access denied'); }
         });
-        
         function loadAdmin() {
             const pending = assets.filter(a => a.status === 'Audit requested');
             const container = document.getElementById('pendingList');
             if (pending.length === 0) { container.innerHTML = '<p>No pending submissions.</p>'; return; }
-            container.innerHTML = pending.map(a => `
-                <div style="border:1px solid #d4af37; border-radius:16px; padding:15px; margin-bottom:15px;">
-                    <p><strong>${a.id}</strong> - ${a.institution}</p>
-                    <p>Value: $${a.value.toLocaleString()}</p>
-                    <button class="btn-primary" style="margin:8px 8px 0 0;" onclick="approve('${a.id}', 'voluntary')">✅ Approve 25 years</button>
-                    <button class="btn-secondary" onclick="approve('${a.id}', 'forced')">⚠️ Force 3 years</button>
-                </div>
-            `).join('');
+            container.innerHTML = pending.map(a => `<div style="border:1px solid #d4af37; border-radius:16px; padding:15px; margin-bottom:15px;"><p><strong>${a.id}</strong> - ${a.institution}</p><p>Value: $${a.value.toLocaleString()}</p><button class="btn-primary" style="margin:8px 8px 0 0;" onclick="approve('${a.id}', 'voluntary')">✅ Approve 25 years</button><button class="btn-secondary" onclick="approve('${a.id}', 'forced')">⚠️ Force 3 years</button></div>`).join('');
         }
-        
         window.approve = function(id, type) {
             const term = type === 'voluntary' ? '25 years' : '3 years';
             const status = type === 'voluntary' ? 'Active' : 'Forced term';
             assets = assets.map(a => a.id === id ? {...a, status: status, term: term} : a);
-            renderRegistry();
-            loadAdmin();
+            renderRegistry(); loadAdmin();
             alert(`Asset ${id}: ${type === 'voluntary' ? 'Approved for 25 years' : 'Forced to 3 years'}`);
         };
-        
-        // ============================================================
-        // 6. ПЕРЕВОД
-        // ============================================================
-        const translations = {
-            en: { title: "Turn historical Imperial obligations into UNGT tokens.<br>Keep your assets for 25 years.", desc: "📜 <strong>For banks, trusts, and financial institutions holding assets of the Imperial Crown.</strong><br>💰 Digitize your obligations via audit and receive UNGT tokens.<br>🎁 Voluntary = <strong>25 years custody + 3% fee + 22 years usage + 15% discount</strong><br>⚠️ Forced = 3 years custody, no benefits" },
-            ru: { title: "Превратите исторические обязательства Империи в токены UNGT.<br>Сохраните активы на 25 лет.", desc: "📜 <strong>Для банков, трастов и финансовых институтов, владеющих активами Императорской Короны.</strong><br>💰 Оцифруйте свои обязательства через аудит и получите токены UNGT.<br>🎁 Добровольно = <strong>25 лет хранения + 3% вознаграждения + 22 года использования + 15% дисконта</strong><br>⚠️ Принудительно = 3 года хранения, без льгот" },
-            es: { title: "Convierta obligaciones históricas Imperiales en tokens UNGT.<br>Mantenga sus activos por 25 años.", desc: "📜 <strong>Para bancos, fideicomisos e instituciones financieras que poseen activos de la Corona Imperial.</strong><br>💰 Digitalice sus obligaciones mediante auditoría y reciba tokens UNGT.<br>🎁 Voluntario = <strong>25 años de custodia + 3% de honorarios + 22 años de uso + 15% de descuento</strong><br>⚠️ Forzoso = 3 años de custodia, sin beneficios" },
-            fr: { title: "Transformez les obligations historiques impériales en jetons UNGT.<br>Gardez vos actifs pendant 25 ans.", desc: "📜 <strong>Pour les banques, fiducies et institutions financières détenant des actifs de la Couronne Impériale.</strong><br>💰 Numérisez vos obligations via un audit et recevez des jetons UNGT.<br>🎁 Volontaire = <strong>25 ans de garde + 3% de frais + 22 ans d'utilisation + 15% de réduction</strong><br>⚠️ Forcé = 3 ans de garde, sans avantages" },
-            de: { title: "Wandeln Sie historische imperiale Verpflichtungen in UNGT-Token um.<br>Behalten Sie Ihre Vermögenswerte für 25 Jahre.", desc: "📜 <strong>Für Banken, Trusts und Finanzinstitute, die Vermögenswerte der Imperialen Krone halten.</strong><br>💰 Digitalisieren Sie Ihre Verpflichtungen durch ein Audit und erhalten Sie UNGT-Token.<br>🎁 Freiwillig = <strong>25 Jahre Verwahrung + 3% Gebühr + 22 Jahre Nutzung + 15% Rabatt</strong><br>⚠️ Zwangsweise = 3 Jahre Verwahrung, keine Vorteile" },
-            zh: { title: "将历史性的帝国义务转化为UNGT代币。<br>保留您的资产25年。", desc: "📜 <strong>适用于持有皇冠资产的银行、信托和金融机构。</strong><br>💰 通过审计数字化您的义务并接收UNGT代币。<br>🎁 自愿 = <strong>25年托管 + 3%费用 + 22年使用权 + 15%折扣</strong><br>⚠️ 强制 = 3年托管，无任何好处" }
-        };
-        
-        document.getElementById('langSwitcher')?.addEventListener('change', function(e) {
-            const lang = e.target.value;
-            const t = translations[lang] || translations.en;
-            document.getElementById('heroTitle').innerHTML = t.title;
-            document.getElementById('heroDesc').innerHTML = t.desc;
-        });
-        
-        // Показываем How it works по умолчанию
+
+        const translations = { en: { title: "Turn historical Imperial obligations into UNGT tokens.<br>Keep your assets for 25 years.", desc: "📜 <strong>For banks, trusts, and financial institutions holding assets of the Imperial Crown.</strong><br>💰 Digitize your obligations via audit and receive UNGT tokens.<br>🎁 Voluntary = <strong>25 years custody + 3% fee + 22 years usage + 15% discount</strong><br>⚠️ Forced = 3 years custody, no benefits" }, ru: { title: "Превратите исторические обязательства Империи в токены UNGT.<br>Сохраните активы на 25 лет.", desc: "📜 <strong>Для банков, трастов и финансовых институтов, владеющих активами Императорской Короны.</strong><br>💰 Оцифруйте свои обязательства через аудит и получите токены UNGT.<br>🎁 Добровольно = <strong>25 лет хранения + 3% вознаграждения + 22 года использования + 15% дисконта</strong><br>⚠️ Принудительно = 3 года хранения, без льгот" } };
+        document.getElementById('langSwitcher')?.addEventListener('change', function(e) { const t = translations[e.target.value] || translations.en; document.getElementById('heroTitle').innerHTML = t.title; document.getElementById('heroDesc').innerHTML = t.desc; });
         showSection('how');
     </script>
 </body>
