@@ -46,10 +46,48 @@
         .hero-title { font-size: 2rem; font-family: 'Cormorant Garamond'; text-align: center; margin: 30px 0 15px; }
         .hero-desc { text-align: center; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 20px; margin: 20px 0; font-size: 0.9rem; }
         .inline-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .counter-block {
+            background: rgba(0,0,0,0.5);
+            border-radius: 16px;
+            padding: 20px 30px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+        .counter-item {
+            text-align: center;
+            min-width: 150px;
+        }
+        .counter-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #d4af37;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(212,175,55,0.2);
+        }
+        .counter-label {
+            font-size: 0.8rem;
+            color: #b8aa8a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+        .counter-dynamic {
+            font-size: 0.7rem;
+            color: #6a9a6a;
+            margin-top: 2px;
+        }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; align-items: stretch; }
             .nav-links { justify-content: center; }
             .hero-title { font-size: 1.4rem; }
+            .counter-block { flex-direction: column; gap: 15px; padding: 20px; }
+            .counter-number { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -85,6 +123,20 @@
 
     <main>
         <div class="container">
+            <!-- СЧЁТЧИКИ ПОСЕТИТЕЛЕЙ И ПАРТНЁРОВ -->
+            <div class="counter-block">
+                <div class="counter-item">
+                    <div class="counter-number" id="visitorCounter">126,788</div>
+                    <div class="counter-label"><i class="fas fa-user"></i> Total Visitors</div>
+                    <div class="counter-dynamic"><i class="fas fa-arrow-up"></i> +3 / sec</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" id="partnerCounter">459</div>
+                    <div class="counter-label"><i class="fas fa-handshake"></i> Partners</div>
+                    <div class="counter-dynamic"><i class="fas fa-arrow-up"></i> +1 / min</div>
+                </div>
+            </div>
+
             <div class="hero-title" id="heroTitle">Turn historical Imperial obligations into UNGT tokens.<br>Keep your assets for 25 years.</div>
             <div class="hero-desc" id="heroDesc">
                 <p>📜 <strong>For banks, trusts, and financial institutions holding assets of the Imperial Crown.</strong></p>
@@ -176,6 +228,92 @@
     </footer>
 
     <script>
+        // ============================================================
+        // 1. СЧЁТЧИКИ (с сохранением в localStorage)
+        // ============================================================
+        // Ключи для localStorage
+        const VISITOR_KEY = 'ungt_visitor_count';
+        const PARTNER_KEY = 'ungt_partner_count';
+        const VISITOR_LAST_UPDATE = 'ungt_visitor_last_update';
+        const PARTNER_LAST_UPDATE = 'ungt_partner_last_update';
+
+        // Начальные значения
+        const INITIAL_VISITORS = 126788;
+        const INITIAL_PARTNERS = 459;
+
+        // Получаем сохранённые значения или устанавливаем начальные
+        let visitorCount = parseInt(localStorage.getItem(VISITOR_KEY)) || INITIAL_VISITORS;
+        let partnerCount = parseInt(localStorage.getItem(PARTNER_KEY)) || INITIAL_PARTNERS;
+        
+        // Время последнего обновления (для сквозного счёта)
+        let visitorLastUpdate = parseInt(localStorage.getItem(VISITOR_LAST_UPDATE)) || Date.now();
+        let partnerLastUpdate = parseInt(localStorage.getItem(PARTNER_LAST_UPDATE)) || Date.now();
+
+        // Функция обновления счётчиков на экране
+        function updateDisplay() {
+            document.getElementById('visitorCounter').textContent = visitorCount.toLocaleString();
+            document.getElementById('partnerCounter').textContent = partnerCount.toLocaleString();
+        }
+
+        // Функция сохранения в localStorage
+        function saveCounters() {
+            localStorage.setItem(VISITOR_KEY, visitorCount);
+            localStorage.setItem(PARTNER_KEY, partnerCount);
+            localStorage.setItem(VISITOR_LAST_UPDATE, visitorLastUpdate);
+            localStorage.setItem(PARTNER_LAST_UPDATE, partnerLastUpdate);
+        }
+
+        // Инициализация: восстановление прогресса с учётом времени бездействия
+        function initCounters() {
+            const now = Date.now();
+            
+            // Восстанавливаем посетителей: +3 за каждую секунду с последнего обновления
+            const visitorElapsedSeconds = Math.floor((now - visitorLastUpdate) / 1000);
+            if (visitorElapsedSeconds > 0) {
+                visitorCount += visitorElapsedSeconds * 3;
+                visitorLastUpdate = now - ((now - visitorLastUpdate) % 1000); // сбрасываем остаток
+            }
+            
+            // Восстанавливаем партнёров: +1 за каждую минуту с последнего обновления
+            const partnerElapsedMinutes = Math.floor((now - partnerLastUpdate) / 60000);
+            if (partnerElapsedMinutes > 0) {
+                partnerCount += partnerElapsedMinutes;
+                partnerLastUpdate = now - ((now - partnerLastUpdate) % 60000);
+            }
+            
+            updateDisplay();
+            saveCounters();
+        }
+
+        // Запускаем восстановление
+        initCounters();
+
+        // Таймер для посетителей: +3 каждую секунду
+        setInterval(() => {
+            visitorCount += 3;
+            visitorLastUpdate = Date.now();
+            updateDisplay();
+            saveCounters();
+        }, 1000);
+
+        // Таймер для партнёров: +1 каждую минуту
+        setInterval(() => {
+            partnerCount += 1;
+            partnerLastUpdate = Date.now();
+            updateDisplay();
+            saveCounters();
+        }, 60000);
+
+        // Дополнительная страховка: обновление счётчиков при возврате на вкладку
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                initCounters();
+            }
+        });
+
+        // ============================================================
+        // 2. ОСТАЛЬНАЯ ЛОГИКА (без изменений)
+        // ============================================================
         function showSection(sectionName) {
             document.getElementById('sectionHow').classList.add('hidden');
             document.getElementById('sectionInstitution').classList.add('hidden');
